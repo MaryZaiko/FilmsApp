@@ -1,0 +1,25 @@
+.btnUserNameHeader {
+  min-width: 56px;
+  min-height: 56px;
+  color: white;
+  background: #7b61ff;
+  border-radius: 10px;
+  border: none;
+}
+.btnHeaderArrow {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  color: white;
+}
+.btnUserNameHeaderMenu{
+    display: none;
+}
+@media (max-width: 768px) {
+  .btnHeaderArrow {
+    display: none;
+  }
+  .btnUserNameHeaderMenu{
+    display: block;
+  }
+}

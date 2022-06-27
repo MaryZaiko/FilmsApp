@@ -1,0 +1,22 @@
+.inputSearch {
+  min-width: 272px;
+width: 50%;
+  height: 56px;
+  border-radius: 10px;
+  padding: 16px 20px;
+  margin: 0 32px;
+}
+.inputSearch:focus {
+  outline: none;
+  border: 2px solid #7b61ff;
+
+}
+
+.inputSearchLight {
+  background: #ffffff;
+  border: 2px solid #afb2b6;
+}
+.inputSearchDark{
+  background: #323537;
+  color: #FFFFFF;
+}

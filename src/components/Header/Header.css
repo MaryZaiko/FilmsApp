@@ -1,0 +1,17 @@
+.headerContainer{
+display: flex;
+align-items: center;
+justify-content: space-between;
+
+}
+.headerContainerDark{
+    width: 100vw;
+    padding: 40px 64px;
+    background-color: black;
+
+}
+@media (max-width: 768px) {
+    .headerContainer{
+        flex-wrap: wrap;
+    }
+  }
