@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 import "./Card.css";
 import classnames from "classnames";
-import CircleSVG from "../assets/CircleSVG";
+import { Theme, useThemeContext } from "./../../context/themeModeContext";
 
 type RATINGS = {
   Source: string;
@@ -69,6 +69,9 @@ const PostCard: FC<PostCardProps> = ({
   Genre,
   Ratings,
 }) => {
+  const { theme } = useThemeContext();
+  const isDarkTheme = theme === Theme.Dark;
+
   const rating = Ratings[0].Value.split("/")[0];
   const re = /,/gi;
   const genreForRender = Genre.replace(re, " •");
@@ -105,7 +108,14 @@ const PostCard: FC<PostCardProps> = ({
     <div className="cardFilm" key={imdbID}>
       <div className="cardContent">
         <img src={Poster} alt={Title} className="cardImg" />
-        <h2 className="cardTitle cardTitleLight">{Title}</h2>
+        <h2
+          className={classnames(
+            "cardTitle",
+            isDarkTheme ? "cardTitleDark" : "cardTitleLight"
+          )}
+        >
+          {Title}
+        </h2>
         <p className="cardGenre">{genreForRender}</p>
       </div>
       <div

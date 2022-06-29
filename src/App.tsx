@@ -1,14 +1,18 @@
-import React from 'react';
+import React, { useState } from "react";
+
 import './App.css';
-import Logo from './components/Logo';
-import Input from './components/Input';
-import UserNameHeader from './components/UserNameHeader';
-import Header from './components/Header';
-import PagesWrapper from './components/PagesWrapper';
-import Card from './components/Card';
+
+import { ThemeModeProvider } from "./context/themeModeProvider";
+import { Theme } from "./context/themeModeContext";
+
 import CardList from './components/FilmsList';
 
 function App() {
+  const [theme, setTheme] = useState<Theme>(Theme.Dark);
+
+  const onChangeTheme = (value: Theme) => {
+    setTheme(value);
+  };
   const MOCK_DATA = [{
     Title: "Guardians of the Galaxy Vol. 2",
     Year: 2017,
@@ -131,9 +135,13 @@ function App() {
     Response: "True",
   }]
   return (
+
+    <ThemeModeProvider theme={theme} onChangeTheme={onChangeTheme}>
+
     <div className="App">
     <CardList data={MOCK_DATA}/>
     </div>
+    </ThemeModeProvider>
     
   );
 }
