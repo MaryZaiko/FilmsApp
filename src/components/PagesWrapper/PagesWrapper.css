@@ -1,0 +1,14 @@
+.pagesWrapper{
+  display: flex;
+}
+.pagesWrapperDark{
+  background-color: black;
+
+}
+.pagesWrapperLight{
+  background-color: white;
+}
+.headerContent{
+  /* width: 80%; */
+  padding-top: 40px;
+}
