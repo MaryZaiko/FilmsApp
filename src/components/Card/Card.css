@@ -1,5 +1,9 @@
-.cardImg {
+.cardFilm{
   position: relative;
+
+}
+
+.cardImg {
   width: 266px;
   height: 357px;
   border-radius: 20px;
