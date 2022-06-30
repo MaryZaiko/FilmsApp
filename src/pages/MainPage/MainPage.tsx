@@ -1,6 +1,7 @@
 import React, { FC } from "react";
 import "./MainPage.css";
 import FilmsList from "../../components/FilmsList";
+import PagesWrapper from "../../components/PagesWrapper";
 
 import classnames from "classnames";
 import { Theme, useThemeContext } from "../../context/themeModeContext";
@@ -15,10 +16,13 @@ const MainPage: FC<MainPageProps> = ({data}) => {
   const isDarkTheme = theme === Theme.Dark;
   
 
-  return (
+  return (<div>
+    {/* <PagesWrapper /> */}
     <div className={classnames('mainPageContainer', isDarkTheme ?  'mainPageContainerDark' : 'mainPageContainerLight')} >
       <FilmsList data={data} />
     </div>
+  </div>
+   
   );
 };
 
