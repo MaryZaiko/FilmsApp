@@ -1,0 +1,23 @@
+.mainPageContainer{
+  padding-top: 100px;
+  padding-left: 100px;
+  padding-right: 62px;
+  padding-bottom: 64px;
+  min-height: 100vh;
+}
+.mainPageContainerDark{
+  background-color: black;
+}
+.mainPageContainerLight{
+  background-color: white;
+}
+@media (max-width: 768px) {
+  .mainPageContainer {
+    padding: 144px 40px 56px 40px;
+  }
+}
+@media (max-width: 320px) {
+  .mainPageContainer {
+    padding: 216px 24px 48px 24px;
+  }
+}

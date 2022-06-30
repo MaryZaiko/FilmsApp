@@ -7,7 +7,7 @@ type FilmsListProps = {
   data: CardTypes[];
 };
 
-const FilmsList: FC<FilmsListProps> = ({ data}) => {
+const FilmsList: FC<FilmsListProps> = ({data}) => {
   // const onClickCard = (id: string) => {
   //   window.location.href = `/cards-list/${id}`;
   // };
