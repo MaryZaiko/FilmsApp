@@ -7,7 +7,7 @@ export type CardTypes = {
   Poster: string;
   Title: string;
   Genre: string;
-  Ratings: RATINGS[];
+  imdbRating: number;
 
 };
 // type PostCardProps = {

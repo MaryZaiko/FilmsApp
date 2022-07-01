@@ -3,17 +3,14 @@ import "./Card.css";
 import classnames from "classnames";
 import { Theme, useThemeContext } from "./../../context/themeModeContext";
 
-type RATINGS = {
-  Source: string;
-  Value: string;
-};
+
 
 type PostCardProps = {
   imdbID: string;
   Poster: string;
   Title: string;
   Genre: string;
-  Ratings: RATINGS[];
+  imdbRating: number;
   // date: string;
   // isBig?: boolean;
   // onClick?: (e: any) => void;
@@ -21,17 +18,17 @@ type PostCardProps = {
   // saved?: boolean;
 };
 
-const PostCard: FC<PostCardProps> = ({
+const Card: FC<PostCardProps> = ({
   imdbID,
   Poster,
   Title,
   Genre,
-  Ratings,
+  imdbRating,
 }) => {
   const { theme } = useThemeContext();
   const isDarkTheme = theme === Theme.Dark;
 
-  const rating = Ratings[0].Value.split("/")[0];
+ 
   const re = /,/gi;
   const genreForRender = Genre.replace(re, " •");
 
@@ -51,15 +48,15 @@ const PostCard: FC<PostCardProps> = ({
       </div>
       <div
         className={classnames("cardRating", {
-          ["cardRatingHigh"]: +rating > 6,
-          ["cardRatingAverage"]: +rating < 6 && +rating > 4,
-          ["cardRatingLow"]: +rating < 4,
+          ["cardRatingHigh"]: +imdbRating > 6,
+          ["cardRatingAverage"]: +imdbRating < 6 && +imdbRating > 4,
+          ["cardRatingLow"]: +imdbRating < 4,
         })}
       >
-        {rating}
+        {imdbRating}
       </div>
     </div>
   );
 };
 
-export default PostCard;
+export default Card;

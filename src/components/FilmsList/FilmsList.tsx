@@ -17,7 +17,7 @@ const FilmsList: FC<FilmsListProps> = ({data}) => {
       <div key={card.imdbID}
       //  onClick={() => onClickCard(card.imdbID)}
        >
-      <Card imdbID={card.imdbID} Poster={card.Poster} Title={card.Title} Genre={card.Genre} Ratings={card.Ratings} />
+      <Card imdbID={card.imdbID} Poster={card.Poster} Title={card.Title} Genre={card.Genre} imdbRating={card.imdbRating} />
        </div>
     );
   });

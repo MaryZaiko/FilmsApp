@@ -1,0 +1,88 @@
+.singlePageContainer {
+  min-height: 100vh;
+  padding: 152px 63px 63px 367px;
+  color: white;
+  display: flex;
+  gap: 50px;
+}
+.singlePageContainerDark {
+  background-color: black;
+}
+.singlePageContainerLight {
+  background-color: white;
+}
+.singlePageImg {
+  width: 266px;
+  height: 356px;
+  border-radius: 20px;
+}
+.singlePageTitle {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 40px;
+  line-height: 60px;
+}
+.ratingContainer {
+  display: flex;
+  gap: 20px;
+}
+
+.singlePageCardRating {
+  width: 37px;
+  height: 28px;
+  padding: 2px 8px;
+  border-radius: 6px;
+  color: white;
+  text-align: center;
+}
+
+.singlePageCardRatingHigh {
+  background-color: #00a340;
+}
+.singlePageCardRatingAverage {
+  background-color: #f3a608;
+}
+.singlePageCardRatingLow {
+  background-color: #f45d2d;
+}
+.singlePageImdbRating {
+  padding: 2px 8px;
+  width: 79px;
+  height: 28px;
+  background: #323537;
+  border-radius: 6px;
+}
+.singlePageRuntime {
+  padding: 2px 8px;
+  width: 73px;
+  height: 28px;
+  background: #323537;
+  border-radius: 6px;
+}
+.singlePageTable{
+  margin-top: 40px;
+  margin-bottom: 56px;
+  border-spacing: 0 20px;
+}
+.singlePageTableInfo{
+  padding-left: 54px;
+}
+h2{
+
+font-size: 24px;
+font-weight: 600;
+line-height: 36px;
+letter-spacing: 0em;
+text-align: left;
+
+}
+@media (max-width: 768px) {
+  .mainPageContainer {
+    padding: 144px 40px 56px 40px;
+  }
+}
+@media (max-width: 320px) {
+  .mainPageContainer {
+    padding: 216px 24px 48px 24px;
+  }
+}

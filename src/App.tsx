@@ -5,6 +5,7 @@ import { ThemeModeProvider } from "./context/themeModeProvider";
 import { Theme } from "./context/themeModeContext";
 import MainPage from "./pages/MainPage";
 import PagesWrapper from "./components/PagesWrapper";
+import SingleFilm from "./pages/SingleFilm";
 
 function App() {
   const [theme, setTheme] = useState<Theme>(Theme.Dark);
@@ -140,7 +141,7 @@ function App() {
   return (
     <ThemeModeProvider theme={theme} onChangeTheme={onChangeTheme}>
       <div className="App">
-        <PagesWrapper/>
+        <SingleFilm/>
       </div>
     </ThemeModeProvider>
   );
