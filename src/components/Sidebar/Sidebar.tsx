@@ -10,23 +10,23 @@ import Logo from "../Logo";
 const Sidebar = () => {
   return (
     <div className="SidebarContainer SidebarContainerDark">
-    <Logo className='logoSidebar'/>
-   
+      <Logo className="logoSidebar" />
+
       <a href="#" className="linkSidebar">
         <HomeSVG />
-         Home
+        Home
       </a>
       <a href="#" className="linkSidebar">
-        <FireSVG />
-         Trends
+        <FireSVG fill="#80858B" />
+        Trends
       </a>
       <a href="#" className="linkSidebar">
         <FlagSVG />
-         Favorites
+        Favorites
       </a>
       <a href="#" className="linkSidebar">
         <GearSVG />
-         Settings
+        Settings
       </a>
     </div>
   );

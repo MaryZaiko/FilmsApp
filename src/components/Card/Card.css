@@ -42,6 +42,12 @@
 .cardRatingLow {
   background-color: #f45d2d;
 }
+.cardTrends{
+width: 57px;
+height: 28px;
+background-color: #7B61FF;
+
+}
 @media (max-width: 768px) {
   .cardImg {
     width: 208px;

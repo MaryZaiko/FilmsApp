@@ -2,8 +2,7 @@ import React, { FC } from "react";
 import "./Card.css";
 import classnames from "classnames";
 import { Theme, useThemeContext } from "./../../context/themeModeContext";
-
-
+import FireSVG from "../assets/FireSVG";
 
 type PostCardProps = {
   imdbID: string;
@@ -27,8 +26,8 @@ const Card: FC<PostCardProps> = ({
 }) => {
   const { theme } = useThemeContext();
   const isDarkTheme = theme === Theme.Dark;
+  const isTrends = false;
 
- 
   const re = /,/gi;
   const genreForRender = Genre.replace(re, " •");
 
@@ -51,8 +50,9 @@ const Card: FC<PostCardProps> = ({
           ["cardRatingHigh"]: +imdbRating > 6,
           ["cardRatingAverage"]: +imdbRating < 6 && +imdbRating > 4,
           ["cardRatingLow"]: +imdbRating < 4,
-        })}
+        }, {['cardTrends']: isTrends})}
       >
+        {isTrends && <FireSVG width="10" height="15" fill="#FFFFFF"/>}
         {imdbRating}
       </div>
     </div>
