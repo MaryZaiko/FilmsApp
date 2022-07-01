@@ -13,6 +13,7 @@
 .inputSearchLight {
   background: #ffffff;
   border: 2px solid #afb2b6;
+  border-right: none;
 }
 .inputSearchDark {
   background: #323537;

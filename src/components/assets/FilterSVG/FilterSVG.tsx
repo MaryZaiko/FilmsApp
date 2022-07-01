@@ -5,12 +5,14 @@ type FilterSVGType = {
   width?: string;
   height?: string;
   fill?: string;
+  stroke?:string;
 };
 
 const FilterSVG = ({
   width = "24px",
   height = "24px",
   fill = "none",
+  stroke = 'white'
 }: FilterSVGType) => {
   let isFilter = true;
 
@@ -27,9 +29,10 @@ const FilterSVG = ({
     >
       <path
         d="M5 6L19 6M10 12H19M14 18H19"
-        stroke="white"
+        stroke={stroke}
         strokeWidth="2"
         strokeLinecap="round"
+      
       />
       <circle
         className={isFilter ? "circleFilter" : "circleFilterNone"}

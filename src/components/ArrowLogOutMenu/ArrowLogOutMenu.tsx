@@ -5,9 +5,11 @@ import UserSVG from "../assets/UserSVG";
 import classnames from "classnames";
 import ArrowSVG from "../assets/ArrowSVG";
 import LogOutMenu from "../LogOutMenu";
+import { Theme, useThemeContext } from "../../context/themeModeContext";
 
 const ArrowLogOutMenu = () => {
-  let isLogin = true;
+  const { theme } = useThemeContext();
+  const isDarkTheme = theme === Theme.Dark;
 
   const [isOpenMenu, setIsOpenMenu] = useState(false);
   const onClickArr = (e: any) => {
@@ -25,7 +27,7 @@ const ArrowLogOutMenu = () => {
           />
         }
       />
-      <LogOutMenu className={classnames('logOutMenuContainer', isOpenMenu ? "logOutMenuOpen" : "logOutMenuClose")}/>
+      <LogOutMenu className={classnames('logOutMenuContainer',isDarkTheme ? 'logOutMenuContainerDark' : 'logOutMenuContainerLight' ,isOpenMenu ? "logOutMenuOpen" : "logOutMenuClose")}/>
     </div>
   );
 };

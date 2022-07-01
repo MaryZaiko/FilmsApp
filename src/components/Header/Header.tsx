@@ -9,31 +9,36 @@ import UserNameHeader from "../UserNameHeader";
 import Sidebar from "../Sidebar";
 import FilterSVG from "../assets/FilterSVG";
 import ArrowSVG from "../assets/ArrowSVG";
+import { Theme, useThemeContext } from "../../context/themeModeContext";
 import classnames from "classnames";
 
 const Header = () => {
   const [isOpenMenu, setIsOpenMenu] = useState(false);
   const [isOpenBurgerMenu, setIsOpenBurgerMenu] = useState(false);
-
+  const { theme } = useThemeContext();
+  const isDarkTheme = theme === Theme.Dark;
   const onClickArr = (e: any) => {
-
     isOpenMenu ? setIsOpenMenu(false) : setIsOpenMenu(true);
   };
   const onClickBurgerMenu = (e: any) => {
-
     isOpenBurgerMenu ? setIsOpenBurgerMenu(false) : setIsOpenBurgerMenu(true);
   };
   return (
-    <div className="headerContainer headerContainerDark">
+    <div
+      className={classnames(
+        "headerContainer",
+        isDarkTheme ? "headerContainerDark" : "headerContainerLight"
+      )}
+    >
       <Logo className="logoHeader" />
       <form className="formInput">
         <Input
           type="text"
           placeholder="Search"
-          className="inputSearch inputSearchDark"
+          className={classnames("inputSearch", isDarkTheme ? "inputSearchDark" : "inputSearchLight")}
         />
-        <div className="iconInput iconInputDark">
-          <FilterSVG />
+        <div className={classnames("iconInput", isDarkTheme ? "iconInputDark" : "iconInputLight")}>
+          <FilterSVG stroke={isDarkTheme ? 'white' : '#AFB2B6'}/>
         </div>
       </form>
 
@@ -50,12 +55,8 @@ const Header = () => {
         }
         className="btnUserNameHeader btnUserNameHeaderMenu"
       />
-      
+
       <UserNameHeader />
-      
-     
-      
-       
     </div>
   );
 };

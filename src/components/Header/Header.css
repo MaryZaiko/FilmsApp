@@ -13,7 +13,10 @@
 .headerContainerDark {
   background-color: black;
 }
-
+.headerContainerLight {
+  background-color: white;
+  color: black;
+}
 .formInput {
   display: flex;
   flex-wrap: nowrap;
@@ -32,6 +35,7 @@
 .iconInputLight {
   background: #ffffff;
   border: 2px solid #afb2b6;
+  border-left: none;
 }
 .iconInputDark {
   background: #323537;

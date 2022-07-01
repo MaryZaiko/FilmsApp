@@ -1,0 +1,16 @@
+.settingsContainer{
+  padding-left: 280px;
+
+}
+.settingsContainerDark{
+  background-color: black;
+  color: white;
+}
+.settingsContainerLight{
+  background-color: white;
+  color: black;
+}
+.settingsInputWrapper{
+    display: flex;
+    flex-direction: column;
+}

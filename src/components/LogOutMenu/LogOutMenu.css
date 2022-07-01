@@ -4,19 +4,35 @@
   position: absolute;
   top: 55px;
   right: 0;
-  background: #242426;
+
 border-radius: 10px;
 }
+.logOutMenuContainerDark{
+  background: #242426;
+}
+.logOutMenuContainerLight{
+  background: white;
+  color: #242426;
+  border: 1px solid #323537;;
+}
 li{
-  padding:  15px 0;
+  padding:  15px 20px;
   list-style-type: none;
 }
+ul{
+  padding: 0;
+}
 ul li:first-child{
-  border-top: 1px solid #323537;;
+  border-bottom: 1px solid #323537;;
+
 }
 .logOutMenuOpen{
   display: block;
 }
 .logOutMenuClose{
   display: none;
+}
+li:hover{
+  color: #7B61FF;
+  cursor: pointer;
 }

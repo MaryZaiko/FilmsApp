@@ -4,9 +4,7 @@
   gap: 20px;
   position: relative;
 }
-.userNameHeaderContainerDark {
-  color: white;
-}
+
 
 @media (max-width: 768px) {
   .UserNameHeaderContainer,.userNameHeaderContainerDark {

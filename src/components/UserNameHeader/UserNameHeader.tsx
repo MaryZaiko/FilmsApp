@@ -6,17 +6,20 @@ import classnames from "classnames";
 import ArrowSVG from "../assets/ArrowSVG";
 import LogOutMenu from "../LogOutMenu";
 import ArrowLogOutMenu from "../ArrowLogOutMenu";
+import { Theme, useThemeContext } from "../../context/themeModeContext";
+
 
 const UserNameHeader = () => {
   let isLogin = true;
-
+  const { theme } = useThemeContext();
+  const isDarkTheme = theme === Theme.Dark;
   const [isOpenMenu, setIsOpenMenu] = useState(false);
   const onClickArr = (e: any) => {
     isOpenMenu ? setIsOpenMenu(false) : setIsOpenMenu(true);
   };
 
   return (
-    <div className="userNameHeaderContainer userNameHeaderContainerDark">
+    <div className={classnames("userNameHeaderContainer", isDarkTheme ? "userNameHeaderContainerDark" : 'userNameHeaderContainerLight')}>
       {/* класс зависит от темы */}
       {isLogin ? (
         <div className="userNameHeaderContent">

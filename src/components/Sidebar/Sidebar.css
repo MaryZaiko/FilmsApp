@@ -1,4 +1,4 @@
-.SidebarContainer {
+.sidebarContainer {
   height: 100vh;
   padding: 48px 60px 64px 60px;
   display: flex;
@@ -10,7 +10,7 @@
   left: 0;
   top: 0;
 }
-.SidebarContainerDark {
+.sidebarContainerDark {
   background-color: black;
 }
 .linkSidebar {
@@ -20,7 +20,7 @@
   color: #80858b;
 }
 @media (max-width: 950px) {
-  .SidebarContainer {
+  .sidebarContainer {
     display: none;
   }
 }

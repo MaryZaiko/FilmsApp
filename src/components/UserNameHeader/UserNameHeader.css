@@ -7,7 +7,9 @@
 .userNameHeaderContainerDark {
   color: white;
 }
-
+.userNameHeaderContainerLight {
+  background-color: white;
+}
 @media (max-width: 950px) {
   .userNameHeaderContainer,.userNameHeaderContainerDark {
     display: none;

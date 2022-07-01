@@ -1,5 +1,8 @@
 import React, { FC } from "react";
 import "./Sidebar.css";
+import { Theme, useThemeContext } from "../../context/themeModeContext";
+import classnames from "classnames";
+
 import Button from "../Button";
 import HomeSVG from "../assets/HomeSVG";
 import FireSVG from "../assets/FireSVG";
@@ -8,8 +11,15 @@ import GearSVG from "../assets/GearSVG";
 import Logo from "../Logo";
 
 const Sidebar = () => {
+  const { theme } = useThemeContext();
+  const isDarkTheme = theme === Theme.Dark;
   return (
-    <div className="SidebarContainer SidebarContainerDark">
+    <div
+      className={classnames(
+        "sidebarContainer",
+        isDarkTheme ? "sidebarContainerDark" : "sidebarContainerLight"
+      )}
+    >
       <Logo className="logoSidebar" />
 
       <a href="#" className="linkSidebar">
