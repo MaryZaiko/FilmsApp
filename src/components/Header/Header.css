@@ -2,17 +2,18 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  /* border: 2px solid red; */
-  margin: 0 146px;
   gap: 40px;
+
+  margin-left: 220px;
+  padding: 40px 62px 56px 62px;
+  flex-wrap: wrap;
+
 }
 
 .headerContainerDark {
   background-color: black;
 }
-.logoHeader {
-  display: none;
-}
+
 .formInput {
   display: flex;
   flex-wrap: nowrap;
@@ -41,8 +42,16 @@
   align-items: center;
   justify-content: space-between;
 }
-@media (max-width: 768px) {
+@media (max-width: 950px) {
   .headerContainer {
-    flex-wrap: wrap;
+    justify-content: center;
+  }
+}
+@media (max-width: 950px) {
+  .headerContainer {
+    /* flex-wrap: nowrap; */
+    justify-content: center;
+    padding: 40px;
+    margin: 0;
   }
 }

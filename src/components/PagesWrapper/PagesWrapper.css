@@ -1,5 +1,6 @@
-.pagesWrapper{
-  display: flex;
+.pagesWrapperContainer{
+  position: relative;
+  /* padding: 0 62px ; */
 }
 .pagesWrapperDark{
   background-color: black;
@@ -8,7 +9,9 @@
 .pagesWrapperLight{
   background-color: white;
 }
-.headerContent{
-  /* width: 80%; */
-  padding-top: 40px;
+
+@media (max-width: 950px) {
+  .pagesWrapperContainer {
+   padding: 0;
+  }
 }

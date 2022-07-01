@@ -1,0 +1,22 @@
+.logOutMenuContainer{
+  width: 100%;
+  height: 112px;
+  position: absolute;
+  top: 55px;
+  right: 0;
+  background: #242426;
+border-radius: 10px;
+}
+li{
+  padding:  15px 0;
+  list-style-type: none;
+}
+ul li:first-child{
+  border-top: 1px solid #323537;;
+}
+.logOutMenuOpen{
+  display: block;
+}
+.logOutMenuClose{
+  display: none;
+}

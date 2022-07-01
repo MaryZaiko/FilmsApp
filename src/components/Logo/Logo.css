@@ -1,7 +1,15 @@
-.logo{
-
-}
+.logoHeader {
+    display: none;
+  }
 .logoImg{
 height: 40px;
 width: 158px;
 }
+.logoSidebar{
+    padding-bottom: 42px;
+}
+@media (max-width: 950px) {
+    .logoHeader {
+      display: block;
+    }
+  }

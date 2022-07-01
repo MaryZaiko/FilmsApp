@@ -50,16 +50,12 @@ const Header = () => {
         }
         className="btnUserNameHeader btnUserNameHeaderMenu"
       />
+      
       <UserNameHeader />
-      <Button
-        className="btnHeaderArrow"
-        btnContent={
-          <ArrowSVG
-            className={classnames(isOpenMenu ? "arrowRotate" : "arrow")}
-            onClick={onClickArr}
-          />
-        }
-      />
+      
+     
+      
+       
     </div>
   );
 };

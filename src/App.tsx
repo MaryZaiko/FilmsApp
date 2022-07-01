@@ -141,7 +141,7 @@ function App() {
   return (
     <ThemeModeProvider theme={theme} onChangeTheme={onChangeTheme}>
       <div className="App">
-        <SingleFilm/>
+        <PagesWrapper/>
       </div>
     </ThemeModeProvider>
   );

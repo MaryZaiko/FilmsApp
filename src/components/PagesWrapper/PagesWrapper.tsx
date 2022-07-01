@@ -6,11 +6,11 @@ import Header from "../Header";
 
 const PagesWrapper = () => {
   return (
-    <div className="pagesWrapper pagesWrapperDark">
+    <div className="pagesWrapperContainer pagesWrapperDark">
       <Sidebar />
-      <div className="headerContent">
+    
         <Header />
-      </div>
+ 
     </div>
   );
 };

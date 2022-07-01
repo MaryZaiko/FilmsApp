@@ -1,19 +1,32 @@
 .SidebarContainer {
   height: 100vh;
-  /* width: 20%; */
-  padding-top: 50px;
-  padding-left: 65px;
+  padding: 48px 60px 64px 60px;
   display: flex;
   flex-direction: column;
   gap: 40px;
   z-index: 2;
+  border: 1px solid red;
+  position: fixed;
+  left: 0;
+  top: 0;
 }
 .SidebarContainerDark {
   background-color: black;
 }
-.linkSidebar{
+.linkSidebar {
   text-decoration: none;
   display: flex;
   gap: 25px;
-  color: #80858B;
+  color: #80858b;
 }
+@media (max-width: 950px) {
+  .SidebarContainer {
+    display: none;
+  }
+}
+/* @media (max-width: 320px) {
+  .cardImg {
+    width: 272px;
+    height: 365px;
+  }
+} */

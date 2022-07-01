@@ -8,8 +8,8 @@
   color: white;
 }
 
-@media (max-width: 950px) {
-  .userNameHeaderContainer,.userNameHeaderContainerDark {
+@media (max-width: 768px) {
+  .UserNameHeaderContainer,.userNameHeaderContainerDark {
     display: none;
   }
 }

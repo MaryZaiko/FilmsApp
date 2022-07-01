@@ -10,7 +10,7 @@ import Logo from "../Logo";
 const Sidebar = () => {
   return (
     <div className="SidebarContainer SidebarContainerDark">
-    <Logo />
+    <Logo className='logoSidebar'/>
    
       <a href="#" className="linkSidebar">
         <HomeSVG />
