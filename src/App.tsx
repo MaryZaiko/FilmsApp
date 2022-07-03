@@ -142,8 +142,9 @@ function App() {
   return (
     <ThemeModeProvider theme={theme} onChangeTheme={onChangeTheme}>
       <div className="App">
-        <PagesWrapper/>
-        <Settings/>
+        <PagesWrapper>
+          <Settings/>
+        </PagesWrapper>
       </div>
     </ThemeModeProvider>
   );

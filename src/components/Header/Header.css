@@ -3,10 +3,7 @@
   align-items: center;
   justify-content: space-between;
   gap: 40px;
-
-  margin-left: 220px;
   padding: 40px 62px 56px 62px;
-  flex-wrap: wrap;
 
 }
 
@@ -20,6 +17,7 @@
 .formInput {
   display: flex;
   flex-wrap: nowrap;
+  width: 100%;
 }
 .formInput:hover {
   border: 2px solid #7b61ff;

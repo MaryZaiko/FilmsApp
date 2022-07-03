@@ -35,7 +35,7 @@ const Header = () => {
         <Input
           type="text"
           placeholder="Search"
-          className={classnames("inputSearch", isDarkTheme ? "inputSearchDark" : "inputSearchLight")}
+          className={classnames("inputSearch", isDarkTheme ? "inputDark" : "inputLight")}
         />
         <div className={classnames("iconInput", isDarkTheme ? "iconInputDark" : "iconInputLight")}>
           <FilterSVG stroke={isDarkTheme ? 'white' : '#AFB2B6'}/>

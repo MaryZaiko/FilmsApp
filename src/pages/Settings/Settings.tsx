@@ -5,6 +5,7 @@ import { Theme, useThemeContext } from "../../context/themeModeContext";
 
 import Input from "../../components/Input";
 import Switcher from "../../components/Switcher";
+import Button from "../../components/Button";
 
 const Settings = () => {
   const { theme } = useThemeContext();
@@ -13,51 +14,107 @@ const Settings = () => {
   return (
     <div
       className={classnames(
-        "settingsContainer",
-        isDarkTheme ? "settingsContainerDark" : "settingsContainerLight"
+        "settingsWrapper",
+        isDarkTheme ? "settingsWrapperDark" : "settingsWrapperLight"
       )}
     >
       <div className="settingsProfileWrapper">
         <span>Profile</span>
-        <div className="settingsProfileContent">
+        <div
+          className={classnames(
+            " settingsProfileContent",
+            isDarkTheme ? "settingsContentDark" : "settingsContentLight"
+          )}
+        >
           <label className="settingsInputWrapper">
             <span>Name</span>
-            <Input type={"text"} />
+            <Input
+              type={"text"}
+              className={classnames(
+                "inputSettings",
+                isDarkTheme ? "inputDark" : "inputLight"
+              )}
+            />
           </label>
           <label className="settingsInputWrapper">
             <span>Email</span>
-            <Input type={"email"} />
+            <Input
+              type={"email"}
+              className={classnames(
+                "inputSettings",
+                isDarkTheme ? "inputDark" : "inputLight"
+              )}
+            />
           </label>
         </div>
       </div>
 
       <div className="settingsPasswordWrapper">
         <span>Password</span>
-        <div className="settingsPasswordContent">
+        <div
+          className={classnames(
+            "settingsPasswordContent",
+            isDarkTheme ? "settingsContentDark" : "settingsContentLight"
+          )}
+        >
           <label className="settingsInputWrapper">
             <span>Password</span>
-            <Input type={"text"} placeholder="Your password" />
+            <Input
+              type={"text"}
+              placeholder="Your password"
+              className={classnames(
+                "inputSettings",
+                isDarkTheme ? "inputDark" : "inputLight"
+              )}
+            />
           </label>
-          <label className="settingsInputWrapper">
-            <span>New password</span>
-            <Input type={"text"} placeholder="New password" />
-          </label>
-          <label className="settingsInputWrapper">
-            <span>Confirm password</span>
-            <Input type={"text"} placeholder="Confirm password" />
-          </label>
+          <div className="settingsChangePasswordWrapper">
+            <label className="settingsInputWrapper">
+              <span>New password</span>
+              <Input
+                type={"text"}
+                placeholder="New password"
+                className={classnames(
+                  "inputSettings",
+                  isDarkTheme ? "inputDark" : "inputLight"
+                )}
+              />
+            </label>
+            <label className="settingsInputWrapper">
+              <span>Confirm password</span>
+              <Input
+                type={"text"}
+                placeholder="Confirm password"
+                className={classnames(
+                  "inputSettings",
+                  isDarkTheme ? "inputDark" : "inputLight"
+                )}
+              />
+            </label>
+          </div>
         </div>
       </div>
 
       <div className="settingsColorModeWrapper">
         <span>Color Mode</span>
-        <div className="settingsColorModeContent">
+        <div
+          className={classnames(
+            "settingsColorModeContent",
+            isDarkTheme ? "settingsContentDark" : "settingsContentLight"
+          )}
+        >
           <div>
-          <span>{isDarkTheme ? "Dark" : "Light"}</span>
-          <p>Use {isDarkTheme ? "dark" : "light"} theme</p>
+            <span>{isDarkTheme ? "Dark" : "Light"}</span>
+            <p>Use {isDarkTheme ? "dark" : "light"} theme</p>
           </div>
-         <Switcher />
+          <Switcher />
         </div>
+      
+      </div>
+      <div className="btnsWrapper">
+        <Button btnContent={'Cancel'} className={classnames('btnSettings' , isDarkTheme ? 'btnSettingsDark' : 'btnSettingsLight', )}/>
+        <Button btnContent={'Save'} className={classnames('btnSettings' , isDarkTheme ? 'btnSettingsDark' : 'btnSettingsLight', )} />
+
       </div>
     </div>
   );

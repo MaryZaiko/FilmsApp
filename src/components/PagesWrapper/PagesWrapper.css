@@ -1,6 +1,8 @@
 .pagesWrapperContainer{
-  position: relative;
-  /* padding: 0 62px ; */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  height: 100vh;
 }
 .pagesWrapperDark{
   background-color: black;
@@ -9,9 +11,17 @@
 .pagesWrapperLight{
   background-color: white;
 }
+.contentWrapper {
+  display: flex;
+}
 
 @media (max-width: 950px) {
   .pagesWrapperContainer {
    padding: 0;
   }
+  
+.contentWrapper {
+  flex-direction: row-reverse;
+}
+
 }

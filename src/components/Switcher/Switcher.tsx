@@ -16,7 +16,7 @@ const Switcher = () => {
     <div className="themeToggle">
     <label className="switch">
       <input type="checkbox" onClick={() => onClickTheme()} />
-      <span className="slider"></span>
+      <div className="slider"></div>
     </label>
   </div>
   )

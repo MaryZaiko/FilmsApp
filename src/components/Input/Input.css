@@ -10,12 +10,21 @@
 }
 
 
-.inputSearchLight {
+
+.inputSettings{
+height: 56px;
+background: #323537;
+border-radius: 10px;
+padding: 16px 20px;
+border: none;
+}
+
+
+.inputLight {
   background: #ffffff;
   border: 2px solid #afb2b6;
-  border-right: none;
 }
-.inputSearchDark {
+.inputDark {
   background: #323537;
   color: #ffffff;
 }

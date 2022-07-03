@@ -20,7 +20,7 @@ const Sidebar = () => {
         isDarkTheme ? "sidebarContainerDark" : "sidebarContainerLight"
       )}
     >
-      <Logo className="logoSidebar" />
+      {/* <Logo className="logoSidebar" /> */}
 
       <a href="#" className="linkSidebar">
         <HomeSVG />
