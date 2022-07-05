@@ -4,7 +4,6 @@
   justify-content: space-between;
   gap: 40px;
   padding: 40px 62px 56px 62px;
-
 }
 
 .headerContainerDark {
@@ -14,31 +13,23 @@
   background-color: white;
   color: black;
 }
-.formInput {
+.inputWrapper {
   display: flex;
   flex-wrap: nowrap;
   width: 100%;
-}
-.formInput:hover {
-  border: 2px solid #7b61ff;
-  border-radius: 10px;
+  position: relative;
+  padding-left: 20px;
+  padding-right: 10px;
 }
 
 .iconInput {
   height: 56px;
   padding: 16px 20px;
-  border-bottom-right-radius: 10px;
-  border-top-right-radius: 10px;
+  position: absolute;
+  top: 0px;
+  right: 8px;
 }
-.iconInputLight {
-  background: #ffffff;
-  border: 2px solid #afb2b6;
-  border-left: none;
-}
-.iconInputDark {
-  background: #323537;
-  color: #ffffff;
-}
+
 .headerTop {
   display: flex;
   align-items: center;

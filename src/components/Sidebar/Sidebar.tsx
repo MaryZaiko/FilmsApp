@@ -20,24 +20,25 @@ const Sidebar = () => {
         isDarkTheme ? "sidebarContainerDark" : "sidebarContainerLight"
       )}
     >
-      {/* <Logo className="logoSidebar" /> */}
-
-      <a href="#" className="linkSidebar">
-        <HomeSVG />
-        Home
-      </a>
-      <a href="#" className="linkSidebar">
-        <FireSVG fill="#80858B" />
-        Trends
-      </a>
-      <a href="#" className="linkSidebar">
-        <FlagSVG />
-        Favorites
-      </a>
-      <a href="#" className="linkSidebar">
-        <GearSVG />
-        Settings
-      </a>
+      <div className="linksWrapper">
+        <a href="#" className="linkSidebar">
+          <HomeSVG />
+          Home
+        </a>
+        <a href="#" className="linkSidebar">
+          <FireSVG fill="#80858B" />
+          Trends
+        </a>
+        <a href="#" className="linkSidebar">
+          <FlagSVG />
+          Favorites
+        </a>
+        <a href="#" className="linkSidebar">
+          <GearSVG />
+          Settings
+        </a>
+      </div>
+      <span className="sidebarFooter">© All Rights Reserved</span>
     </div>
   );
 };

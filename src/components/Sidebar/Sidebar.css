@@ -3,12 +3,16 @@
   padding: 48px 60px 64px 60px;
   display: flex;
   flex-direction: column;
+justify-content: space-between;
+
+}
+.linksWrapper{
+  display: flex;
+  flex-direction: column;
   gap: 40px;
-  /* z-index: 2; */
-  border: 1px solid red;
-  /* position: fixed; */
-  /* left: 0;
-  top: 0; */
+}
+.sidebarFooter{
+  color: #AFB2B6;
 }
 .sidebarContainerDark {
   background-color: black;

@@ -1,5 +1,5 @@
 .settingsWrapper {
-  padding-left: 30px;
+
   padding-right: 290px;
   display: flex;
   flex-direction: column;
@@ -65,6 +65,7 @@ label > span {
 .btnsWrapper {
   display: flex;
   justify-content: flex-end;
+  gap: 40px;
   width: 50%;
   margin-top: 48px;
   align-self: end;

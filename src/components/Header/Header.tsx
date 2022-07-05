@@ -31,22 +31,23 @@ const Header = () => {
       )}
     >
       <Logo className="logoHeader" />
-      <form className="formInput">
+      <div className="inputWrapper">
         <Input
           type="text"
           placeholder="Search"
-          className={classnames("inputSearch", isDarkTheme ? "inputDark" : "inputLight")}
+          className={classnames(
+            "inputSearch",
+            isDarkTheme ? "inputDark" : "inputLight"
+          )}
         />
-        <div className={classnames("iconInput", isDarkTheme ? "iconInputDark" : "iconInputLight")}>
-          <FilterSVG stroke={isDarkTheme ? 'white' : '#AFB2B6'}/>
+        <div className={classnames("iconInput")}>
+          <FilterSVG stroke={isDarkTheme ? "white" : "#AFB2B6"} />
         </div>
-      </form>
+      </div>
 
       <Button
         onClick={onClickBurgerMenu}
         btnContent={
-          // <FontAwesomeIcon icon={faXmark} />
-
           isOpenBurgerMenu ? (
             <FontAwesomeIcon icon={faXmark} />
           ) : (

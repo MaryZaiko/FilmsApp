@@ -1,12 +1,12 @@
 .inputSearch {
   min-width: 272px;
-  width: 50%;
+  /* width: 50%; */
   height: 56px;
-  border-top-left-radius: 10px;
-  border-bottom-left-radius: 10px;
+  border-radius: 10px;
   padding: 16px 20px;
   outline: none;
   border-style: hidden;
+ flex: auto;
 }
 
 
@@ -16,9 +16,11 @@ height: 56px;
 background: #323537;
 border-radius: 10px;
 padding: 16px 20px;
-border: none;
-}
 
+}
+.inputSearch:focus{
+border: 2px solid #7B61FF;
+}
 
 .inputLight {
   background: #ffffff;

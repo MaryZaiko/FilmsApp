@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Settings.css";
 import classnames from "classnames";
 import { Theme, useThemeContext } from "../../context/themeModeContext";
@@ -109,12 +109,22 @@ const Settings = () => {
           </div>
           <Switcher />
         </div>
-      
       </div>
       <div className="btnsWrapper">
-        <Button btnContent={'Cancel'} className={classnames('btnSettings' , isDarkTheme ? 'btnSettingsDark' : 'btnSettingsLight', )}/>
-        <Button btnContent={'Save'} className={classnames('btnSettings' , isDarkTheme ? 'btnSettingsDark' : 'btnSettingsLight', )} />
-
+        <Button
+          btnContent={"Cancel"}
+          className={classnames(
+            "btnSettings",
+            isDarkTheme ? "btnSettingsDark" : "btnSettingsLight"
+          )}
+        />
+        <Button
+          btnContent={"Save"}
+          className={classnames(
+            "btnSettings",
+            isDarkTheme ? "btnSettingsDark" : "btnSettingsLight"
+          )}
+        />
       </div>
     </div>
   );

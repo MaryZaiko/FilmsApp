@@ -29,8 +29,8 @@
   background-color: white;
   border: 2px solid #afb2b6;
 }
-.btnSettingsActive{
-
+.btnSettings:hover{
+  background-color: #7B61FF;
 }
 @media (max-width: 950px) {
   .btnHeaderArrow {
