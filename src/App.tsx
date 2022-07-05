@@ -7,6 +7,7 @@ import MainPage from "./pages/MainPage";
 import PagesWrapper from "./components/PagesWrapper";
 import SingleFilm from "./pages/SingleFilm";
 import Settings from "./pages/Settings";
+import Authorization from "./pages/Authorization";
 
 function App() {
   const [theme, setTheme] = useState<Theme>(Theme.Dark);
@@ -142,9 +143,7 @@ function App() {
   return (
     <ThemeModeProvider theme={theme} onChangeTheme={onChangeTheme}>
       <div className="App">
-        <PagesWrapper>
-          <Settings/>
-        </PagesWrapper>
+       <Authorization />
       </div>
     </ThemeModeProvider>
   );

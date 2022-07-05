@@ -9,7 +9,7 @@ const Logo = ({ className }: any) => {
   return (
     <div className={className}>
       <LogoImg fill={isDarkTheme ? "white" : "black"} />
-      {/* //fill зависит от темы */}
+ 
     </div>
   );
 };

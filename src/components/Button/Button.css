@@ -5,6 +5,7 @@
   background: #7b61ff;
   border-radius: 10px;
   border: none;
+  cursor: pointer;
 }
 .btnHeaderArrow {
   background-color: transparent;
@@ -12,31 +13,44 @@
   cursor: pointer;
   color: white;
 }
-.btnUserNameHeaderMenu{
-    display: none;
+.btnUserNameHeaderMenu {
+  display: none;
+  cursor: pointer;
+
 }
-.btnSettings{
+.btnSettings {
   width: 266px;
   height: 56px;
-   border-radius: 10px;
-   flex: 1;
-   gap: 40pxs;
+  border-radius: 10px;
+  flex: 1;
+  cursor: pointer;
+
 }
-.btnSettingsDark{
+.btnSettingsDark {
   background: #323537;
 }
-.btnSettingsLight{
+.btnSettingsLight {
   background-color: white;
   border: 2px solid #afb2b6;
 }
-.btnSettings:hover{
-  background-color: #7B61FF;
+.btnSettings:hover {
+  background-color: #7b61ff;
+}
+.btnAuth {
+  background-color: #7b61ff;
+  height: 56px;
+  border-radius: 10px;
+  cursor: pointer;
+  border: none;
+}
+.btnAuthLight{
+  color: white;
 }
 @media (max-width: 950px) {
   .btnHeaderArrow {
     display: none;
   }
-  .btnUserNameHeaderMenu{
+  .btnUserNameHeaderMenu {
     display: block;
   }
 }

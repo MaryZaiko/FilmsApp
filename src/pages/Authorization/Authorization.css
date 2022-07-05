@@ -1,0 +1,36 @@
+.authorizationPageWrapper {
+  height: 100vh;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+  padding: 48px 62px 64px 62px;
+}
+.authorizationPageLogo {
+ 
+  align-self: flex-start;
+}
+.formTitle {
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 36px;
+}
+/* .SingInPageWrapperDark{
+  background-color: black;
+
+} */
+@media (max-width: 768px) {
+ 
+  .authorizationPageWrapper{
+    padding: 47px 40px 56px 40px;
+  }
+}
+@media (max-width: 320px) {
+  .authorizationPageWrapper{
+    padding: 32px 24px 48px 24px;
+  }
+  .authorizationPageLogo {
+ 
+    align-self: center;
+  }
+}
