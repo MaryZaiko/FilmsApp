@@ -8,22 +8,24 @@ import Button from "../Button";
 
 const RegistrationForm = () => {
   const { theme } = useThemeContext();
-  const isDarkTheme = theme === Theme.Light;
+  const isDarkTheme = theme === Theme.Dark;
   return (
     <div
       className={classnames(
-        "egistrationFormWrapper",
-        isDarkTheme ? "egistrationFormWrapperDark" : "egistrationFormWrapperLight"
+        "registrationFormWrapper",
+        isDarkTheme
+          ? "registrationFormWrapperDark"
+          : "registrationFormWrapperLight"
       )}
     >
-      <form className="egistrationForm">
-        <span className="formTitle">Sing in</span>
+      <form className="registrationForm">
+        <span className="formTitle">Sing Up</span>
         <div className="inputWrapper">
           <label className="settingsInputWrapper">
             <span>Name</span>
             <Input
               type={"text"}
-              placeholder={"Your email"}
+              placeholder={"Your name"}
               className={classnames(
                 "inputSettings",
                 isDarkTheme ? "inputDark" : "inputLight"
@@ -34,18 +36,45 @@ const RegistrationForm = () => {
             <span>Email</span>
             <Input
               type={"email"}
+              placeholder={"Your email"}
+              className={classnames(
+                "inputSettings",
+                isDarkTheme ? "inputDark" : "inputLight"
+              )}
+            />
+          </label>
+          <label className="settingsInputWrapper">
+            <span>Password</span>
+            <Input
+              type={"text"}
               placeholder={"Your password"}
               className={classnames(
                 "inputSettings",
                 isDarkTheme ? "inputDark" : "inputLight"
               )}
             />
-            <span>Forgot password?</span>
+          </label>
+          <label className="settingsInputWrapper">
+            <span>Confirm password</span>
+            <Input
+              type={"text"}
+              placeholder={"Confirm password"}
+              className={classnames(
+                "inputSettings",
+                isDarkTheme ? "inputDark" : "inputLight"
+              )}
+            />
           </label>
         </div>
       </form>
-      <Button btnContent={"Sign in"} className={classnames("btnAuth", !isDarkTheme && "btnAuthLight")} />
-      <span className="loginFormFooter">Don’t have an account? <a href="#">Sign Up</a> </span>
+      <Button
+        btnContent={"Sign up"}
+        className={classnames("btnAuth")}
+      />
+      <span className="loginFormFooter">
+        Already have an account?
+        <a href="#">Sign In</a>{" "}
+      </span>
     </div>
   );
 };

@@ -24,8 +24,8 @@ const Authorization = () => {
     <div className={classnames('authorizationPageWrapper', isDarkTheme ?  'authorizationPageWrapperDark' : 'authorizationPageWrapperLight')} >
       <Logo className='authorizationPageLogo'/>
      
-      <SingInForm />
-{/* <RegistrationForm /> */}
+      {/* <SingInForm /> */}
+<RegistrationForm />
    
       <span>© All Rights Reserved</span>
     </div>

@@ -8,7 +8,7 @@ import Button from "../Button";
 
 const LoginForm = () => {
   const { theme } = useThemeContext();
-  const isDarkTheme = theme === Theme.Light;
+  const isDarkTheme = theme === Theme.Dark;
   return (
     <div
       className={classnames(
@@ -17,7 +17,7 @@ const LoginForm = () => {
       )}
     >
       <form className="loginForm">
-        <span className="formTitle">Sing in</span>
+        <span className="formTitle">Sing In</span>
         <div className="inputWrapper">
           <label className="settingsInputWrapper">
             <span>Email</span>
@@ -44,7 +44,7 @@ const LoginForm = () => {
           </label>
         </div>
       </form>
-      <Button btnContent={"Sign in"} className={classnames("btnAuth", !isDarkTheme && "btnAuthLight")} />
+      <Button btnContent={"Sign in"} className={classnames("btnAuth")} />
       <span className="loginFormFooter">Don’t have an account? <a href="#">Sign Up</a> </span>
     </div>
   );

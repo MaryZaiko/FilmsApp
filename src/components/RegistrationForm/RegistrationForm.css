@@ -1,6 +1,8 @@
 .registrationFormWrapper {
   width: 574px;
-  height: 540px;
+  height: 732px;
+
+  background: #242426;
   border-radius: 10px;
   padding: 40px;
   flex-direction: column;
@@ -8,11 +10,13 @@
   gap: 40px;
 
 }
-/* .loginForm {
+
+.registrationForm {
   display: flex;
   flex-direction: column;
   gap: 40px;
 }
+
 .inputWrapper {
   display: flex;
   flex-direction: column;
@@ -24,14 +28,9 @@
   flex-direction: column;
   flex: 1;
 }
-Input + span {
-  font-weight: 500;
-  font-size: 14px;
-  line-height: 24px;
-  color: #80858b;
-  cursor: pointer;
 
-}
+
+
 .loginFormFooter{
   font-weight: 500;
   font-size: 14px;
@@ -43,17 +42,31 @@ Input + span {
   text-decoration: none;
   color: #7B61FF;;
 }
-.loginFormWrapperDark {
+.registrationFormWrapperDark {
   background-color: #242426;
   color: #ffffff;
-}
-.loginFormWrapperLight {
+} 
+.registrationFormWrapperLight {
   background-color: #ffffff;
   border: 2px solid #afb2b6;
 }
-@media (max-width: 380px) {
-  .loginFormWrapper {
-    padding: 24px;
+@media (max-width: 650px) {
+  .registrationFormWrapper {
+    width: 100%;
   }
+}
 
-} */
+@media (max-width: 380px) {
+  .registrationFormWrapper {
+    height: 656px;
+    width: 272px;
+    padding: 24px;
+    gap: none;
+  }
+  .registrationForm {
+    gap: 32px;
+  }
+  .inputWrapper {
+    gap: 20px;
+  }
+}

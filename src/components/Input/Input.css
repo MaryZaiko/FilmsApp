@@ -27,4 +27,5 @@ border: 2px solid #7B61FF;
 .inputDark {
   background: #323537;
   color: #ffffff;
+  border: none;
 }
