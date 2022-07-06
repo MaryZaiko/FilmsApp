@@ -1,9 +1,8 @@
 import React, { FC, useState } from "react";
 import "./ArrowLogOutMenu.css";
 import Button from "../Button";
-import UserSVG from "../assets/UserSVG";
 import classnames from "classnames";
-import ArrowSVG from "../assets/ArrowSVG";
+import ArrowSVG from "../../assets/ArrowSVG";
 import LogOutMenu from "../LogOutMenu";
 import { Theme, useThemeContext } from "../../context/themeModeContext";
 

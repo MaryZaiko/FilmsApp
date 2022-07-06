@@ -4,14 +4,15 @@ import classnames from "classnames";
 import { Theme, useThemeContext } from "../../context/themeModeContext";
 import { CardTypes } from "../../common/types";
 import Button from "../../components/Button";
-import ImdbLogoSVG from "../../components/assets/ImdbLogoSVG";
+import ImdbLogoSVG from "../../assets/ImdbLogoSVG";
 import Carousel from "../../components/Carousel";
+
 
 const SingleFilm = () => {
   const { theme } = useThemeContext();
   const isDarkTheme = theme === Theme.Dark;
 
-  const MOCK_DATA = {
+  const MOCK_DATA =  {
     Title: "Guardians of the Galaxy Vol. 2",
     Year: 2017,
     Rated: "PG-13",
@@ -42,16 +43,16 @@ const SingleFilm = () => {
       },
     ],
     Metascore: 67,
-    imdbRating: 7.6,
+    imdbRating: 3,
     imdbVotes: 655.156,
-    imdbID: "tt3896197",
+    imdbID: "tt3896198",
     Type: "movie",
     DVD: "22 Aug 2017",
     BoxOffice: "$389,813,101",
     Production: "N/A",
     Website: "N/A",
     Response: "True",
-  };
+  }
 
   const re = /,/gi;
   const genreForRender = MOCK_DATA.Genre.replace(re, " •");
@@ -60,8 +61,8 @@ const SingleFilm = () => {
     <div>
       <div
         className={classnames(
-          "singlePageContainer",
-          isDarkTheme ? "singlePageContainerDark" : "singlePageContainerLight"
+          "singlePageWrapper",
+          isDarkTheme ? "singlePageWrapperDark" : "singlePageWrapperLight"
         )}
       >
         <div className="singlePagePoster">
@@ -78,7 +79,7 @@ const SingleFilm = () => {
         <div className="singlePageFilmInfo">
           <p>{genreForRender}</p>
           <h1 className="singlePageTitle">{MOCK_DATA.Title}</h1>
-          <div className="ratingContainer">
+          <div className="ratingWrapper">
             <div
               className={classnames("singlePageCardRating", {
                 ["singlePageCardRatingHigh"]: MOCK_DATA.imdbRating > 6,
@@ -132,7 +133,7 @@ const SingleFilm = () => {
           <h2>
           Recommendations
           </h2>
-          <Carousel />
+          {/* <Carousel /> */}
         </div>
       </div>
     </div>

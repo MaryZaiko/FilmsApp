@@ -5,9 +5,10 @@ import { CardTypes } from "../../common/types";
 
 type FilmsListProps = {
   data: CardTypes[];
+  isTrends?:boolean
 };
 
-const FilmsList: FC<FilmsListProps> = ({data}) => {
+const FilmsList: FC<FilmsListProps> = ({data,isTrends}) => {
   // const onClickCard = (id: string) => {
   //   window.location.href = `/cards-list/${id}`;
   // };
@@ -17,11 +18,11 @@ const FilmsList: FC<FilmsListProps> = ({data}) => {
       <div key={card.imdbID}
       //  onClick={() => onClickCard(card.imdbID)}
        >
-      <Card imdbID={card.imdbID} Poster={card.Poster} Title={card.Title} Genre={card.Genre} imdbRating={card.imdbRating} />
+      <Card imdbID={card.imdbID} Poster={card.Poster} Title={card.Title} Genre={card.Genre} imdbRating={card.imdbRating} isTrends={isTrends}/>
        </div>
     );
   });
 
-  return <div className="filmsListContainer">{cardList}</div>;
+  return <div className="filmsListWrapper">{cardList}</div>;
 };
 export default FilmsList;

@@ -1,20 +1,19 @@
-.sidebarContainer {
-  height: 100vh;
+.sidebarWrapper {
+  height: 100%;
   padding: 48px 60px 64px 60px;
   display: flex;
   flex-direction: column;
-justify-content: space-between;
-
+  justify-content: space-between;
 }
-.linksWrapper{
+.linksWrapper {
   display: flex;
   flex-direction: column;
   gap: 40px;
 }
-.sidebarFooter{
-  color: #AFB2B6;
+.sidebarFooter {
+  color: #afb2b6;
 }
-.sidebarContainerDark {
+.sidebarWrapperDark {
   background-color: black;
 }
 .linkSidebar {
@@ -23,8 +22,14 @@ justify-content: space-between;
   gap: 25px;
   color: #80858b;
 }
-@media (max-width: 950px) {
-  .sidebarContainer {
+/* .sidebarWrapperVisible{
+  display: block;
+}
+.sidebarWrapperUnVisible{
+  display: none;
+} */
+@media (max-width: 1280px) {
+  .sidebarWrapper {
     display: none;
   }
 }

@@ -1,9 +1,9 @@
 import React, { FC, useState } from "react";
 import "./UserNameHeader.css";
 import Button from "../Button";
-import UserSVG from "../assets/UserSVG";
+import UserSVG from "../../assets/UserSVG";
 import classnames from "classnames";
-import ArrowSVG from "../assets/ArrowSVG";
+
 import LogOutMenu from "../LogOutMenu";
 import ArrowLogOutMenu from "../ArrowLogOutMenu";
 import { Theme, useThemeContext } from "../../context/themeModeContext";

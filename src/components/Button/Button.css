@@ -45,11 +45,13 @@
   color: white;
 }
 
-@media (max-width: 950px) {
+@media (max-width: 1280px) {
   .btnHeaderArrow {
     display: none;
   }
   .btnUserNameHeaderMenu {
     display: block;
+    margin-left: 35px;
+    margin-right: 35px;
   }
 }

@@ -9,17 +9,18 @@ import { CardTypes } from "../../common/types";
 
 type MainPageProps = {
   data: CardTypes[];
+  isTrends?:boolean
 };
 
-const MainPage: FC<MainPageProps> = ({data}) => {
+const MainPage: FC<MainPageProps> = ({data,isTrends}) => {
   const { theme } = useThemeContext();
   const isDarkTheme = theme === Theme.Dark;
   
 
   return (<div>
     {/* <PagesWrapper /> */}
-    <div className={classnames('mainPageContainer', isDarkTheme ?  'mainPageContainerDark' : 'mainPageContainerLight')} >
-      <FilmsList data={data} />
+    <div className={classnames('mainPageWrapper', isDarkTheme ?  'mainPageWrapperDark' : 'mainPageWrapperLight')} >
+      <FilmsList data={data} isTrends={isTrends} />
     </div>
   </div>
    

@@ -7,8 +7,8 @@ import Logo from "../Logo";
 import Button from "../Button";
 import UserNameHeader from "../UserNameHeader";
 import Sidebar from "../Sidebar";
-import FilterSVG from "../assets/FilterSVG";
-import ArrowSVG from "../assets/ArrowSVG";
+import FilterSVG from "../../assets/FilterSVG";
+
 import { Theme, useThemeContext } from "../../context/themeModeContext";
 import classnames from "classnames";
 

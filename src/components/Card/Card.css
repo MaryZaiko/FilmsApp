@@ -46,7 +46,10 @@
 width: 57px;
 height: 28px;
 background-color: #7B61FF;
-
+display: flex;
+justify-content: center;
+align-items: center;
+gap: 5px;
 }
 @media (max-width: 768px) {
   .cardImg {

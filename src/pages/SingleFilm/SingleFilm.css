@@ -1,14 +1,14 @@
-.singlePageContainer {
+.singlePageWrapper {
   min-height: 100vh;
-  padding: 152px 63px 63px 367px;
+  padding: 40px 62px 0px 0;
   color: white;
   display: flex;
   gap: 50px;
 }
-.singlePageContainerDark {
+.singlePageWrapperDark {
   background-color: black;
 }
-.singlePageContainerLight {
+.singlePageWrapperLight {
   background-color: white;
 }
 .singlePageImg {
@@ -22,7 +22,7 @@
   font-size: 40px;
   line-height: 60px;
 }
-.ratingContainer {
+.ratingWrapper {
   display: flex;
   gap: 20px;
 }
@@ -76,13 +76,18 @@ letter-spacing: 0em;
 text-align: left;
 
 }
-@media (max-width: 768px) {
-  .mainPageContainer {
-    padding: 144px 40px 56px 40px;
+@media (max-width: 1280px) {
+  .singlePageWrapper {
+    padding: 40px 176px 0px 176px;
   }
 }
-@media (max-width: 320px) {
-  .mainPageContainer {
-    padding: 216px 24px 48px 24px;
+@media (max-width: 1024px) {
+  .singlePageWrapper {
+    padding: 40px 48px 0px 48px;
+  }
+}
+@media (max-width: 350px) {
+  .singlePageWrapper {
+    padding: 32px 24px 0px 24px;
   }
 }

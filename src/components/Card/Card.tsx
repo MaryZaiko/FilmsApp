@@ -2,7 +2,7 @@ import React, { FC } from "react";
 import "./Card.css";
 import classnames from "classnames";
 import { Theme, useThemeContext } from "./../../context/themeModeContext";
-import FireSVG from "../assets/FireSVG";
+import FireSVG from "../../assets/FireSVG";
 
 type PostCardProps = {
   imdbID: string;
@@ -10,6 +10,7 @@ type PostCardProps = {
   Title: string;
   Genre: string;
   imdbRating: number;
+  isTrends?:boolean
   // date: string;
   // isBig?: boolean;
   // onClick?: (e: any) => void;
@@ -23,10 +24,11 @@ const Card: FC<PostCardProps> = ({
   Title,
   Genre,
   imdbRating,
+  isTrends
 }) => {
   const { theme } = useThemeContext();
   const isDarkTheme = theme === Theme.Dark;
-  const isTrends = false;
+  // const isTrends = false;
 
   const re = /,/gi;
   const genreForRender = Genre.replace(re, " •");
