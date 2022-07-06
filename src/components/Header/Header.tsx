@@ -11,18 +11,27 @@ import FilterSVG from "../../assets/FilterSVG";
 
 import { Theme, useThemeContext } from "../../context/themeModeContext";
 import classnames from "classnames";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  FilmsSelector,
+  setIsVisibleSidebar,
+} from "../../redux/reducers/filmsReducer";
+import { useNavigate } from "react-router-dom";
+
 
 const Header = () => {
-  const [isOpenMenu, setIsOpenMenu] = useState(false);
-  const [isOpenBurgerMenu, setIsOpenBurgerMenu] = useState(false);
   const { theme } = useThemeContext();
   const isDarkTheme = theme === Theme.Dark;
-  const onClickArr = (e: any) => {
-    isOpenMenu ? setIsOpenMenu(false) : setIsOpenMenu(true);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const isOpenBurgerMenu = useSelector(FilmsSelector.getIsVisibleSidebar);
+  const onClickBurgerMenu = () => {
+    isOpenBurgerMenu ? dispatch(setIsVisibleSidebar(false)) : dispatch(setIsVisibleSidebar(true));
   };
-  const onClickBurgerMenu = (e: any) => {
-    isOpenBurgerMenu ? setIsOpenBurgerMenu(false) : setIsOpenBurgerMenu(true);
-  };
+  // const onClickLogo = () =>{
+  //   navigate("/films");
+  // }
   return (
     <div
       className={classnames(
@@ -30,7 +39,7 @@ const Header = () => {
         isDarkTheme ? "headerContainerDark" : "headerContainerLight"
       )}
     >
-      <Logo className="logoHeader" />
+      <Logo className="logoHeader"/>
       <div className="inputWrapper">
         <Input
           type="text"

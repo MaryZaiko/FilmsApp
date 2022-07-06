@@ -137,7 +137,7 @@ const MOCK_DATA = [
 ];
 
 const Router = () => {
-  const isLoggedIn = true;
+  const isLoggedIn = false;
   // const isLoggedIn = useSelector(AuthSelector.getLogStatus);
   // const dispatch = useDispatch();
   // useEffect(() => {

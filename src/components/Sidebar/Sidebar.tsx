@@ -2,11 +2,10 @@ import React, { FC } from "react";
 import "./Sidebar.css";
 import { Theme, useThemeContext } from "../../context/themeModeContext";
 import classnames from "classnames";
-
 import { NavLink } from "react-router-dom";
-// import { logout, setLogStatus } from "../../redux/reducers/authReducer";
-// import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { ActiveTabLinkEnum } from "../../common/types";
 
 import Button from "../Button";
 import HomeSVG from "../../assets/HomeSVG";
@@ -14,34 +13,71 @@ import FireSVG from "../../assets/FireSVG";
 import FlagSVG from "../../assets/FlagSVG";
 import GearSVG from "../../assets/GearSVG";
 import Logo from "../Logo";
+import {
+  FilmsSelector,
+  setActiveTabLink,
+} from "../../redux/reducers/filmsReducer";
 
 const Sidebar = () => {
   const { theme } = useThemeContext();
   const isDarkTheme = theme === Theme.Dark;
-  const isVisible = true;
+  const isVisible = useSelector(FilmsSelector.getIsVisibleSidebar)
+  const dispatch = useDispatch();
+
+  const onClickActiveLink = (value: string) => {
+    console.log(value);
+
+    dispatch(setActiveTabLink(value));
+  };
+  const isActive = useSelector(FilmsSelector.getActiveTabLink);
+
   return (
     <div
       className={classnames(
         "sidebarWrapper",
         isDarkTheme ? "sidebarWrapperDark" : "sidebarWrapperLight",
-        // isVisible ? "sidebarWrapperVisible" : "sidebarWrapperUnVisible"
+        { ["sidebarWrapperVisible"] :isVisible }
       )}
     >
       <div className="linksWrapper">
-        <NavLink to="/films" className="linkSidebar">
-          <HomeSVG />
+        <NavLink
+          to="/films"
+          className={classnames("linkSidebar", {
+            ["linkActive"]: isActive === ActiveTabLinkEnum.Home,
+          })}
+          onClick={() => onClickActiveLink(ActiveTabLinkEnum.Home)}
+        >
+          <HomeSVG fill={isActive === ActiveTabLinkEnum.Home ? "#7B61FF" : "#80858B"} />
           Home
         </NavLink>
-        <NavLink to="/trends" className="linkSidebar">
-          <FireSVG fill="#80858B" />
+        <NavLink
+          to="/trends"
+          className={classnames("linkSidebar", {
+            ["linkActive"]: isActive === ActiveTabLinkEnum.Trends,
+          })}
+          onClick={() => onClickActiveLink(ActiveTabLinkEnum.Trends)}
+        >
+          <FireSVG fill={isActive === ActiveTabLinkEnum.Trends ? "#7B61FF" : "#80858B"} />
           Trends
         </NavLink>
-        <NavLink to="/favorites" className="linkSidebar">
-          <FlagSVG />
+        <NavLink
+          to="/favorites"
+          className={classnames("linkSidebar", {
+            ["linkActive"]: isActive === ActiveTabLinkEnum.Favorites,
+          })}
+          onClick={() => onClickActiveLink(ActiveTabLinkEnum.Favorites)}
+        >
+          <FlagSVG fill={isActive === ActiveTabLinkEnum.Favorites ? "#7B61FF" : "#80858B"} />
           Favorites
         </NavLink>
-        <NavLink to="/settings" className="linkSidebar">
-          <GearSVG />
+        <NavLink
+          to="/settings"
+          className={classnames("linkSidebar", {
+            ["linkActive"]: isActive === ActiveTabLinkEnum.Settings,
+          })}
+          onClick={() => onClickActiveLink(ActiveTabLinkEnum.Settings)}
+        >
+          <GearSVG fill={isActive === ActiveTabLinkEnum.Settings ? "#7B61FF" : "#80858B"} />
           Settings
         </NavLink>
       </div>

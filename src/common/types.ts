@@ -8,7 +8,6 @@ export type CardTypes = {
   Title: string;
   Genre: string;
   imdbRating: number;
-
 };
 // type PostCardProps = {
 //   imdbID: string;
@@ -22,8 +21,9 @@ export type CardTypes = {
 //   // likeStatus?: LikeStatus | null;
 //   // saved?: boolean;
 // };
-export enum LikeStatus {
-  Like = "like",
-  Dislike = "dislike",
-  Save = 'save'
+export enum ActiveTabLinkEnum {
+  Home = "home",
+  Trends = "trends",
+  Favorites = "favorites",
+  Settings = "settings",
 }
