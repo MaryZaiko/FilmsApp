@@ -4,12 +4,11 @@ import classnames from "classnames";
 import { Theme, useThemeContext } from "../../context/themeModeContext";
 import Logo from "../../components/Logo";
 import RegistrationForm from "../../components/RegistrationForm";
+import LoginForm from "../../components/LoginForm";
 
-// type SingInProps = {
-//   data: CardTypes[];
-// };
 
-const Authorization = () => {
+
+const Authorization = ( {children}:any) => {
   const { theme } = useThemeContext();
   const isDarkTheme = theme === Theme.Dark;
 
@@ -25,9 +24,9 @@ const Authorization = () => {
         )}
       >
         <Logo className="authorizationPageLogo" />
+        {children}
 
-        {/* <SingInForm /> */}
-        <RegistrationForm />
+     
 
         <span className="authorizationPageWrapperFooter">
           © All Rights Reserved

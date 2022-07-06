@@ -44,6 +44,10 @@
   border: none;
   color: white;
 }
+.btnAuth:disabled{
+  background-color: #706994;
+
+}
 
 @media (max-width: 1280px) {
   .btnHeaderArrow {

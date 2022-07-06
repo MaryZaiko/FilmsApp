@@ -28,21 +28,21 @@ const authSlice = createSlice({
   initialState,
   reducers: {
     registerUser: (state, action: PayloadAction<RegisterUser>) => {},
-    userActivate: (state, action: any) => {},
-    setLogStatus: (state: any, action: PayloadAction<boolean>) => {
-      state.isLoggedIn = action.payload;
-    },
-    setTempMail: (state, action: PayloadAction<string>) => {
-      state.tempMail = action.payload;
-    },
-    loginUser: (
-      state: any,
-      action: PayloadAction<{ email: string; password: string }>
-    ) => {},
-    setIsLoginUserLoading: (state, action) => {
-      state.isLoginUserLoading = action.payload;
-    },
-    logout: (state: any, action: any) => {},
+    // userActivate: (state, action: any) => {},
+    // setLogStatus: (state: any, action: PayloadAction<boolean>) => {
+    //   state.isLoggedIn = action.payload;
+    // },
+    // setTempMail: (state, action: PayloadAction<string>) => {
+    //   state.tempMail = action.payload;
+    // },
+    // loginUser: (
+    //   state: any,
+    //   action: PayloadAction<{ email: string; password: string }>
+    // ) => {},
+    // setIsLoginUserLoading: (state, action) => {
+    //   state.isLoginUserLoading = action.payload;
+    // },
+    // logout: (state: any, action: any) => {},
 
   
   },
@@ -50,12 +50,12 @@ const authSlice = createSlice({
 
 export const {
   registerUser,
-  setLogStatus,
-  setTempMail,
-  userActivate,
-  loginUser,
-  logout,
-  setIsLoginUserLoading,
+  // setLogStatus,
+  // setTempMail,
+  // userActivate,
+  // loginUser,
+  // logout,
+  // setIsLoginUserLoading,
 } = authSlice.actions;
 export default authSlice.reducer;
 export const AuthSelector = {

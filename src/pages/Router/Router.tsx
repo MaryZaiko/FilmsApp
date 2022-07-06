@@ -1,11 +1,14 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Route, BrowserRouter, Routes, Navigate } from "react-router-dom";
+import LoginForm from "../../components/LoginForm";
 import PagesWrapper from "../../components/PagesWrapper";
 import Authorization from "../Authorization";
 import MainPage from "../MainPage";
 import Settings from "../Settings";
 import SingleFilm from "../SingleFilm";
+import RegistrationForm from "../../components/RegistrationForm";
+import Confirmation from "../../components/Confirmation";
 
 const MOCK_DATA = [
   {
@@ -149,57 +152,79 @@ const Router = () => {
   return (
     <BrowserRouter>
       <Routes>
-
         {/* <Route path={"/"} element={<PagesWrapper />}> */}
-          <Route
-            path={"/films"}
-            element={<PagesWrapper>
+        <Route
+          path={"/films"}
+          element={
+            <PagesWrapper>
               <MainPage data={MOCK_DATA} />
-            </PagesWrapper>}
-          ></Route>
+            </PagesWrapper>
+          }
+        ></Route>
+        <Route
+          path={"/trends"}
+          element={
+            <PagesWrapper>
+              <MainPage data={MOCK_DATA} isTrends />
+            </PagesWrapper>
+          }
+        ></Route>
+        {isLoggedIn && (
           <Route
-            path={"/trends"}
+            path={"/favorites"}
             element={
               <PagesWrapper>
-                <MainPage data={MOCK_DATA}  isTrends/>
-              </PagesWrapper>
-            }
-          ></Route>
-          {isLoggedIn && (
-            <Route
-              path={"/favorites"}
-              element={
-                <PagesWrapper>
-                  <MainPage data={MOCK_DATA}/>
-                </PagesWrapper>
-              }
-            />
-          )}
-          {/* переадресация на логин */}
-
-          <Route
-            path={"/films/:id"}
-            element={
-              <PagesWrapper>
-                <SingleFilm />
+                <MainPage data={MOCK_DATA} />
               </PagesWrapper>
             }
           />
-          <Route
-            path={"/settings"}
-            element={
-              <PagesWrapper>
-                <Settings />
-              </PagesWrapper>
-            }
-          />
+        )}
+        {/* переадресация на логин */}
 
-          <Route path={"/auth"} element={<Authorization />}></Route>
+        <Route
+          path={"/films/:id"}
+          element={
+            <PagesWrapper>
+              <SingleFilm />
+            </PagesWrapper>
+          }
+        />
+        <Route
+          path={"/settings"}
+          element={
+            <PagesWrapper>
+              <Settings />
+            </PagesWrapper>
+          }
+        />
+
+        <Route
+          path={"/auth"}
+          element={
+            <Authorization>
+              <LoginForm />
+            </Authorization>
+          }
+        />
+          <Route
+          path={"/registration"}
+          element={
+            <Authorization>
+              <RegistrationForm />
+            </Authorization>
+          }
+        />
+        <Route
+          path={"/confirm"}
+          element={
+            <Authorization>
+              <Confirmation />
+            </Authorization>
+          }
+        />
         {/* </Route> */}
         <Route path={"*"} element={<Navigate to={"/films"} replace />} />
         {/* что значт строчка */}
-
-
       </Routes>
     </BrowserRouter>
   );
