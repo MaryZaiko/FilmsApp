@@ -1,0 +1,53 @@
+.formSelectWrapper {
+  padding: 48px 40px;
+  position: fixed;
+  right: 0;
+  top: 0px;
+  border-radius: 10px;
+  border: 2px solid red;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+  height: 100vh;
+}
+.formSelectHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.formSelectContentWrapper {
+  display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex: 1;
+}
+.formSelectContent {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+.formSelectItem {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.btnsSortWrapper {
+  display: flex;
+}
+.formSelectSortInterval {
+  display: flex;
+  gap: 40px;
+}
+.formSelectFooter {
+  display: flex;
+  gap: 40px;
+}
+.formSelectWrapperDark {
+  background-color: #242426;
+  color: white;
+}
+.formSelectWrapperLight {
+  background-color: white;
+  border: 2px solid #80858b;
+}

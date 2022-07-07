@@ -1,0 +1,71 @@
+.multiSelect__control {
+  background-color: #323537 !important;
+  height: 56px !important;
+  border-radius: 10px !important;
+  border: 2px solid transparent !important;
+  color: white;
+}
+.multiSelectLight__control {
+  background-color: white !important;
+  height: 56px !important;
+  border-radius: 10px !important;
+  border: 2px solid #afb2b6 !important;
+  color: #242426;
+}
+.multiSelect__multi-value {
+  background: #242426 !important;
+  border-radius: 6px !important;
+}
+.multiSelectLight__multi-value {
+  border: 2px solid #afb2b6 !important;
+  border-radius: 6px !important;
+background-color: #afb2b6 !important;
+}
+
+.multiSelect__multi-value__label {
+  color: white !important;
+}
+
+.multiSelect__multi-value__remove:hover {
+  background-color: transparent !important;
+  color: white !important;
+  cursor: pointer !important;
+}
+.multiSelectLight__multi-value__remove:hover {
+    background-color: transparent !important;
+    color: #242426 !important;
+    cursor: pointer !important;
+  }
+
+
+.multiSelect__indicators {
+  display: none !important;
+}
+.multiSelectLight__indicators {
+    display: none !important;
+  }
+/* .multiSelect__input:focus {
+  border-color: #7b61ff !important;
+  рамка инпута
+} */
+.multiSelect__input {
+  cursor: text !important;
+  color: white !important;
+}
+
+.multiSelect__menu {
+  background-color: #323537 !important;
+
+}
+.multiSelect__option {
+  cursor: pointer !important;
+  border-bottom: 1px solid #242426 !important;
+}
+.multiSelectLight__option {
+    cursor: pointer;
+
+  }
+/* .multiSelect__option--is-focused{
+    background-color: #f700b1;
+}
+не работает наведение в выпадающем списке */

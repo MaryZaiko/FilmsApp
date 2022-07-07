@@ -9,18 +9,11 @@ export type CardTypes = {
   Genre: string;
   imdbRating: number;
 };
-// type PostCardProps = {
-//   imdbID: string;
-//   Poster: string;
-//   Title: string;
-//   Genre: string;
-//   Ratings: RATINGS[];
-//   // date: string;
-//   // isBig?: boolean;
-//   // onClick?: (e: any) => void;
-//   // likeStatus?: LikeStatus | null;
-//   // saved?: boolean;
-// };
+
+export interface IOption {
+  value:string,
+  label: string
+}
 export enum ActiveTabLinkEnum {
   Home = "home",
   Trends = "trends",

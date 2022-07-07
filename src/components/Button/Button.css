@@ -18,22 +18,24 @@
   cursor: pointer;
 
 }
-.btnSettings {
-  width: 266px;
+.btnSettingsSort {
+  /* width: 266px; */
   height: 56px;
   border-radius: 10px;
   flex: 1;
   cursor: pointer;
+  color: white;
 
 }
-.btnSettingsDark {
+.btnSettingsSortDark {
   background: #323537;
 }
-.btnSettingsLight {
+.btnSettingsSortLight {
   background-color: white;
   border: 2px solid #afb2b6;
+  color: #242426;
 }
-.btnSettings:hover {
+.btnSettingsSort:hover {
   background-color: #7b61ff;
 }
 .btnAuth {
@@ -47,6 +49,36 @@
 .btnAuth:disabled{
   background-color: #706994;
 
+}
+.btnSort{
+  height: 52px;
+  flex: 1;
+  cursor: pointer;
+}
+
+.btnSortRight{
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
+.btnSortLeft{
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+.btnSortDark{
+  background-color: #242426;
+  color: #80858B;
+  border: 2px solid #323537;
+}
+.btnSortLight{
+  background: #ffffff;
+  border: 2px solid #afb2b6;
+  color: #242426;
+}
+.btnSortActiveDark{
+background-color: #323537;;
+}
+.btnSortActiveLight{
+  background-color:#afb2b6 ;
 }
 
 @media (max-width: 1280px) {

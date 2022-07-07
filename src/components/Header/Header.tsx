@@ -17,6 +17,7 @@ import {
   setIsVisibleSidebar,
 } from "../../redux/reducers/filmsReducer";
 import { useNavigate } from "react-router-dom";
+import FormSelect from "../FormSelect";
 
 
 const Header = () => {
@@ -67,6 +68,7 @@ const Header = () => {
       />
 
       <UserNameHeader />
+      <FormSelect />
     </div>
   );
 };

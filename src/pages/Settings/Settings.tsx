@@ -114,15 +114,15 @@ const Settings = () => {
         <Button
           btnContent={"Cancel"}
           className={classnames(
-            "btnSettings",
-            isDarkTheme ? "btnSettingsDark" : "btnSettingsLight"
+            "btnSettingsSort",
+            isDarkTheme ? "btnSettingsSortDark" : "btnSettingsSortLight"
           )}
         />
         <Button
           btnContent={"Save"}
           className={classnames(
-            "btnSettings",
-            isDarkTheme ? "btnSettingsDark" : "btnSettingsLight"
+            "btnSettingsSort",
+            isDarkTheme ? "btnSettingsSortDark" : "btnSettingsSortLight"
           )}
         />
       </div>

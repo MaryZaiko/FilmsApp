@@ -1,0 +1,36 @@
+.singleSelect__control {
+  background-color: #323537 !important;
+  height: 56px !important;
+  border-radius: 10px !important;
+  border: 2px solid transparent !important;
+  color: white;
+}
+.singleSelectLight__control {
+  background-color: white !important;
+  height: 56px !important;
+  border-radius: 10px !important;
+  border: 2px solid #afb2b6 !important;
+  color: #242426;
+}
+.singleSelect__indicators {
+  display: none !important;
+}
+.singleSelectLight__indicators {
+  display: none !important;
+}
+.singleSelect__input {
+  cursor: text !important;
+  color: white !important;
+}
+.singleSelect__single-value{
+  color: white !important;
+
+}
+.singleSelect__menu {
+    background-color: #323537 !important;
+  
+  }
+.singleSelect__option {
+  cursor: pointer !important;
+  border-bottom: 1px solid #242426 !important;
+}
