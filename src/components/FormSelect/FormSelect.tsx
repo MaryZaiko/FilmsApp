@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,  } from "react";
 import "./FormSelect.css";
 import classnames from "classnames";
 import Select from "react-select";
@@ -8,11 +8,15 @@ import XMarkSVG from "../../assets/XMarkSVG";
 import Button from "../Button";
 import Input from "../Input";
 import { Theme, useThemeContext } from "../../context/themeModeContext";
+import { useDispatch, useSelector } from "react-redux";
+import { FilmsSelector,setIsVisibleFormSelect } from "../../redux/reducers/filmsReducer";
+
 
 const FormSelect = () => {
   const { theme } = useThemeContext();
   const isDarkTheme = theme === Theme.Dark;
   const [btnSortActive, setBtnSortActive] = useState("rating");
+  const dispatch = useDispatch()
 
   const onClickSortBtn = (value: string) => {
     console.log(value);
@@ -20,16 +24,25 @@ const FormSelect = () => {
     setBtnSortActive(value);
   };
 
+   const isVisibleForm = useSelector(FilmsSelector.getIsVisibleFormSelect)
+
+   const onClickFiltersClose = () =>{
+    dispatch(isVisibleForm ? setIsVisibleFormSelect(false) :setIsVisibleFormSelect(true) )
+     }
+
   return (
     <div
       className={classnames(
         "formSelectWrapper",
-        isDarkTheme ? "formSelectWrapperDark" : "formSelectWrapperLight"
+        isDarkTheme ? "formSelectWrapperDark" : "formSelectWrapperLight", {['formSelectVisible'] : isVisibleForm}
       )}
     >
       <div className="formSelectHeader">
         <h2>Filters</h2>
+        <div className="formSelectClose" onClick={onClickFiltersClose}>
         <XMarkSVG fill="#AFB2B6" />
+
+        </div>
       </div>
 
       <div className="formSelectContentWrapper">

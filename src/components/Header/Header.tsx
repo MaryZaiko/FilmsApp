@@ -15,6 +15,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   FilmsSelector,
   setIsVisibleSidebar,
+  setIsVisibleFormSelect
 } from "../../redux/reducers/filmsReducer";
 import { useNavigate } from "react-router-dom";
 import FormSelect from "../FormSelect";
@@ -27,9 +28,14 @@ const Header = () => {
   const navigate = useNavigate();
 
   const isOpenBurgerMenu = useSelector(FilmsSelector.getIsVisibleSidebar);
+  const isVisibleForm = useSelector(FilmsSelector.getIsVisibleFormSelect)
+
   const onClickBurgerMenu = () => {
-    isOpenBurgerMenu ? dispatch(setIsVisibleSidebar(false)) : dispatch(setIsVisibleSidebar(true));
+    dispatch( isOpenBurgerMenu ? setIsVisibleSidebar(false) : setIsVisibleSidebar(true));
   };
+  const onClickFiltersIcon = () =>{
+ dispatch(isVisibleForm ? setIsVisibleFormSelect(false) :setIsVisibleFormSelect(true) )
+  }
   // const onClickLogo = () =>{
   //   navigate("/films");
   // }
@@ -50,7 +56,7 @@ const Header = () => {
             isDarkTheme ? "inputDark" : "inputLight"
           )}
         />
-        <div className={classnames("iconInput")}>
+        <div className={classnames("iconInput")} onClick={onClickFiltersIcon}>
           <FilterSVG stroke={isDarkTheme ? "white" : "#AFB2B6"} />
         </div>
       </div>

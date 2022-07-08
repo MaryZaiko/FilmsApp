@@ -10,11 +10,13 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 export type FilmsReducerStateType = {
   activeTabLink: string;
   isVisibleSidebar: boolean;
+  isUnVisibleFormSelect: boolean;
 };
 
 const initialState = {
   activeTabLink: "home",
   isVisibleSidebar: false,
+  isUnVisibleFormSelect: true,
 };
 
 const filmsSlice = createSlice({
@@ -27,12 +29,17 @@ const filmsSlice = createSlice({
     setIsVisibleSidebar: (state, action: PayloadAction<boolean>) => {
       state.isVisibleSidebar = action.payload;
     },
+    setIsVisibleFormSelect: (state, action: PayloadAction<boolean>) => {
+      state.isUnVisibleFormSelect = action.payload;
+    },
   },
 });
 
-export const { setActiveTabLink,setIsVisibleSidebar } = filmsSlice.actions;
+export const { setActiveTabLink,setIsVisibleSidebar,setIsVisibleFormSelect } = filmsSlice.actions;
 export default filmsSlice.reducer;
 export const FilmsSelector = {
   getActiveTabLink: (state: any) => state.films.activeTabLink,
-  getIsVisibleSidebar:(state:any) => state.films.isVisibleSidebar
+  getIsVisibleSidebar:(state:any) => state.films.isVisibleSidebar,
+  getIsVisibleFormSelect:(state:any) => state.films.isUnVisibleFormSelect
+
 };
