@@ -1,13 +1,19 @@
 import { create } from "apisauce";
-// const API = create({
-//   baseURL: "https://studapi.teachmeskills.by",
-// });
+const API = create({
+  baseURL: "https://unelmamovie.com/api/v1",
+});
 
-// type UserType = {
-//   username: string;
-//   password: string;
-//   email: string;
-// };
+type UserType = {
+  first_name: string;
+  email: string;
+  password: string;
+  password_confirmation: string;
+  token_name: string;
+};
+
+const registerUserApi = (userData: UserType) => {
+  return API.post("/auth/register", userData);
+};
 
 // const getAllPostsApi = ({search = '', limit = 10, offset = 0, ordering = 'date'}) => {
 //   return API.get("/blog/posts/",{search, limit, offset, ordering});
@@ -15,10 +21,6 @@ import { create } from "apisauce";
 
 // const getSinglePost = (id: string) => {
 //   return API.get(`/blog/posts/${id}/`);
-// };
-
-// const registerUserApi = (userData: UserType) => {
-//   return API.post("/auth/users/", userData);
 // };
 
 // const userActivateApi = (uid: string, token: string) => {
@@ -64,15 +66,15 @@ import { create } from "apisauce";
 //     },
 //   });
 // };
-// export {
-//   getAllPostsApi,
-//   getSinglePost,
-//   registerUserApi,
-//   userActivateApi,
-//   loginUserApi,
-//   getUserInfoApi,
-//   verifyToken,
-//   getNewAccessToken,
-//   getMyPosts,
-//   createPostApi
-// };
+export {
+  //   getAllPostsApi,
+  //   getSinglePost,
+  registerUserApi,
+  //   userActivateApi,
+  //   loginUserApi,
+  //   getUserInfoApi,
+  //   verifyToken,
+  //   getNewAccessToken,
+  //   getMyPosts,
+  //   createPostApi
+};

@@ -1,10 +1,13 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 export type RegisterUser = {
-  name: string;
+  first_name: string;
   email: string;
   password: string;
+  password_confirmation: string,
+  token_name:string,
   callback: () => void;
+ 
 };
 
 export type AuthReducerStateType = {

@@ -17,40 +17,42 @@ import {
 //   loginUserApi,
 // } from "../api/index";
 import { useNavigate } from "react-router-dom";
+import { registerUserApi } from "../api";
 
-// function* registerUserWorker(action: PayloadAction<RegisterUser>) {
-//   const { callback, email, name, password } = action.payload;
+function* registerUserWorker(action: PayloadAction<RegisterUser>) {
+  const {
+    callback,
+    email,
+    first_name,
+    password,
+    password_confirmation,
+    token_name, 
+    } = action.payload;
 
-//   const { data, status, problem } = yield call(
-//     registerUserApi
-//     , {
-//     email,
-//     username: name,
-//     password,
-//   });
+  const { data, status, problem } = yield call(registerUserApi, {
+    email,
+    first_name,
+    password,
+    password_confirmation,
+    token_name,
+  });
 
-//   console.log(problem);
-//   if (status === 201) {
-//     console.log(data);
-//     // yield put(setTempMail(data.email || ""));
-//     callback();
-//   }
-// }
-// function* userActivateWorker(action: any) {
-//   const { uuid, token, callback } = action.payload;
-//   const { status, data } = yield call(userActivateApi, uuid, token);
-//   console.log(status);
+  console.log(problem);
+  console.log(data);
 
-//   if (status === 204) {
-//     callback();
-//     console.log(data);
-//   }
-// }
+  if (status === 200) {
+    console.log(data.boostrapData.user.access_token);
+    localStorage.setItem("jwtAccessToken", data.boostrapData.user.access_token);
+
+    callback();
+  }
+}
+
 // function* loginUserWorker(action: any) {
 //   yield put( setIsLoginUserLoading(true));
 //   const userData = action.payload;
 //   console.log(userData);
-  
+
 //   const { status, data, problem } = yield call(loginUserApi, userData);
 //   if (status === 200) {
 //     localStorage.setItem("jwtAccessToken", data.access);
@@ -62,7 +64,7 @@ import { useNavigate } from "react-router-dom";
 //   yield put( setIsLoginUserLoading(false));
 // }
 // export function* logoutWorker(action: any) {
-  
+
 //   // const {callback} = action.payload;
 //   localStorage.removeItem("jwtAccessToken");
 //   localStorage.removeItem("jwtRefreshToken");
@@ -72,10 +74,9 @@ import { useNavigate } from "react-router-dom";
 
 export default function* authWatcher() {
   yield all([
-    // takeLatest(registerUser, registerUserWorker),
+    takeLatest(registerUser, registerUserWorker),
     // takeLatest(userActivate, userActivateWorker),
     // takeLatest(loginUser, loginUserWorker),
     // takeLatest(logout, logoutWorker),
-
   ]);
 }

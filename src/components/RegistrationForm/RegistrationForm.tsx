@@ -121,14 +121,17 @@ const RegistrationForm = () => {
     const callback = () => {
       navigate("/confirm");
     };
-  
+
     dispatch(
       registerUser({
-        name: userName,
-        password: password,
-        email: email,
-        callback,
-      })
+        first_name: userName,
+        email,
+        password,
+        password_confirmation: confirmPassword,
+        token_name: "iphone 12",
+        callback
+      }
+)
     );
   };
 
@@ -145,16 +148,16 @@ const RegistrationForm = () => {
         <span className="formTitle">Sing Up</span>
         <div className="inputWrapper">
           <label className="settingsInputWrapper">
-          {userNameDirty && userNameErr && (
-            <div style={{ color: "red" }}>{userNameErr}</div>
-          )}
+            {userNameDirty && userNameErr && (
+              <div style={{ color: "red" }}>{userNameErr}</div>
+            )}
             <span>Name</span>
             <Input
-             value={userName}
-             onBlur={(e) => blurHandler(e)}
-             onChange={userNameHandler}
-             type="text"
-             name="userName"
+              value={userName}
+              onBlur={(e) => blurHandler(e)}
+              onChange={userNameHandler}
+              type="text"
+              name="userName"
               placeholder={"Your name"}
               className={classnames(
                 "inputSettings",
@@ -163,9 +166,9 @@ const RegistrationForm = () => {
             />
           </label>
           <label className="settingsInputWrapper">
-          {emailDirty && emailErr && (
-            <div style={{ color: "red" }}>{emailErr}</div>
-          )}
+            {emailDirty && emailErr && (
+              <div style={{ color: "red" }}>{emailErr}</div>
+            )}
             <span>Email</span>
             <Input
               value={email}
@@ -181,9 +184,9 @@ const RegistrationForm = () => {
             />
           </label>
           <label className="settingsInputWrapper">
-          {passwordDirty && passwordErr && (
-            <div style={{ color: "red" }}>{passwordErr}</div>
-          )}
+            {passwordDirty && passwordErr && (
+              <div style={{ color: "red" }}>{passwordErr}</div>
+            )}
             <span>Password</span>
             <Input
               value={password}
@@ -199,9 +202,9 @@ const RegistrationForm = () => {
             />
           </label>
           <label className="settingsInputWrapper">
-          {confirmPasswordDirty && confirmPasswordErr && (
-            <div style={{ color: "red" }}>{confirmPasswordErr}</div>
-          )}
+            {confirmPasswordDirty && confirmPasswordErr && (
+              <div style={{ color: "red" }}>{confirmPasswordErr}</div>
+            )}
             <span>Confirm password</span>
             <Input
               value={confirmPassword}
@@ -216,7 +219,12 @@ const RegistrationForm = () => {
               )}
             />
           </label>
-          <Button    disabled={!formValid} btnContent={"Sign up"} className={classnames("btnAuth")} onClick={onSubmit}/>
+          <Button
+            disabled={!formValid}
+            btnContent={"Sign up"}
+            className={classnames("btnAuth")}
+            onClick={onSubmit}
+          />
         </div>
       </form>
 
