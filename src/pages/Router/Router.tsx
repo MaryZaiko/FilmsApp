@@ -151,25 +151,26 @@ const Router = () => {
 
   return (
     <BrowserRouter>
-      <Routes>
-        {/* <Route path={"/"} element={<PagesWrapper />}> */}
-        <Route
-          path={"/films"}
-          element={
-            <PagesWrapper>
-              <MainPage data={MOCK_DATA} />
-            </PagesWrapper>
-          }
-        ></Route>
-        <Route
-          path={"/trends"}
-          element={
-            <PagesWrapper>
-              <MainPage data={MOCK_DATA} isTrends />
-            </PagesWrapper>
-          }
-        ></Route>
-        {isLoggedIn && (
+      {isLoggedIn ? (
+        <Routes>
+          {/* <Route path={"/"} element={<PagesWrapper />}> */}
+          <Route
+            path={"/films"}
+            element={
+              <PagesWrapper>
+                <MainPage data={MOCK_DATA} />
+              </PagesWrapper>
+            }
+          ></Route>
+          <Route
+            path={"/trends"}
+            element={
+              <PagesWrapper>
+                <MainPage data={MOCK_DATA} isTrends />
+              </PagesWrapper>
+            }
+          ></Route>
+
           <Route
             path={"/favorites"}
             element={
@@ -178,54 +179,59 @@ const Router = () => {
               </PagesWrapper>
             }
           />
-        )}
-        {/* переадресация на логин */}
 
-        <Route
-          path={"/films/:id"}
-          element={
-            <PagesWrapper>
-              <SingleFilm />
-            </PagesWrapper>
-          }
-        />
-        <Route
-          path={"/settings"}
-          element={
-            <PagesWrapper>
-              <Settings />
-            </PagesWrapper>
-          }
-        />
-
-        <Route
-          path={"/auth"}
-          element={
-            <Authorization>
-              <LoginForm />
-            </Authorization>
-          }
-        />
           <Route
-          path={"/registration"}
-          element={
-            <Authorization>
-              <RegistrationForm />
-            </Authorization>
-          }
-        />
-        <Route
-          path={"/confirm"}
-          element={
-            <Authorization>
-              <Confirmation />
-            </Authorization>
-          }
-        />
-        {/* </Route> */}
-        <Route path={"*"} element={<Navigate to={"/films"} replace />} />
-        {/* что значт строчка */}
-      </Routes>
+            path={"/films/:id"}
+            element={
+              <PagesWrapper>
+                <SingleFilm />
+              </PagesWrapper>
+            }
+          />
+          <Route
+            path={"/settings"}
+            element={
+              <PagesWrapper>
+                <Settings />
+              </PagesWrapper>
+            }
+          />
+
+        
+          <Route path={"*"} element={<Navigate to={"/films"} replace />} />
+          {/* что значт строчка */}
+
+        </Routes>
+      ) : (
+        <Routes>
+          <Route
+            path={"/auth"}
+            element={
+              <Authorization>
+                <LoginForm />
+              </Authorization>
+            }
+          />
+          <Route
+            path={"/registration"}
+            element={
+              <Authorization>
+                <RegistrationForm />
+              </Authorization>
+            }
+          />
+          <Route
+            path={"/confirm"}
+            element={
+              <Authorization>
+                <Confirmation />
+              </Authorization>
+            }
+          />
+          <Route path={"*"} element={<Navigate to={"/auth"} replace />} />
+
+        </Routes>
+      )}
     </BrowserRouter>
   );
 };
