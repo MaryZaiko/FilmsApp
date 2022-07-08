@@ -4,23 +4,20 @@ export type RegisterUser = {
   first_name: string;
   email: string;
   password: string;
-  password_confirmation: string,
-  token_name:string,
+  password_confirmation: string;
+  token_name: string;
   callback: () => void;
- 
 };
 
 export type AuthReducerStateType = {
   isLoggedIn: boolean;
-  tempMail: string;
   authUserName: string;
   isLoginUserLoading: boolean;
 };
 
 const initialState = {
-  isLoggedIn:
-    !!localStorage.getItem("jwtAccessToken") ||
-    !!localStorage.getItem("jwtRefreshToken"),
+  isLoggedIn: !!localStorage.getItem("jwtAccessToken"),
+
   tempMail: "",
   authUserName: "",
   isLoginUserLoading: false,
@@ -31,37 +28,23 @@ const authSlice = createSlice({
   initialState,
   reducers: {
     registerUser: (state, action: PayloadAction<RegisterUser>) => {},
-    // userActivate: (state, action: any) => {},
-    // setLogStatus: (state: any, action: PayloadAction<boolean>) => {
-    //   state.isLoggedIn = action.payload;
-    // },
-    // setTempMail: (state, action: PayloadAction<string>) => {
-    //   state.tempMail = action.payload;
-    // },
-    // loginUser: (
-    //   state: any,
-    //   action: PayloadAction<{ email: string; password: string }>
-    // ) => {},
-    // setIsLoginUserLoading: (state, action) => {
-    //   state.isLoginUserLoading = action.payload;
-    // },
-    // logout: (state: any, action: any) => {},
-
-  
+    loginUser: (
+      state: any,
+      action: PayloadAction<{
+        email: string;
+        password: string;
+        token_name: string;
+      }>
+    ) => {},
+    setLogStatus: (state, action) => {
+      state.isLoggedIn = action.payload;
+    },
+    logout:(state,action) =>{}
   },
 });
 
-export const {
-  registerUser,
-  // setLogStatus,
-  // setTempMail,
-  // userActivate,
-  // loginUser,
-  // logout,
-  // setIsLoginUserLoading,
-} = authSlice.actions;
+export const { registerUser, loginUser,setLogStatus,logout } = authSlice.actions;
 export default authSlice.reducer;
 export const AuthSelector = {
-  getLogStatus: (state: any) => state.auth.isLoggedIn,
-  getTempMail: (state: any) => state.auth.tempMail,
+  getLogStatus: (state: any) => state.auth.isLoggedIn
 };

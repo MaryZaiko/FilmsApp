@@ -7,6 +7,7 @@ import { useDispatch } from "react-redux";
 import { Theme, useThemeContext } from "../../context/themeModeContext";
 import Button from "../Button";
 import { NavLink } from "react-router-dom";
+import { loginUser } from "../../redux/reducers/authReducer";
 
 const LoginForm = () => {
   const { theme } = useThemeContext();
@@ -71,10 +72,10 @@ const LoginForm = () => {
         break;
     }
   };
-  // const onSubmit = (e: any) => {
-  //   e.preventDefault();
-  //   dispatch(loginUser({ email, password }));
-  // };
+  const onSubmit = (e: any) => {
+    e.preventDefault();
+    dispatch(loginUser({ email, password, token_name: "desktop" }));
+  };
   return (
     <div
       className={classnames(
@@ -123,6 +124,7 @@ const LoginForm = () => {
             <span>Forgot password?</span>
           </label>
           <Button
+          onClick={onSubmit}
         disabled={!formValid}
         btnContent={"Sign in"}
         className={classnames("btnAuth")}
