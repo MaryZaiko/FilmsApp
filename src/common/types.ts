@@ -3,11 +3,12 @@ export type RATINGS = {
   Value: string;
 };
 export type CardTypes = {
-  imdbID: string;
-  Poster: string;
-  Title: string;
-  Genre: string;
-  imdbRating: number;
+  backdrop: string;
+  id: number;
+  poster: string;
+  name: string;
+  rating: number;
+  isTrends?:boolean
 };
 
 export interface IOption {

@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { CardTypes } from "../../common/types";
 
 // export type RegisterUser = {
 //   name: string;
@@ -11,12 +12,14 @@ export type FilmsReducerStateType = {
   activeTabLink: string;
   isVisibleSidebar: boolean;
   isUnVisibleFormSelect: boolean;
+  allFilms: CardTypes[];
 };
 
 const initialState = {
   activeTabLink: "home",
   isVisibleSidebar: false,
   isUnVisibleFormSelect: true,
+  allFilms: [],
 };
 
 const filmsSlice = createSlice({
@@ -32,14 +35,24 @@ const filmsSlice = createSlice({
     setIsVisibleFormSelect: (state, action: PayloadAction<boolean>) => {
       state.isUnVisibleFormSelect = action.payload;
     },
+    loadAllFilms: (state, action) => {},
+    setAllFilms: (state, action) => {
+      state.allFilms = action.payload;
+    },
   },
 });
 
-export const { setActiveTabLink,setIsVisibleSidebar,setIsVisibleFormSelect } = filmsSlice.actions;
+export const {
+  setActiveTabLink,
+  setIsVisibleSidebar,
+  setIsVisibleFormSelect,
+  loadAllFilms,
+  setAllFilms,
+} = filmsSlice.actions;
 export default filmsSlice.reducer;
 export const FilmsSelector = {
   getActiveTabLink: (state: any) => state.films.activeTabLink,
-  getIsVisibleSidebar:(state:any) => state.films.isVisibleSidebar,
-  getIsVisibleFormSelect:(state:any) => state.films.isUnVisibleFormSelect
-
+  getIsVisibleSidebar: (state: any) => state.films.isVisibleSidebar,
+  getIsVisibleFormSelect: (state: any) => state.films.isUnVisibleFormSelect,
+  getAllFilms: (state: any) => state.films.allFilms
 };

@@ -10,21 +10,27 @@ type UserType = {
   password_confirmation: string;
   token_name: string;
 };
+const accessToken = localStorage.getItem("jwtAccessToken")
 
 const registerUserApi = (userData: UserType) => {
   return API.post("/auth/register", userData);
 };
 
-
-const loginUserApi = (data: { email: string; password: string; token_name:string }) => {
+const loginUserApi = (data: {
+  email: string;
+  password: string;
+  token_name: string;
+}) => {
   return API.post("/auth/login", data);
 };
 
+const loadAllFilmsApi = () => {
+  return API.get("/titles", {},
+  {
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
+};
 
-export {
- 
-  registerUserApi,
-
-    loginUserApi,
-
-}
+export { registerUserApi, loginUserApi,loadAllFilmsApi };

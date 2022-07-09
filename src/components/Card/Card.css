@@ -1,6 +1,8 @@
+.cardContent{
+  width: 266px;
+}
 .cardFilm{
   position: relative;
-
 }
 
 .cardImg {
