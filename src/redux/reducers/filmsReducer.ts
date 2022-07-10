@@ -13,6 +13,8 @@ export type FilmsReducerStateType = {
   isVisibleSidebar: boolean;
   isUnVisibleFormSelect: boolean;
   allFilms: CardTypes[];
+  singleFilm:any;
+  singleFilmLoading: boolean;
 };
 
 const initialState = {
@@ -20,6 +22,8 @@ const initialState = {
   isVisibleSidebar: false,
   isUnVisibleFormSelect: true,
   allFilms: [],
+  singleFilm: null,
+  singleFilmLoading:false,
 };
 
 const filmsSlice = createSlice({
@@ -39,6 +43,15 @@ const filmsSlice = createSlice({
     setAllFilms: (state, action) => {
       state.allFilms = action.payload;
     },
+    loadFilm: (state, action) => {},
+    setSingleFilm:(state, action) =>{
+      state.singleFilm = action.payload;
+
+    },
+    setSingleFilmLoading:(state, action) =>{
+      state.singleFilmLoading= action.payload;
+
+    },
   },
 });
 
@@ -48,11 +61,14 @@ export const {
   setIsVisibleFormSelect,
   loadAllFilms,
   setAllFilms,
+  loadFilm,setSingleFilm,setSingleFilmLoading
 } = filmsSlice.actions;
 export default filmsSlice.reducer;
 export const FilmsSelector = {
   getActiveTabLink: (state: any) => state.films.activeTabLink,
   getIsVisibleSidebar: (state: any) => state.films.isVisibleSidebar,
   getIsVisibleFormSelect: (state: any) => state.films.isUnVisibleFormSelect,
-  getAllFilms: (state: any) => state.films.allFilms
+  getAllFilms: (state: any) => state.films.allFilms,
+  getSingleFilm: (state:any) => state.films.singleFilm,
+  getSingleFilmLoading:(state:any)=> state.films.singleFilmLoading
 };

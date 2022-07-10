@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./SingleFilm.css";
 import classnames from "classnames";
 import { Theme, useThemeContext } from "../../context/themeModeContext";
@@ -6,136 +6,133 @@ import { CardTypes } from "../../common/types";
 import Button from "../../components/Button";
 import ImdbLogoSVG from "../../assets/ImdbLogoSVG";
 import Carousel from "../../components/Carousel";
-
+import { useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { FilmsSelector, loadFilm } from "../../redux/reducers/filmsReducer";
+import Lottie from "react-lottie";
+import animationData from "../../components/Lotties/Popcorn.json";
 
 const SingleFilm = () => {
   const { theme } = useThemeContext();
   const isDarkTheme = theme === Theme.Dark;
+  const dispatch = useDispatch();
+  const { id } = useParams();
+  const defaultOptions = {
+    loop: true,
+    autoplay: true,
+    animationData: animationData,
+    rendererSettings: {
+      preserveAspectRatio: "xMidYMid slice",
+    },
+  };
+  useEffect(() => {
+    if (id) {
+      dispatch(loadFilm(id));
+    }
+  }, [id]);
+  const singlePostLoading = useSelector(FilmsSelector.getSingleFilmLoading);
+  const MOCK_DATA = useSelector(FilmsSelector.getSingleFilm);
 
-  const MOCK_DATA =  {
-    Title: "Guardians of the Galaxy Vol. 2",
-    Year: 2017,
-    Rated: "PG-13",
-    Released: "05 May 2017",
-    Runtime: "136 min",
-    Genre: "Action, Adventure, Comedy",
-    Director: "James Gunn",
-    Writer: "James Gunn, Dan Abnett, Andy Lanning",
-    Actors: "Chris Pratt, Zoe Saldana, Dave Bautista",
-    Plot: "The Guardians struggle to keep together as a team while dealing with their personal family issues, notably Star-Lord's encounter with his father the ambitious celestial being Ego.",
-    Language: "English",
-    Country: "United States",
-    Awards: "Nominated for 1 Oscar. 15 wins & 59 nominations total",
-    Poster:
-      "https://m.media-amazon.com/images/M/MV5BNjM0NTc0NzItM2FlYS00YzEwLWE0YmUtNTA2ZWIzODc2OTgxXkEyXkFqcGdeQXVyNTgwNzIyNzg@._V1_SX300.jpg",
-    Ratings: [
-      {
-        Source: "Internet Movie Database",
-        Value: "7.6/10",
-      },
-      {
-        Source: "Rotten Tomatoes",
-        Value: "85%",
-      },
-      {
-        Source: "Metacritic",
-        Value: "67/100",
-      },
-    ],
-    Metascore: 67,
-    imdbRating: 3,
-    imdbVotes: 655.156,
-    imdbID: "tt3896198",
-    Type: "movie",
-    DVD: "22 Aug 2017",
-    BoxOffice: "$389,813,101",
-    Production: "N/A",
-    Website: "N/A",
-    Response: "True",
-  }
-
-  const re = /,/gi;
-  const genreForRender = MOCK_DATA.Genre.replace(re, " •");
+  // const genreForRender = MOCK_DATA.genres
+  //   .map((item: { name: string | any[]; }) => item.name[0].toUpperCase() + item.name.slice(1))
+  //   .join(" • ");
+  // const dataReleaseForRender = MOCK_DATA.release_date
+  //   .slice(0, 10)
+  //   .split("-")
+  //   .reverse()
+  //   .join("-");
+  // const getBoxOffice = MOCK_DATA.revenue.toString() + " $";
+  // const getDirector = MOCK_DATA.credits;
 
   return (
     <div>
-      <div
-        className={classnames(
-          "singlePageWrapper",
-          isDarkTheme ? "singlePageWrapperDark" : "singlePageWrapperLight"
-        )}
-      >
-        <div className="singlePagePoster">
-          <img
-            src={MOCK_DATA.Poster}
-            alt={MOCK_DATA.Title}
-            className="singlePageImg"
-          />
-          <div className="singlePageBtns">
-            {/* <Button  />
-                <Button  /> */}
+      {singlePostLoading && (
+        <Lottie options={defaultOptions} height={400} width={400} />
+      )}
+      {MOCK_DATA && (
+        <div
+          className={classnames(
+            "singlePageWrapper",
+            isDarkTheme ? "singlePageWrapperDark" : "singlePageWrapperLight"
+          )}
+        >
+          <div className="singlePagePoster">
+            <img
+              src={MOCK_DATA.poster}
+              alt={MOCK_DATA.name}
+              className="singlePageImg"
+            />
+            {/* <div className="singlePageBtns">
+            <Button  />
+                <Button  />
+          </div> */}
+          </div>
+          <div className="singlePageFilmInfo">
+            <p>
+              {MOCK_DATA.genres
+                .map(
+                  (item: { name: string | any[] }) =>
+                    item.name[0].toUpperCase() + item.name.slice(1)
+                )
+                .join(" • ")}
+            </p>
+            <h1 className="singlePageTitle">{MOCK_DATA.name}</h1>
+            <div className="ratingWrapper">
+              <div
+                className={classnames("singlePageCardRating", {
+                  ["singlePageCardRatingHigh"]: +MOCK_DATA.rating > 6,
+                  ["singlePageCardRatingAverage"]:
+                    +MOCK_DATA.rating < 6 && +MOCK_DATA.rating > 4,
+                  ["singlePageCardRatingLow"]: +MOCK_DATA.rating < 4,
+                })}
+              >
+                {MOCK_DATA.rating}
+              </div>
+              <div className={classnames("singlePageImdbRating")}>
+                <ImdbLogoSVG /> {MOCK_DATA.rating}
+              </div>
+              <div className="singlePageRuntime">{MOCK_DATA.runtime}</div>
+            </div>
+            <p>{MOCK_DATA.description}</p>
+            <table className="singlePageTable">
+              <tbody>
+                <tr>
+                  <td>Year</td>
+                  <td className="singlePageTableInfo">{MOCK_DATA.year}</td>
+                </tr>
+                <tr>
+                  <td>Released</td>
+                  <td className="singlePageTableInfo">
+                    {MOCK_DATA.release_date
+                      .slice(0, 10)
+                      .split("-")
+                      .reverse()
+                      .join("-")}
+                  </td>
+                </tr>
+                <tr>
+                  <td>BoxOffice</td>
+                  <td className="singlePageTableInfo">{MOCK_DATA.revenue}</td>
+                </tr>
+                <tr>
+                  <td>Actors</td>
+                  <td className="singlePageTableInfo">{MOCK_DATA.Actors}</td>
+                </tr>
+                <tr>
+                  <td>Director</td>
+                  {/* <td className="singlePageTableInfo">{getDirector}</td> */}
+                </tr>
+                <tr>
+                  <td>Writer</td>
+                  {/* <td className="singlePageTableInfo">{getWriter}</td> */}
+                </tr>
+              </tbody>
+            </table>
+            <h2>Recommendations</h2>
+            {/* <Carousel /> */}
           </div>
         </div>
-        <div className="singlePageFilmInfo">
-          <p>{genreForRender}</p>
-          <h1 className="singlePageTitle">{MOCK_DATA.Title}</h1>
-          <div className="ratingWrapper">
-            <div
-              className={classnames("singlePageCardRating", {
-                ["singlePageCardRatingHigh"]: MOCK_DATA.imdbRating > 6,
-                ["singlePageCardRatingAverage"]:
-                  MOCK_DATA.imdbRating < 6 && MOCK_DATA.imdbRating > 4,
-                ["singlePageCardRatingLow"]: MOCK_DATA.imdbRating < 4,
-              })}
-            >
-              {MOCK_DATA.imdbRating}
-            </div>
-            <div className={classnames("singlePageImdbRating")}>
-              <ImdbLogoSVG /> {MOCK_DATA.imdbRating}
-            </div>
-            <div className="singlePageRuntime">{MOCK_DATA.Runtime}</div>
-          </div>
-          <p>{MOCK_DATA.Plot}</p>
-          <table className="singlePageTable">
-            <tr>
-              <td>Year</td>
-              <td className="singlePageTableInfo">{MOCK_DATA.Year}</td>
-            </tr>
-            <tr>
-              <td>Released</td>
-              <td className="singlePageTableInfo">{MOCK_DATA.Released}</td>
-            </tr>
-            <tr>
-              <td>BoxOffice</td>
-              <td className="singlePageTableInfo">{MOCK_DATA.BoxOffice}</td>
-            </tr>{" "}
-            <tr>
-              <td>Country</td>
-              <td className="singlePageTableInfo">{MOCK_DATA.Country}</td>
-            </tr>{" "}
-            <tr>
-              <td>Production</td>
-              <td className="singlePageTableInfo">{MOCK_DATA.Production}</td>
-            </tr>{" "}
-            <tr>
-              <td>Actors</td>
-              <td className="singlePageTableInfo">{MOCK_DATA.Actors}</td>
-            </tr>{" "}
-            <tr>
-              <td>Director</td>
-              <td className="singlePageTableInfo">{MOCK_DATA.Director}</td>
-            </tr>{" "}
-            <tr>
-              <td>Writer</td>
-              <td className="singlePageTableInfo">{MOCK_DATA.Writer}</td>
-            </tr>
-          </table>
-          <h2>
-          Recommendations
-          </h2>
-          {/* <Carousel /> */}
-        </div>
-      </div>
+      )}
     </div>
   );
 };

@@ -11,7 +11,6 @@ import RegistrationForm from "../../components/RegistrationForm";
 import Confirmation from "../../components/Confirmation";
 import { AuthSelector } from "../../redux/reducers/authReducer";
 
-
 const Router = () => {
   // const isLoggedIn = false;
   const isLoggedIn = useSelector(AuthSelector.getLogStatus);
@@ -48,7 +47,7 @@ const Router = () => {
             path={"/favorites"}
             element={
               <PagesWrapper>
-                <MainPage  />
+                <MainPage />
               </PagesWrapper>
             }
           />
@@ -70,10 +69,8 @@ const Router = () => {
             }
           />
 
-        
           <Route path={"*"} element={<Navigate to={"/films"} replace />} />
           {/* что значт строчка */}
-
         </Routes>
       ) : (
         <Routes>
@@ -102,7 +99,6 @@ const Router = () => {
             }
           />
           <Route path={"*"} element={<Navigate to={"/auth"} replace />} />
-
         </Routes>
       )}
     </BrowserRouter>

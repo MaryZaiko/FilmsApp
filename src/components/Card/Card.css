@@ -3,6 +3,7 @@
 }
 .cardFilm{
   position: relative;
+  cursor: pointer;
 }
 
 .cardImg {

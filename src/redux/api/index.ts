@@ -24,7 +24,7 @@ const loginUserApi = (data: {
   return API.post("/auth/login", data);
 };
 
-const loadAllFilmsApi = () => {
+const getAllFilmsApi = () => {
   return API.get("/titles", {},
   {
     headers: {
@@ -32,5 +32,13 @@ const loadAllFilmsApi = () => {
     },
   });
 };
+const getSingleFilmApi = (id:string) => {
+  return API.get(`/titles/${id}`, {},
+  {
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
+};
 
-export { registerUserApi, loginUserApi,loadAllFilmsApi };
+export { registerUserApi, loginUserApi,getAllFilmsApi,getSingleFilmApi };
