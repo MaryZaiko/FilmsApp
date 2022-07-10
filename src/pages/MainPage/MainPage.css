@@ -1,6 +1,8 @@
 .mainPageWrapper{
  padding: 40px 62px 0px 0;
   min-height: 100vh;
+  display: flex;
+  margin: 0 auto;
 }
 .mainPageWrapperDark{
   background-color: black;
@@ -8,6 +10,12 @@
 .mainPageWrapperLight{
   background-color: white;
 }
+.lottie{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  }
 @media (max-width: 1280px) {
   .mainPageWrapper {
     padding: 40px 176px 0px 176px;

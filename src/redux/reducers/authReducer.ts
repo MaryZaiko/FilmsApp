@@ -28,6 +28,9 @@ const authSlice = createSlice({
   initialState,
   reducers: {
     registerUser: (state, action: PayloadAction<RegisterUser>) => {},
+    setIsLoginUserLoading: (state, action) => {
+      state.isLoginUserLoading = action.payload;
+    },
     loginUser: (
       state: any,
       action: PayloadAction<{
@@ -39,12 +42,19 @@ const authSlice = createSlice({
     setLogStatus: (state, action) => {
       state.isLoggedIn = action.payload;
     },
-    logout:(state,action) =>{}
+    logout: (state, action) => {},
   },
 });
 
-export const { registerUser, loginUser,setLogStatus,logout } = authSlice.actions;
+export const {
+  registerUser,
+  loginUser,
+  setLogStatus,
+  logout,
+  setIsLoginUserLoading
+} = authSlice.actions;
 export default authSlice.reducer;
 export const AuthSelector = {
-  getLogStatus: (state: any) => state.auth.isLoggedIn
+  getLogStatus: (state: any) => state.auth.isLoggedIn,
+  getIsLoginUserLoading:(state:any)=> state.auth.isLoginUserLoading
 };

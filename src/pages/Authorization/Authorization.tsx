@@ -5,16 +5,25 @@ import { Theme, useThemeContext } from "../../context/themeModeContext";
 import Logo from "../../components/Logo";
 import RegistrationForm from "../../components/RegistrationForm";
 import LoginForm from "../../components/LoginForm";
+import Lottie from "react-lottie";
+import animationData from "../../components/Lotties/Popcorn.json";
+import { useSelector } from "react-redux";
+import { AuthSelector } from "../../redux/reducers/authReducer";
 
-
-
-const Authorization = ( {children}:any) => {
+const Authorization = ({ children }: any) => {
   const { theme } = useThemeContext();
   const isDarkTheme = theme === Theme.Dark;
-
+  const defaultOptions = {
+    loop: true,
+    autoplay: true,
+    animationData: animationData,
+    rendererSettings: {
+      preserveAspectRatio: "xMidYMid slice",
+    },
+  };
+  const isLoginUserLoading = useSelector(AuthSelector.getIsLoginUserLoading);
   return (
     <div>
-      {/* <PagesWrapper /> */}
       <div
         className={classnames(
           "authorizationPageWrapper",
@@ -24,9 +33,19 @@ const Authorization = ( {children}:any) => {
         )}
       >
         <Logo className="authorizationPageLogo" />
-        {children}
+        {/* {isLoginUserLoading ? (
+          <div className="lottie">
+            <Lottie options={defaultOptions} height={400} width={400} />
+          </div>
+        ) :( */}
+          { children } 
+{/* 
+        )
+        
+        
+        } */}
 
-     
+        
 
         <span className="authorizationPageWrapperFooter">
           © All Rights Reserved

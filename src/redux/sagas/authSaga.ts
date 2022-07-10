@@ -5,7 +5,7 @@ import {
   RegisterUser,
   registerUser,
   loginUser,
-  setLogStatus,logout
+  setLogStatus,logout,setIsLoginUserLoading
 
 } from "../reducers/authReducer";
 
@@ -42,7 +42,7 @@ function* registerUserWorker(action: PayloadAction<RegisterUser>) {
 }
 
 function* loginUserWorker(action: any) {
-  // yield put( setIsLoginUserLoading(true));
+  yield put( setIsLoginUserLoading(true));
   const userData = action.payload;
   console.log(userData);
 
@@ -59,7 +59,7 @@ function* loginUserWorker(action: any) {
   } else {
     console.error("ОШИБКА ПРИ ЛОГИНЕ", problem);
   }
-  // yield put( setIsLoginUserLoading(false));
+  yield put( setIsLoginUserLoading(false));
 }
 export function* logoutWorker(action: any) {
   
@@ -78,3 +78,4 @@ export default function* authWatcher() {
     takeLatest(logout, logoutWorker),
   ]);
 }
+

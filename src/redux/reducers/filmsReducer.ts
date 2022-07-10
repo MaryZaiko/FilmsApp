@@ -13,8 +13,9 @@ export type FilmsReducerStateType = {
   isVisibleSidebar: boolean;
   isUnVisibleFormSelect: boolean;
   allFilms: CardTypes[];
-  singleFilm:any;
+  singleFilm: CardTypes | null;
   singleFilmLoading: boolean;
+  mainPageLoading: boolean;
 };
 
 const initialState = {
@@ -23,7 +24,8 @@ const initialState = {
   isUnVisibleFormSelect: true,
   allFilms: [],
   singleFilm: null,
-  singleFilmLoading:false,
+  singleFilmLoading: false,
+  mainPageLoading: false,
 };
 
 const filmsSlice = createSlice({
@@ -39,18 +41,19 @@ const filmsSlice = createSlice({
     setIsVisibleFormSelect: (state, action: PayloadAction<boolean>) => {
       state.isUnVisibleFormSelect = action.payload;
     },
+    setMainPageLoading: (state, action) => {
+      state.mainPageLoading = action.payload;
+    },
     loadAllFilms: (state, action) => {},
     setAllFilms: (state, action) => {
       state.allFilms = action.payload;
     },
     loadFilm: (state, action) => {},
-    setSingleFilm:(state, action) =>{
+    setSingleFilm: (state, action) => {
       state.singleFilm = action.payload;
-
     },
-    setSingleFilmLoading:(state, action) =>{
-      state.singleFilmLoading= action.payload;
-
+    setSingleFilmLoading: (state, action) => {
+      state.singleFilmLoading = action.payload;
     },
   },
 });
@@ -61,7 +64,10 @@ export const {
   setIsVisibleFormSelect,
   loadAllFilms,
   setAllFilms,
-  loadFilm,setSingleFilm,setSingleFilmLoading
+  loadFilm,
+  setSingleFilm,
+  setSingleFilmLoading,
+  setMainPageLoading,
 } = filmsSlice.actions;
 export default filmsSlice.reducer;
 export const FilmsSelector = {
@@ -69,6 +75,7 @@ export const FilmsSelector = {
   getIsVisibleSidebar: (state: any) => state.films.isVisibleSidebar,
   getIsVisibleFormSelect: (state: any) => state.films.isUnVisibleFormSelect,
   getAllFilms: (state: any) => state.films.allFilms,
-  getSingleFilm: (state:any) => state.films.singleFilm,
-  getSingleFilmLoading:(state:any)=> state.films.singleFilmLoading
+  getSingleFilm: (state: any) => state.films.singleFilm,
+  getSingleFilmLoading: (state: any) => state.films.singleFilmLoading,
+  getMainPageLoading: (state: any) => state.films.mainPageLoading,
 };
