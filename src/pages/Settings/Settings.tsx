@@ -6,10 +6,14 @@ import { Theme, useThemeContext } from "../../context/themeModeContext";
 import Input from "../../components/Input";
 import Switcher from "../../components/Switcher";
 import Button from "../../components/Button";
+import { useSelector } from "react-redux";
+import { AuthSelector } from "../../redux/reducers/authReducer";
 
 const Settings = () => {
   const { theme } = useThemeContext();
   const isDarkTheme = theme === Theme.Dark;
+  const authUserName = useSelector(AuthSelector.getAuthUserName);
+  const authUserEmail = useSelector(AuthSelector.getAuthUserEmail);
 
   return (
     <div
@@ -29,6 +33,7 @@ const Settings = () => {
           <label className="settingsInputWrapper">
             <span>Name</span>
             <Input
+            value={authUserName}
               type={"text"}
               className={classnames(
                 "inputSettings",
@@ -39,6 +44,8 @@ const Settings = () => {
           <label className="settingsInputWrapper">
             <span>Email</span>
             <Input
+            value={authUserEmail}
+
               type={"email"}
               className={classnames(
                 "inputSettings",
