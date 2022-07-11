@@ -7,25 +7,32 @@ import classnames from "classnames";
 import LogOutMenu from "../LogOutMenu";
 import ArrowLogOutMenu from "../ArrowLogOutMenu";
 import { Theme, useThemeContext } from "../../context/themeModeContext";
-
+import { useSelector } from "react-redux";
+import { AuthSelector } from "../../redux/reducers/authReducer";
 
 const UserNameHeader = () => {
   let isLogin = true;
   const { theme } = useThemeContext();
   const isDarkTheme = theme === Theme.Dark;
-  const [isOpenMenu, setIsOpenMenu] = useState(false);
-  const onClickArr = (e: any) => {
-    isOpenMenu ? setIsOpenMenu(false) : setIsOpenMenu(true);
-  };
+  const authUserName = useSelector(AuthSelector.getAuthUserName);
 
   return (
-    <div className={classnames("userNameHeaderContainer", isDarkTheme ? "userNameHeaderContainerDark" : 'userNameHeaderContainerLight')}>
-      {/* класс зависит от темы */}
+    <div
+      className={classnames(
+        "userNameHeaderContainer",
+        isDarkTheme
+          ? "userNameHeaderContainerDark"
+          : "userNameHeaderContainerLight"
+      )}
+    >
       {isLogin ? (
         <div className="userNameHeaderContent">
-          <Button btnContent={"AL"} className="btnUserNameHeader" />
-          <p>Artem Lapitsky</p>
-        <ArrowLogOutMenu />
+          <Button
+            btnContent={authUserName && `${authUserName[0]}`}
+            className="btnUserNameHeader"
+          />
+          <p>{authUserName}</p>
+          <ArrowLogOutMenu />
         </div>
       ) : (
         <div className="userNameHeaderContent">

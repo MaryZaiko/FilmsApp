@@ -40,5 +40,12 @@ const getSingleFilmApi = (id:string) => {
     },
   });
 };
-
-export { registerUserApi, loginUserApi,getAllFilmsApi,getSingleFilmApi };
+const getUserInfoApi = (id:string) => {
+  return API.get(`/user-profile/${id}`, {},
+  {
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
+};
+export { registerUserApi, loginUserApi,getAllFilmsApi,getSingleFilmApi,getUserInfoApi };

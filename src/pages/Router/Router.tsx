@@ -9,17 +9,16 @@ import Settings from "../Settings";
 import SingleFilm from "../SingleFilm";
 import RegistrationForm from "../../components/RegistrationForm";
 import Confirmation from "../../components/Confirmation";
-import { AuthSelector } from "../../redux/reducers/authReducer";
+import { AuthSelector, getUserInfo } from "../../redux/reducers/authReducer";
 
 const Router = () => {
-  // const isLoggedIn = false;
   const isLoggedIn = useSelector(AuthSelector.getLogStatus);
-  // const dispatch = useDispatch();
-  // useEffect(() => {
-  //   if (isLoggedIn) {
-  //     dispatch(getUserInfo(""));
-  //   }
-  // }, [isLoggedIn]);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    if (isLoggedIn) {
+      dispatch(getUserInfo(""));
+    }
+  }, [isLoggedIn]);
 
   return (
     <BrowserRouter>

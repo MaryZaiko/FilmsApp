@@ -3,11 +3,13 @@ import React, { useEffect, useState } from "react";
 import "./LoginForm.css";
 import classnames from "classnames";
 import Input from "../Input";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Theme, useThemeContext } from "../../context/themeModeContext";
 import Button from "../Button";
 import { NavLink } from "react-router-dom";
-import { loginUser } from "../../redux/reducers/authReducer";
+import { AuthSelector, loginUser } from "../../redux/reducers/authReducer";
+import Lottie from "react-lottie";
+import animationData from "../../components/Lotties/Popcorn.json";
 
 const LoginForm = () => {
   const { theme } = useThemeContext();
@@ -76,6 +78,15 @@ const LoginForm = () => {
     e.preventDefault();
     dispatch(loginUser({ email, password, token_name: "desktop" }));
   };
+  const defaultOptions = {
+    loop: true,
+    autoplay: true,
+    animationData: animationData,
+    rendererSettings: {
+      preserveAspectRatio: "xMidYMid slice",
+    },
+  };
+  const isLoginUserLoading = useSelector(AuthSelector.getIsLoginUserLoading)
   return (
     <div
       className={classnames(
@@ -83,7 +94,14 @@ const LoginForm = () => {
         isDarkTheme ? "loginFormWrapperDark" : "loginFormWrapperLight"
       )}
     >
-      <form className="loginForm">
+{
+  isLoginUserLoading ? (
+    <div className="lottie">
+    <Lottie options={defaultOptions} height={400} width={400} />
+  </div>
+  ):(
+<div>
+<form className="loginForm">
         <span className="formTitle">Sing In</span>
         <div className="inputWrapper">
           <label className="settingsInputWrapper">
@@ -135,6 +153,11 @@ const LoginForm = () => {
       <span className="loginFormFooter">
         Don’t have an account? <NavLink to="/registration">Sign Up</NavLink>{" "}
       </span>
+</div>
+  )
+}
+
+     
     </div>
   );
 };

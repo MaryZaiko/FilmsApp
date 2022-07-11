@@ -31,7 +31,7 @@ const SingleFilm = () => {
     }
   }, [id]);
   const singlePostLoading = useSelector(FilmsSelector.getSingleFilmLoading);
-  const MOCK_DATA = useSelector(FilmsSelector.getSingleFilm);
+  const filmData = useSelector(FilmsSelector.getSingleFilm);
 
   // const genreForRender = MOCK_DATA.genres
   //   .map((item: { name: string | any[]; }) => item.name[0].toUpperCase() + item.name.slice(1))
@@ -51,7 +51,7 @@ const SingleFilm = () => {
           <Lottie options={defaultOptions} height={400} width={400} />
         </div>
       ) : (
-        MOCK_DATA && (
+        filmData && (
           <div
             className={classnames(
               "singlePageWrapper",
@@ -60,8 +60,8 @@ const SingleFilm = () => {
           >
             <div className="singlePagePoster">
               <img
-                src={MOCK_DATA.poster}
-                alt={MOCK_DATA.name}
+                src={filmData.poster}
+                alt={filmData.name}
                 className="singlePageImg"
               />
               {/* <div className="singlePageBtns">
@@ -71,41 +71,41 @@ const SingleFilm = () => {
             </div>
             <div className="singlePageFilmInfo">
               <p>
-                {MOCK_DATA.genres
+                {filmData.genres
                   .map(
                     (item: { name: string | any[] }) =>
                       item.name[0].toUpperCase() + item.name.slice(1)
                   )
                   .join(" • ")}
               </p>
-              <h1 className="singlePageTitle">{MOCK_DATA.name}</h1>
+              <h1 className="singlePageTitle">{filmData.name}</h1>
               <div className="ratingWrapper">
                 <div
                   className={classnames("singlePageCardRating", {
-                    ["singlePageCardRatingHigh"]: +MOCK_DATA.rating > 6,
+                    ["singlePageCardRatingHigh"]: +filmData.rating > 6,
                     ["singlePageCardRatingAverage"]:
-                      +MOCK_DATA.rating < 6 && +MOCK_DATA.rating > 4,
-                    ["singlePageCardRatingLow"]: +MOCK_DATA.rating < 4,
+                      +filmData.rating < 6 && +filmData.rating > 4,
+                    ["singlePageCardRatingLow"]: +filmData.rating < 4,
                   })}
                 >
-                  {MOCK_DATA.rating}
+                  {filmData.rating}
                 </div>
                 <div className={classnames("singlePageImdbRating")}>
-                  <ImdbLogoSVG /> {MOCK_DATA.rating}
+                  <ImdbLogoSVG /> {filmData.rating}
                 </div>
-                <div className="singlePageRuntime">{MOCK_DATA.runtime}</div>
+                <div className="singlePageRuntime">{filmData.runtime.toString() + ' min'}</div>
               </div>
-              <p>{MOCK_DATA.description}</p>
+              <p>{filmData.description}</p>
               <table className="singlePageTable">
                 <tbody>
                   <tr>
                     <td>Year</td>
-                    <td className="singlePageTableInfo">{MOCK_DATA.year}</td>
+                    <td className="singlePageTableInfo">{filmData.year}</td>
                   </tr>
                   <tr>
                     <td>Released</td>
                     <td className="singlePageTableInfo">
-                      {MOCK_DATA.release_date
+                      {filmData.release_date
                         .slice(0, 10)
                         .split("-")
                         .reverse()
@@ -115,14 +115,14 @@ const SingleFilm = () => {
                   <tr>
                     <td>BoxOffice</td>
                     <td className="singlePageTableInfo">
-                      {MOCK_DATA.revenue
-                        ? MOCK_DATA.revenue.toString() + " $"
+                      {filmData.revenue
+                        ? filmData.revenue.toString() + " $"
                         : "-"}
                     </td>
                   </tr>
                   <tr>
                     <td>Actors</td>
-                    <td className="singlePageTableInfo">{MOCK_DATA.Actors}</td>
+                    <td className="singlePageTableInfo">{filmData.Actors}</td>
                   </tr>
                   <tr>
                     <td>Director</td>

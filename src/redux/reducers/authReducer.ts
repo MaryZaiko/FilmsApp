@@ -11,16 +11,16 @@ export type RegisterUser = {
 
 export type AuthReducerStateType = {
   isLoggedIn: boolean;
-  authUserName: string;
   isLoginUserLoading: boolean;
+  authUserName: string;
+  authUserEmail: string;
 };
 
 const initialState = {
   isLoggedIn: !!localStorage.getItem("jwtAccessToken"),
-
-  tempMail: "",
-  authUserName: "",
   isLoginUserLoading: false,
+  authUserName: "",
+  authUserEmail: "",
 };
 
 const authSlice = createSlice({
@@ -43,6 +43,13 @@ const authSlice = createSlice({
       state.isLoggedIn = action.payload;
     },
     logout: (state, action) => {},
+    getUserInfo: (state, action) => {},
+    setAuthUserName: (state, action) => {
+      state.authUserName = action.payload;
+    },
+    setAuthUserEmail: (state, action) => {
+      state.authUserEmail = action.payload;
+    },
   },
 });
 
@@ -51,10 +58,15 @@ export const {
   loginUser,
   setLogStatus,
   logout,
-  setIsLoginUserLoading
+  setIsLoginUserLoading,
+  getUserInfo,
+  setAuthUserName,
+  setAuthUserEmail,
 } = authSlice.actions;
 export default authSlice.reducer;
 export const AuthSelector = {
   getLogStatus: (state: any) => state.auth.isLoggedIn,
-  getIsLoginUserLoading:(state:any)=> state.auth.isLoginUserLoading
+  getIsLoginUserLoading: (state: any) => state.auth.isLoginUserLoading,
+  getAuthUserName: (state: any) => state.auth.authUserName,
+  getAuthUserEmail: (state: any) => state.auth.authUserEmail,
 };
