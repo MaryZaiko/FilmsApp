@@ -1,4 +1,4 @@
-import React, { FC, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 import "./Header.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark, faBars } from "@fortawesome/free-solid-svg-icons";
@@ -15,11 +15,12 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   FilmsSelector,
   setIsVisibleSidebar,
-  setIsVisibleFormSelect
+  setIsVisibleFormSelect,
+  setSearchOfFilms,
+  searchOfFilms,
 } from "../../redux/reducers/filmsReducer";
 import { useNavigate } from "react-router-dom";
 import FormSelect from "../FormSelect";
-
 
 const Header = () => {
   const { theme } = useThemeContext();
@@ -27,18 +28,42 @@ const Header = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  const [search, setSearch] = useState("");
+
   const isOpenBurgerMenu = useSelector(FilmsSelector.getIsVisibleSidebar);
-  const isVisibleForm = useSelector(FilmsSelector.getIsVisibleFormSelect)
+  const isVisibleForm = useSelector(FilmsSelector.getIsVisibleFormSelect);
+
+
 
   const onClickBurgerMenu = () => {
-    dispatch( isOpenBurgerMenu ? setIsVisibleSidebar(false) : setIsVisibleSidebar(true));
+    dispatch(
+      isOpenBurgerMenu ? setIsVisibleSidebar(false) : setIsVisibleSidebar(true)
+    );
   };
-  const onClickFiltersIcon = () =>{
- dispatch(isVisibleForm ? setIsVisibleFormSelect(false) :setIsVisibleFormSelect(true) )
-  }
-  // const onClickLogo = () =>{
-  //   navigate("/films");
-  // }
+  const onClickFiltersIcon = () => {
+    dispatch(
+      isVisibleForm
+        ? setIsVisibleFormSelect(false)
+        : setIsVisibleFormSelect(true)
+    );
+  };
+  const onClickLogo = () => {
+    navigate("/films");
+  };
+  const onSearch = (event: any) => {
+    setSearch(event.target.value);
+    
+    // dispatch(setSearchOfFilms({search}));
+
+
+  };
+
+  useEffect(() => {
+
+    dispatch(searchOfFilms({search}));
+
+
+  }, [search]);
   return (
     <div
       className={classnames(
@@ -46,11 +71,15 @@ const Header = () => {
         isDarkTheme ? "headerContainerDark" : "headerContainerLight"
       )}
     >
-      <Logo className="logoHeader"/>
+      <div onClick={onClickLogo}>
+        <Logo className="logoHeader" />
+      </div>
       <div className="inputWrapper">
         <Input
+          value={search}
           type="text"
           placeholder="Search"
+          onChange={onSearch}
           className={classnames(
             "inputSearch",
             isDarkTheme ? "inputDark" : "inputLight"

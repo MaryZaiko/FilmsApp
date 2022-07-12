@@ -12,6 +12,7 @@ import {
   setAuthUserName,
   setAuthUserEmail,
 } from "../reducers/authReducer";
+import { callCheckingAuth } from "./callCheckingAuth";
 
 import { useNavigate } from "react-router-dom";
 import { registerUserApi, loginUserApi, getUserInfoApi } from "../api";
@@ -41,6 +42,8 @@ function* registerUserWorker(action: PayloadAction<RegisterUser>) {
 
 function* loginUserWorker(action: any) {
   yield put(setIsLoginUserLoading(true));
+  yield put(setAuthUserName(''));
+  yield put(setAuthUserEmail(''));
   const userData = action.payload;
   const { status, data, problem } = yield call(loginUserApi, userData);
 
@@ -57,6 +60,8 @@ export function* logoutWorker(action: any) {
   yield put(setLogStatus(false));
 }
 export function* getUserInfoWorker() {
+const access_token = localStorage.getItem("jwtAccessToken")
+
   const { status, data, problem } = yield call(getUserInfoApi, "me");
 
   if (status === 200) {

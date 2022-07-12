@@ -13,9 +13,14 @@ export type FilmsReducerStateType = {
   isVisibleSidebar: boolean;
   isUnVisibleFormSelect: boolean;
   allFilms: CardTypes[];
-  singleFilm: CardTypes | null;
-  singleFilmLoading: boolean;
+  searchedFilms: CardTypes[];
+
   mainPageLoading: boolean;
+  singleFilm: CardTypes | null;
+  directorForSingleFilm: string[];
+  writerForSingleFilm: string[];
+  actorsForSingleFilm: string[];
+  singleFilmLoading: boolean;
 };
 
 const initialState = {
@@ -23,9 +28,13 @@ const initialState = {
   isVisibleSidebar: false,
   isUnVisibleFormSelect: true,
   allFilms: [],
+  searchedFilms:[],
+  mainPageLoading: false,
   singleFilm: null,
   singleFilmLoading: false,
-  mainPageLoading: false,
+  directorForSingleFilm: [],
+  writerForSingleFilm: [],
+  actorsForSingleFilm: [],
 };
 
 const filmsSlice = createSlice({
@@ -55,7 +64,23 @@ const filmsSlice = createSlice({
     setSingleFilmLoading: (state, action) => {
       state.singleFilmLoading = action.payload;
     },
+    setDirectorForSingleFilm: (state, action) => {
+      state.directorForSingleFilm = action.payload;
+    },
+    setWriterForSingleFilm: (state, action) => {
+      state.writerForSingleFilm = action.payload;
+    },
+    setActorsForSingleFilm: (state, action) => {
+      state.actorsForSingleFilm = action.payload;
+    },
+    setSearchOfFilms:(state, action) =>{
+      state.searchedFilms = action.payload
+   
+    },
+    searchOfFilms:(state,action) =>{},
+  
   },
+ 
 });
 
 export const {
@@ -68,6 +93,11 @@ export const {
   setSingleFilm,
   setSingleFilmLoading,
   setMainPageLoading,
+  setDirectorForSingleFilm,
+  setWriterForSingleFilm,
+  setActorsForSingleFilm,
+  setSearchOfFilms,
+  searchOfFilms
 } = filmsSlice.actions;
 export default filmsSlice.reducer;
 export const FilmsSelector = {
@@ -78,4 +108,9 @@ export const FilmsSelector = {
   getSingleFilm: (state: any) => state.films.singleFilm,
   getSingleFilmLoading: (state: any) => state.films.singleFilmLoading,
   getMainPageLoading: (state: any) => state.films.mainPageLoading,
+  getDirectorForSingleFilm: (state: any) => state.films.directorForSingleFilm,
+  getWriterForSingleFilm: (state: any) => state.films.writerForSingleFilm,
+  getActorsForSingleFilm: (state: any) => state.films.actorsForSingleFilm,
+  getSearchOfFilms:(state:any) => state.films.searchedFilms,
+ 
 };

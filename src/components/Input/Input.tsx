@@ -16,7 +16,7 @@ const Input: FC<InputProps> = ({ value, name, onChange, type, className, onBlur,
   //   if (event.target) {
   //     onChange(event.target.value);
   //   }
-  // }; СЛЕТАЕТ ИЗ-ЗА ТИПОВ
+  // }; 
 
   return (
     <input

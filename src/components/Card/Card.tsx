@@ -3,6 +3,9 @@ import "./Card.css";
 import classnames from "classnames";
 import { Theme, useThemeContext } from "./../../context/themeModeContext";
 import FireSVG from "../../assets/FireSVG";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setActiveTabLink } from "../../redux/reducers/filmsReducer";
 
 type PostCardProps = {
   id: number;
@@ -67,11 +70,19 @@ const Card: FC<PostCardProps> = ({
 }) => {
   const { theme } = useThemeContext();
   const isDarkTheme = theme === Theme.Dark;
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   // const isTrends = false;
 
-
+  const onClickCard = (id: string) => {
+    navigate(`/films/${id}`);
+    dispatch(setActiveTabLink(""));
+  };
   return (
-    <div className="cardFilm" key={id}>
+    <div className="cardFilm" key={id}
+      onClick={() => onClickCard(id.toString())}
+      >
       <div className="cardContent">
         <img src={poster} alt={name} className="cardImg" />
         <h2
@@ -83,7 +94,7 @@ const Card: FC<PostCardProps> = ({
           {name}
         </h2>
       </div>
-      <div
+      {rating && <div
         className={classnames("cardRating", {
           ["cardRatingHigh"]: +rating > 6,
           ["cardRatingAverage"]: +rating < 6 && +rating > 4,
@@ -92,7 +103,7 @@ const Card: FC<PostCardProps> = ({
       >
         {isTrends && <FireSVG width="10" height="15" fill="#FFFFFF"/>}
         {rating}
-      </div>
+      </div>}
     </div>
   );
 };

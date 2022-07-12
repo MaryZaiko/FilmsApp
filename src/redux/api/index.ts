@@ -24,11 +24,11 @@ const loginUserApi = (data: {
   return API.post("/auth/login", data);
 };
 
-const getAllFilmsApi = () => {
+const getAllFilmsApi = (token: any) => {
   return API.get("/titles", {},
   {
     headers: {
-      Authorization: `Bearer ${accessToken}`,
+      Authorization: `Bearer ${token}`,
     },
   });
 };
@@ -48,4 +48,19 @@ const getUserInfoApi = (id:string) => {
     },
   });
 };
-export { registerUserApi, loginUserApi,getAllFilmsApi,getSingleFilmApi,getUserInfoApi };
+const getSearchedOfFilmsApi = (token: any, query: any) =>{
+  return API.get(`/search/${query}`, {limit: 10,},{
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  
+  }
+
+  
+  )
+}
+
+
+
+
+export { registerUserApi, loginUserApi,getAllFilmsApi,getSingleFilmApi,getUserInfoApi,getSearchedOfFilmsApi };

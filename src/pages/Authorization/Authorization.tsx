@@ -33,17 +33,9 @@ const Authorization = ({ children }: any) => {
         )}
       >
         <Logo className="authorizationPageLogo" />
-        {/* {isLoginUserLoading ? (
-          <div className="lottie">
-            <Lottie options={defaultOptions} height={400} width={400} />
-          </div>
-        ) :( */}
+       
           { children } 
-{/* 
-        )
-        
-        
-        } */}
+
 
         
 

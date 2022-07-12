@@ -32,6 +32,14 @@ const SingleFilm = () => {
   }, [id]);
   const singlePostLoading = useSelector(FilmsSelector.getSingleFilmLoading);
   const filmData = useSelector(FilmsSelector.getSingleFilm);
+const directorName = useSelector(FilmsSelector.getDirectorForSingleFilm)
+const writersNames = useSelector(FilmsSelector.getWriterForSingleFilm)
+const actorsNames = useSelector(FilmsSelector.getActorsForSingleFilm)
+console.log(directorName)
+console.log(writersNames)
+console.log(actorsNames)
+
+
 
   // const genreForRender = MOCK_DATA.genres
   //   .map((item: { name: string | any[]; }) => item.name[0].toUpperCase() + item.name.slice(1))
@@ -90,10 +98,10 @@ const SingleFilm = () => {
                 >
                   {filmData.rating}
                 </div>
-                <div className={classnames("singlePageImdbRating")}>
+                <div className={classnames("singlePageImdbRating", {['singlePageInfoLight'] : !isDarkTheme})}>
                   <ImdbLogoSVG /> {filmData.rating}
                 </div>
-                <div className="singlePageRuntime">{filmData.runtime.toString() + ' min'}</div>
+                <div className={classnames("singlePageRuntime",{['singlePageInfoLight'] : !isDarkTheme} )}>{filmData.runtime.toString() + ' min'}</div>
               </div>
               <p>{filmData.description}</p>
               <table className="singlePageTable">

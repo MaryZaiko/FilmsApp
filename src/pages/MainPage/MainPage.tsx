@@ -28,11 +28,22 @@ const MainPage: FC<MainPageProps> = ({ isTrends }) => {
     },
   };
   const mainPageLoading = useSelector(FilmsSelector.getMainPageLoading);
+  const mainOrder = 'budget:desc'
+  const trendOrder = 'popularity:desc'
   useEffect(() => {
-    dispatch(loadAllFilms(""));
+    // if(isActivePage === ActiveTabLinkEnum.Home ){
+      dispatch(loadAllFilms(''));
+    // }
+    // else if (isActivePage === ActiveTabLinkEnum.Trends ){
+    //   dispatch(loadAllFilms({trendOrder}));
+
+    // }
   }, []);
 
   const allFilms = useSelector(FilmsSelector.getAllFilms);
+  const searchedFilms = useSelector(FilmsSelector.getSearchOfFilms)
+  console.log(searchedFilms);
+  
   return (
     <div
       className={classnames(
@@ -46,7 +57,8 @@ const MainPage: FC<MainPageProps> = ({ isTrends }) => {
         </div>
       ) : (
         isActivePage === ActiveTabLinkEnum.Home && (
-          <FilmsList data={allFilms} isTrends={isTrends} />
+       
+          <FilmsList data={searchedFilms.length > 0 ? searchedFilms : allFilms} isTrends={isTrends} />
         )
       )}
     </div>

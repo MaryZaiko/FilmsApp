@@ -10,6 +10,11 @@
 }
 .singlePageWrapperLight {
   background-color: white;
+  color: black;
+}
+.singlePageInfoLight{
+  color: white;
+
 }
 .singlePageContent{
   display: flex;
@@ -94,6 +99,17 @@ width: 100%;
 @media (max-width: 1024px) {
   .singlePageWrapper {
     padding: 40px 48px 0px 48px;
+  }
+}
+@media (max-width: 1024px) {
+  .singlePageWrapper {
+    padding: 40px 48px 0px 48px;
+  }
+}
+@media (max-width: 740px) {
+  .singlePageWrapper {
+    padding: 40px 40px 56px 40px;
+    flex-direction: column;
   }
 }
 @media (max-width: 350px) {

@@ -14,14 +14,16 @@ type FilmsListProps = {
 const FilmsList: FC<FilmsListProps> = ({ data, isTrends }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const onClickCard = (id: string) => {
-    navigate(`/films/${id}`);
-    dispatch(setActiveTabLink(""));
-  };
+  // const onClickCard = (id: string) => {
+  //   navigate(`/films/${id}`);
+  //   dispatch(setActiveTabLink(""));
+  // };
 
   const cardList = data.map((card) => {
     return (
-      <div key={card.id} onClick={() => onClickCard(card.id.toString())}>
+      <div key={card.id} 
+      // onClick={() => onClickCard(card.id.toString())}
+      >
         <Card
           id={card.id}
           poster={card.poster}
