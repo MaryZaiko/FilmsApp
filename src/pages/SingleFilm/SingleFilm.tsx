@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "./SingleFilm.css";
 import classnames from "classnames";
 import { Theme, useThemeContext } from "../../context/themeModeContext";
@@ -11,11 +11,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { FilmsSelector, loadFilm } from "../../redux/reducers/filmsReducer";
 import Lottie from "react-lottie";
 import animationData from "../../components/Lotties/Popcorn.json";
+import FlagSVG from "../../assets/FlagSVG";
+import ShareSVG from "../../assets/ShareSVG";
 
 const SingleFilm = () => {
   const { theme } = useThemeContext();
   const isDarkTheme = theme === Theme.Dark;
   const dispatch = useDispatch();
+  const [isSaveFilm, setIsSaveFilm] = useState(false)
   const { id } = useParams();
   const defaultOptions = {
     loop: true,
@@ -30,28 +33,18 @@ const SingleFilm = () => {
       dispatch(loadFilm(id));
     }
   }, [id]);
+
   const singlePostLoading = useSelector(FilmsSelector.getSingleFilmLoading);
   const filmData = useSelector(FilmsSelector.getSingleFilm);
-const directorName = useSelector(FilmsSelector.getDirectorForSingleFilm)
-const writersNames = useSelector(FilmsSelector.getWriterForSingleFilm)
-const actorsNames = useSelector(FilmsSelector.getActorsForSingleFilm)
-console.log(directorName)
-console.log(writersNames)
-console.log(actorsNames)
-
-
-
-  // const genreForRender = MOCK_DATA.genres
-  //   .map((item: { name: string | any[]; }) => item.name[0].toUpperCase() + item.name.slice(1))
-  //   .join(" • ");
-  // const dataReleaseForRender = MOCK_DATA.release_date
-  //   .slice(0, 10)
-  //   .split("-")
-  //   .reverse()
-  //   .join("-");
-  // const getBoxOffice = MOCK_DATA.revenue.toString() + " $";
-  // const getDirector = MOCK_DATA.credits;
-
+  const directorName = useSelector(FilmsSelector.getDirectorForSingleFilm);
+  const writersNames = useSelector(FilmsSelector.getWriterForSingleFilm);
+  const actorsNames = useSelector(FilmsSelector.getActorsForSingleFilm);
+  console.log(directorName);
+  console.log(writersNames);
+  console.log(actorsNames);
+const onClickSave = ()=>{
+  isSaveFilm ? setIsSaveFilm(false) : setIsSaveFilm(true)
+}
   return (
     <div className="singlePageContent">
       {singlePostLoading ? (
@@ -72,10 +65,10 @@ console.log(actorsNames)
                 alt={filmData.name}
                 className="singlePageImg"
               />
-              {/* <div className="singlePageBtns">
-            <Button  />
-                <Button  />
-          </div> */}
+              <div className="singlePageBtns">
+                <Button onClick={onClickSave} btnContent={<FlagSVG fill={isSaveFilm ?'#E3DB08' :"#AFB2B6"}/>} className='btnSinglePageFlag'/>
+                <Button btnContent={<ShareSVG />} className='btnSinglePageShare'/>
+              </div>
             </div>
             <div className="singlePageFilmInfo">
               <p>
@@ -88,20 +81,32 @@ console.log(actorsNames)
               </p>
               <h1 className="singlePageTitle">{filmData.name}</h1>
               <div className="ratingWrapper">
-                <div
-                  className={classnames("singlePageCardRating", {
-                    ["singlePageCardRatingHigh"]: +filmData.rating > 6,
-                    ["singlePageCardRatingAverage"]:
-                      +filmData.rating < 6 && +filmData.rating > 4,
-                    ["singlePageCardRatingLow"]: +filmData.rating < 4,
+        {filmData.rating  && <div
+          className={classnames("singlePageCardRating", {
+            ["singlePageCardRatingHigh"]: +filmData.rating > 6,
+            ["singlePageCardRatingAverage"]:
+              +filmData.rating < 6 && +filmData.rating > 4,
+            ["singlePageCardRatingLow"]: +filmData.rating < 4,
+          })}
+        >
+          {filmData.rating}
+        </div>}
+                {filmData.rating  &&<div
+                  className={classnames("singlePageImdbRating", {
+                    ["singlePageInfoLight"]: !isDarkTheme,
                   })}
                 >
-                  {filmData.rating}
-                </div>
-                <div className={classnames("singlePageImdbRating", {['singlePageInfoLight'] : !isDarkTheme})}>
                   <ImdbLogoSVG /> {filmData.rating}
-                </div>
-                <div className={classnames("singlePageRuntime",{['singlePageInfoLight'] : !isDarkTheme} )}>{filmData.runtime.toString() + ' min'}</div>
+                </div>}
+                {filmData.runtime && (
+                  <div
+                    className={classnames("singlePageRuntime", {
+                      ["singlePageInfoLight"]: !isDarkTheme,
+                    })}
+                  >
+                    {filmData.runtime.toString() + " min"}
+                  </div>
+                )}
               </div>
               <p>{filmData.description}</p>
               <table className="singlePageTable">
@@ -130,15 +135,21 @@ console.log(actorsNames)
                   </tr>
                   <tr>
                     <td>Actors</td>
-                    <td className="singlePageTableInfo">{filmData.Actors}</td>
+                    <td className="singlePageTableInfo">
+                      {actorsNames.length > 0 ? actorsNames.map((p: any) => `${p.name} `) : '-'}
+                    </td>
                   </tr>
                   <tr>
                     <td>Director</td>
-                    {/* <td className="singlePageTableInfo">{getDirector}</td> */}
+                    <td className="singlePageTableInfo">
+                      {directorName.length > 0 ? directorName.map((p: any) => `${p.name} `) : '-'}
+                    </td>
                   </tr>
                   <tr>
                     <td>Writer</td>
-                    {/* <td className="singlePageTableInfo">{getWriter}</td> */}
+                    <td className="singlePageTableInfo">
+                      {writersNames.length > 0 ? writersNames.map((p: any) => `${p.name} `) : '-'}
+                    </td>
                   </tr>
                 </tbody>
               </table>

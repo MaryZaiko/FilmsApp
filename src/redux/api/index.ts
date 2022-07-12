@@ -24,8 +24,8 @@ const loginUserApi = (data: {
   return API.post("/auth/login", data);
 };
 
-const getAllFilmsApi = (token: any) => {
-  return API.get("/titles", {},
+const getAllFilmsApi = (token: any, order:any) => {
+  return API.get("/titles", {order},
   {
     headers: {
       Authorization: `Bearer ${token}`,
@@ -40,11 +40,11 @@ const getSingleFilmApi = (id:string) => {
     },
   });
 };
-const getUserInfoApi = (id:string) => {
+const getUserInfoApi = (token: any, id:string) => {
   return API.get(`/user-profile/${id}`, {},
   {
     headers: {
-      Authorization: `Bearer ${accessToken}`,
+      Authorization: `Bearer ${token}`,
     },
   });
 };

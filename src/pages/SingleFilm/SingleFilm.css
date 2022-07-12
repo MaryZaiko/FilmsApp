@@ -19,6 +19,7 @@
 .singlePageContent{
   display: flex;
   margin: 0 auto;
+  height: 100vh;
 }
 .singlePageImg {
   width: 266px;

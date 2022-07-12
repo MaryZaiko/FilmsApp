@@ -59,11 +59,10 @@ const Header = () => {
   };
 
   useEffect(() => {
-
-    dispatch(searchOfFilms({search}));
-
-
+    if (search.length !== 0) {
+    dispatch(searchOfFilms({search}));}
   }, [search]);
+  
   return (
     <div
       className={classnames(

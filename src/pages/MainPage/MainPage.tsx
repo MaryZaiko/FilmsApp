@@ -28,22 +28,21 @@ const MainPage: FC<MainPageProps> = ({ isTrends }) => {
     },
   };
   const mainPageLoading = useSelector(FilmsSelector.getMainPageLoading);
-  const mainOrder = 'budget:desc'
-  const trendOrder = 'popularity:desc'
-  useEffect(() => {
-    // if(isActivePage === ActiveTabLinkEnum.Home ){
-      dispatch(loadAllFilms(''));
-    // }
-    // else if (isActivePage === ActiveTabLinkEnum.Trends ){
-    //   dispatch(loadAllFilms({trendOrder}));
+  const mainOrder = "release_date:desc";
+  const trendOrder = "popularity:desc";
 
-    // }
-  }, []);
+  useEffect(() => {
+    if (isActivePage === ActiveTabLinkEnum.Home) {
+      dispatch(loadAllFilms(mainOrder));
+    } else if (isActivePage === ActiveTabLinkEnum.Trends) {
+      dispatch(loadAllFilms(trendOrder));
+    }
+  }, [isActivePage]);
 
   const allFilms = useSelector(FilmsSelector.getAllFilms);
-  const searchedFilms = useSelector(FilmsSelector.getSearchOfFilms)
+  const searchedFilms = useSelector(FilmsSelector.getSearchOfFilms);
   console.log(searchedFilms);
-  
+
   return (
     <div
       className={classnames(
@@ -55,11 +54,15 @@ const MainPage: FC<MainPageProps> = ({ isTrends }) => {
         <div className="lottie">
           <Lottie options={defaultOptions} height={400} width={400} />
         </div>
+      ) : isActivePage === ActiveTabLinkEnum.Home ? (
+        <FilmsList
+          data={searchedFilms.length > 0 ? searchedFilms : allFilms}
+          isTrends={isTrends}
+        />
+      ) : isActivePage === ActiveTabLinkEnum.Trends ? (
+        <FilmsList data={allFilms} isTrends={isTrends} />
       ) : (
-        isActivePage === ActiveTabLinkEnum.Home && (
-       
-          <FilmsList data={searchedFilms.length > 0 ? searchedFilms : allFilms} isTrends={isTrends} />
-        )
+        <FilmsList data={allFilms} />
       )}
     </div>
   );

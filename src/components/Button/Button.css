@@ -16,7 +16,6 @@
 .btnUserNameHeaderMenu {
   display: none;
   cursor: pointer;
-
 }
 .btnSettingsSort {
   /* width: 266px; */
@@ -25,7 +24,6 @@
   flex: 1;
   cursor: pointer;
   color: white;
-
 }
 .btnSettingsSortDark {
   background: #323537;
@@ -46,41 +44,64 @@
   border: none;
   color: white;
 }
-.btnAuth:disabled{
+.btnAuth:disabled {
   background-color: #706994;
-
 }
-.btnSort{
+.btnSort {
   height: 52px;
   flex: 1;
   cursor: pointer;
 }
 
-.btnSortRight{
+.btnSortRight {
   border-top-left-radius: 10px;
   border-bottom-left-radius: 10px;
 }
-.btnSortLeft{
+.btnSortLeft {
   border-top-right-radius: 10px;
   border-bottom-right-radius: 10px;
 }
-.btnSortDark{
+.btnSortDark {
   background-color: #242426;
-  color: #80858B;
+  color: #80858b;
   border: 2px solid #323537;
 }
-.btnSortLight{
+.btnSortLight {
   background: #ffffff;
   border: 2px solid #afb2b6;
   color: #242426;
 }
-.btnSortActiveDark{
-background-color: #323537;;
+.btnSortActiveDark {
+  background-color: #323537;
 }
-.btnSortActiveLight{
-  background-color:#afb2b6 ;
+.btnSortActiveLight {
+  background-color: #afb2b6;
 }
-
+.singlePageBtns {
+  display: flex;
+}
+.btnSinglePageFlag {
+  height: 56px;
+  background-color: #323537;
+  flex: 1;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+.btnSinglePageShare {
+  background-color: #323537;
+  height: 56px;
+  flex: 1;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
 @media (max-width: 1280px) {
   .btnHeaderArrow {
     display: none;

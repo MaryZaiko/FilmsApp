@@ -1,6 +1,5 @@
 .sidebarWrapper {
-  height: 100vh;
-  padding: 48px 60px 64px 60px;
+   padding: 48px 85px 64px 85px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;

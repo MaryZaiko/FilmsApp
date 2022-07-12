@@ -21,6 +21,13 @@ export type FilmsReducerStateType = {
   writerForSingleFilm: string[];
   actorsForSingleFilm: string[];
   singleFilmLoading: boolean;
+  filters: {
+    // sort:null | SortEnum
+    genre: string[];
+    // years:null | BaseFromTo ={from:string to:string}
+    // rating:null | BaseFromTo ={from:string to:string}
+    countries: string;
+  };
 };
 
 const initialState = {
@@ -28,7 +35,7 @@ const initialState = {
   isVisibleSidebar: false,
   isUnVisibleFormSelect: true,
   allFilms: [],
-  searchedFilms:[],
+  searchedFilms: [],
   mainPageLoading: false,
   singleFilm: null,
   singleFilmLoading: false,
@@ -73,14 +80,11 @@ const filmsSlice = createSlice({
     setActorsForSingleFilm: (state, action) => {
       state.actorsForSingleFilm = action.payload;
     },
-    setSearchOfFilms:(state, action) =>{
-      state.searchedFilms = action.payload
-   
+    setSearchOfFilms: (state, action) => {
+      state.searchedFilms = action.payload;
     },
-    searchOfFilms:(state,action) =>{},
-  
+    searchOfFilms: (state, action) => {},
   },
- 
 });
 
 export const {
@@ -97,7 +101,7 @@ export const {
   setWriterForSingleFilm,
   setActorsForSingleFilm,
   setSearchOfFilms,
-  searchOfFilms
+  searchOfFilms,
 } = filmsSlice.actions;
 export default filmsSlice.reducer;
 export const FilmsSelector = {
@@ -111,6 +115,5 @@ export const FilmsSelector = {
   getDirectorForSingleFilm: (state: any) => state.films.directorForSingleFilm,
   getWriterForSingleFilm: (state: any) => state.films.writerForSingleFilm,
   getActorsForSingleFilm: (state: any) => state.films.actorsForSingleFilm,
-  getSearchOfFilms:(state:any) => state.films.searchedFilms,
- 
+  getSearchOfFilms: (state: any) => state.films.searchedFilms,
 };

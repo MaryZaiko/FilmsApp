@@ -62,7 +62,7 @@ export function* logoutWorker(action: any) {
 export function* getUserInfoWorker() {
 const access_token = localStorage.getItem("jwtAccessToken")
 
-  const { status, data, problem } = yield call(getUserInfoApi, "me");
+  const { status, data, problem } = yield call(getUserInfoApi,access_token, "me");
 
   if (status === 200) {
     yield put(setAuthUserName(data.user.first_name));
