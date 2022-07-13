@@ -1,25 +1,49 @@
-/* .carousel {
-  position: relative;
+.sliderContainer {
+  max-width: 830px;
+  /* width: 100%; */
+  overflow: hidden;
+}
+.sliderTitle {
+  font-weight: 600;
+  font-size: 24px;
+  color: #ffffff;
+  margin-bottom: 40px;
 }
 
-.carousel-item {
-  position: absolute;
-  visibility: hidden;
-  background: #fec901;
-  width: 400px;
-  height: 300px;
+.slick-slider {
+  height: 100%;
   display: flex;
-  align-items: center;
   justify-content: center;
-  font-size: 26px;
-  text-transform: uppercase;
-  font-weight: bold;
-  user-select: none;
+  align-items: center;
+  padding: 0 40px;
 }
-
-.carousel-item.visible {
-  visibility: visible;
-} */
-.carousel{
-  background-color: red;
+.slick-list {
+  overflow: hidden;
+  width: 100%;
 }
+.slick-next{
+right:4px !important;
+}
+.slick-prev  {
+  left: 4px !important;
+}
+@media (max-width: 1480px) {
+  .sliderContainer {
+  max-width: 630px;
+    
+  }
+}@media (max-width: 1010px) {
+  .sliderContainer {
+  max-width: 515px;
+    
+  }
+  .slick-slider {
+ 
+    padding: 0 30px;
+  }
+}
+@media (max-width: 590px) {
+  .sliderContainer {
+  max-width: 280px;
+    
+  }}

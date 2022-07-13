@@ -38,7 +38,13 @@ function* getAllFilmsWorker(action: any) {
   console.log(problem);
 
   if (status === 200) {
-    yield put(setAllFilms(data.pagination.data));
+    const newData = data.pagination.data.map((card: any) => {
+      return {
+        ...card,
+        saved: false,
+      };
+    });
+    yield put(setAllFilms(newData));
   }
   yield put(setMainPageLoading(false));
 }

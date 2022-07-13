@@ -19,7 +19,8 @@
 .singlePageContent{
   display: flex;
   margin: 0 auto;
-  height: 100vh;
+  min-height: 100vh;
+
 }
 .singlePageImg {
   width: 266px;
@@ -94,25 +95,21 @@ width: 100%;
 }
 @media (max-width: 1280px) {
   .singlePageWrapper {
-    padding: 40px 176px 0px 176px;
+    padding: 40px 40px 0px 40px;
+  }
+  .singlePageImg{
+    width: 208px;
+    height: 280px;
   }
 }
-@media (max-width: 1024px) {
+
+@media (max-width: 840px) {
   .singlePageWrapper {
-    padding: 40px 48px 0px 48px;
-  }
-}
-@media (max-width: 1024px) {
-  .singlePageWrapper {
-    padding: 40px 48px 0px 48px;
-  }
-}
-@media (max-width: 740px) {
-  .singlePageWrapper {
-    padding: 40px 40px 56px 40px;
+    align-items: center;
     flex-direction: column;
   }
 }
+
 @media (max-width: 350px) {
   .singlePageWrapper {
     padding: 32px 24px 0px 24px;

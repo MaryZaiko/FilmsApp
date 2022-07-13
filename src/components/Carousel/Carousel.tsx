@@ -1,46 +1,147 @@
-import React, { FC } from "react";
+import React from "react";
 import "./Carousel.css";
-import classnames from "classnames";
-import { Theme, useThemeContext } from "../../context/themeModeContext";
-// import "~slick-carousel/slick/slick.css";
-// import "~slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import Card from "../Card";
 
 
-const Carousel = ({ carouselItems, ...rest }: any) => {
+const MovieSlider = () => {
   const settings = {
-    dots: true,
+    dots: false,
+    arrows: true,
     infinite: true,
     speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1,
+    slidesToShow: 3,
+    slidesToScroll: 3,
+    initialSlide: 0,
+  
+
+    responsive: [
+      {
+        breakpoint: 1480,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 2,
+        },
+      },
+      {
+        breakpoint: 930,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 2,
+        },
+      },
+      {
+        breakpoint: 590,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+        },
+      },
+    ],
   };
 
+  const MockData = [
+    {
+      id: 2,
+      name: "Wonder Woman: 1984",
+   
+      rating: 8.1,
+      poster:
+        "https://avatars.mds.yandex.net/get-kinopoisk-image/1773646/de30cec1-c90e-4d7a-b7e7-4b5db3bdf02c/300x450",
+    },{
+      id: 2,
+      name: "Wonder Woman: 1984",
+   
+      rating: 8.1,
+      poster:
+        "https://avatars.mds.yandex.net/get-kinopoisk-image/1773646/de30cec1-c90e-4d7a-b7e7-4b5db3bdf02c/300x450",
+    },{
+      id: 2,
+      name: "Wonder Woman: 1984",
+   
+      rating: 8.1,
+      poster:
+        "https://avatars.mds.yandex.net/get-kinopoisk-image/1773646/de30cec1-c90e-4d7a-b7e7-4b5db3bdf02c/300x450",
+    },{
+      id: 2,
+      name: "Wonder Woman: 1984",
+   
+      rating: 8.1,
+      poster:
+        "https://avatars.mds.yandex.net/get-kinopoisk-image/1773646/de30cec1-c90e-4d7a-b7e7-4b5db3bdf02c/300x450",
+    },{
+      id: 2,
+      name: "Wonder Woman: 1984",
+   
+      rating: 8.1,
+      poster:
+        "https://avatars.mds.yandex.net/get-kinopoisk-image/1773646/de30cec1-c90e-4d7a-b7e7-4b5db3bdf02c/300x450",
+    },{
+      id: 2,
+      name: "Wonder Woman: 1984",
+   
+      rating: 8.1,
+      poster:
+        "https://avatars.mds.yandex.net/get-kinopoisk-image/1773646/de30cec1-c90e-4d7a-b7e7-4b5db3bdf02c/300x450",
+    },{
+      id: 2,
+      name: "Wonder Woman: 1984",
+   
+      rating: 8.1,
+      poster:
+        "https://avatars.mds.yandex.net/get-kinopoisk-image/1773646/de30cec1-c90e-4d7a-b7e7-4b5db3bdf02c/300x450",
+    },{
+      id: 2,
+      name: "Wonder Woman: 1984",
+   
+      rating: 8.1,
+      poster:
+        "https://avatars.mds.yandex.net/get-kinopoisk-image/1773646/de30cec1-c90e-4d7a-b7e7-4b5db3bdf02c/300x450",
+    },{
+      id: 2,
+      name: "Wonder Woman: 1984",
+   
+      rating: 8.1,
+      poster:
+        "https://avatars.mds.yandex.net/get-kinopoisk-image/1773646/de30cec1-c90e-4d7a-b7e7-4b5db3bdf02c/300x450",
+    },{
+      id: 2,
+      name: "Wonder Woman: 1984",
+   
+      rating: 8.1,
+      poster:
+        "https://avatars.mds.yandex.net/get-kinopoisk-image/1773646/de30cec1-c90e-4d7a-b7e7-4b5db3bdf02c/300x450",
+    },{
+      id: 2,
+      name: "Wonder Woman: 1984",
+   
+      rating: 8.1,
+      poster:
+        "https://avatars.mds.yandex.net/get-kinopoisk-image/1773646/de30cec1-c90e-4d7a-b7e7-4b5db3bdf02c/300x450",
+    },
+  ];
+
   return (
-    <div className="carousel">
-      <h2> Single Item</h2>
+    <div className="sliderContainer">
+  
       <Slider {...settings}>
-        <div>
-          <h3>1</h3>
-        </div>
-        <div>
-          <h3>2</h3>
-        </div>
-        <div>
-          <h3>3</h3>
-        </div>
-        <div>
-          <h3>4</h3>
-        </div>
-        <div>
-          <h3>5</h3>
-        </div>
-        <div>
-          <h3>6</h3>
-        </div>
+        {MockData.map((item) => {
+          return (
+            <Card
+              id={item.id}
+              key={item.id}
+              poster={item.poster}
+              name={item.name}             
+              rating={item.rating}
+              isSlider
+            />
+          );
+        })}
       </Slider>
     </div>
   );
 };
 
-export default Carousel;
+export default MovieSlider;

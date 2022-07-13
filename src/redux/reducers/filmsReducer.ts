@@ -14,7 +14,7 @@ export type FilmsReducerStateType = {
   isUnVisibleFormSelect: boolean;
   allFilms: CardTypes[];
   searchedFilms: CardTypes[];
-
+  favoriteFilms: CardTypes[];
   mainPageLoading: boolean;
   singleFilm: CardTypes | null;
   directorForSingleFilm: string[];
@@ -42,6 +42,7 @@ const initialState = {
   directorForSingleFilm: [],
   writerForSingleFilm: [],
   actorsForSingleFilm: [],
+  favoriteFilms: [],
 };
 
 const filmsSlice = createSlice({
@@ -62,7 +63,7 @@ const filmsSlice = createSlice({
     },
     loadAllFilms: (state, action) => {},
     setAllFilms: (state, action) => {
-      state.allFilms = action.payload;
+      state.allFilms = action.payload
     },
     loadFilm: (state, action) => {},
     setSingleFilm: (state, action) => {
@@ -84,6 +85,9 @@ const filmsSlice = createSlice({
       state.searchedFilms = action.payload;
     },
     searchOfFilms: (state, action) => {},
+    setFavoriteFilms: (state, action) => {
+      state.favoriteFilms = action.payload;
+    },
   },
 });
 
@@ -102,6 +106,7 @@ export const {
   setActorsForSingleFilm,
   setSearchOfFilms,
   searchOfFilms,
+  setFavoriteFilms,
 } = filmsSlice.actions;
 export default filmsSlice.reducer;
 export const FilmsSelector = {
@@ -116,4 +121,5 @@ export const FilmsSelector = {
   getWriterForSingleFilm: (state: any) => state.films.writerForSingleFilm,
   getActorsForSingleFilm: (state: any) => state.films.actorsForSingleFilm,
   getSearchOfFilms: (state: any) => state.films.searchedFilms,
+  getFavoriteFilms: (state: any) => state.films.favoriteFilms,
 };

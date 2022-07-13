@@ -41,7 +41,9 @@ const MainPage: FC<MainPageProps> = ({ isTrends }) => {
 
   const allFilms = useSelector(FilmsSelector.getAllFilms);
   const searchedFilms = useSelector(FilmsSelector.getSearchOfFilms);
-  console.log(searchedFilms);
+  const favoriteFilms = useSelector(FilmsSelector.getFavoriteFilms);
+
+  console.log(allFilms);
 
   return (
     <div
@@ -62,7 +64,7 @@ const MainPage: FC<MainPageProps> = ({ isTrends }) => {
       ) : isActivePage === ActiveTabLinkEnum.Trends ? (
         <FilmsList data={allFilms} isTrends={isTrends} />
       ) : (
-        <FilmsList data={allFilms} />
+        <FilmsList data={favoriteFilms} />
       )}
     </div>
   );
