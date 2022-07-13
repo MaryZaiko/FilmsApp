@@ -11,7 +11,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   FilmsSelector,
   loadFilm,
-  setFavoriteFilms,
+  setFavoriteFilms,setRecommendationFilms,loadRecommendationFilms
 } from "../../redux/reducers/filmsReducer";
 import Lottie from "react-lottie";
 import animationData from "../../components/Lotties/Popcorn.json";
@@ -35,6 +35,8 @@ const SingleFilm = () => {
   useEffect(() => {
     if (id) {
       dispatch(loadFilm(id));
+      dispatch(loadRecommendationFilms(id));
+
     }
   }, [id]);
 
@@ -43,6 +45,9 @@ const SingleFilm = () => {
   const directorName = useSelector(FilmsSelector.getDirectorForSingleFilm);
   const writersNames = useSelector(FilmsSelector.getWriterForSingleFilm);
   const actorsNames = useSelector(FilmsSelector.getActorsForSingleFilm);
+  const recommendationFilms = useSelector(FilmsSelector.getRecommendationFilms);
+console.log(recommendationFilms);
+
   
   const onClickSave = (id: number, action: string) => {
     isSaveFilm ? setIsSaveFilm(false) : setIsSaveFilm(true);
@@ -180,10 +185,10 @@ const SingleFilm = () => {
                   </tr>
                 </tbody>
               </table>
-              <div className="sliderWrapper">
+              {recommendationFilms.length > 0 && <div className="sliderWrapper">
               <h2>Recommendations</h2>
-              <Carousel />
-              </div>
+              <Carousel data= {recommendationFilms}/>
+              </div>}
               
             </div>
           </div>

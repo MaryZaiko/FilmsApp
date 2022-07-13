@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import {
   getAllFilmsApi,
   getSearchedOfFilmsApi,
-  getSingleFilmApi,
+  getSingleFilmApi,getRecommendationFilmsApi
 } from "../api";
 import {
   loadAllFilms,
@@ -18,9 +18,9 @@ import {
   setWriterForSingleFilm,
   setActorsForSingleFilm,
   setSearchOfFilms,
-  searchOfFilms,
+  searchOfFilms,loadRecommendationFilms, setRecommendationFilms
 } from "../reducers/filmsReducer";
-import { act } from "react-dom/test-utils";
+
 
 function* getAllFilmsWorker(action: any) {
   yield put(setMainPageLoading(true));
@@ -33,10 +33,6 @@ function* getAllFilmsWorker(action: any) {
     access_token,
     order
   );
-  console.log(data.pagination.data);
-  console.log(status);
-  console.log(problem);
-
   if (status === 200) {
     const newData = data.pagination.data.map((card: any) => {
       return {
@@ -59,21 +55,15 @@ function* getSingleFilmWorker(action: PayloadAction<string>) {
     getSingleFilmApi,
     action.payload
   );
-  console.log(data.title);
-  
-
   if (status === 200) {
     yield put(setSingleFilm(data.title));
-
-
     const filterPeople = (type: string) => {
       return data.title.credits.filter((item: any) => item.pivot.department === type)
     }
     const director: any[] = filterPeople('directing');
     const writers: any[] = filterPeople('writing');
     const actors: any[] = filterPeople('cast');
-   
-    
+     
     yield put(setDirectorForSingleFilm(director));
     yield put(setWriterForSingleFilm(writers));
     yield put(setActorsForSingleFilm(actors));
@@ -81,14 +71,13 @@ function* getSingleFilmWorker(action: PayloadAction<string>) {
   yield put(setSingleFilmLoading(false));
 }
 
-function* getSearchedOfFilms(action: any) {
+function* getSearchedOfFilmsWorker(action: any) {
+  yield put(setMainPageLoading(true));
   yield put(setSearchOfFilms(""));
 
   const access_token = localStorage.getItem("jwtAccessToken");
   const { search: query } = action.payload;
-  console.log(query);
-
-  const { data, status, problem } = yield call(
+   const { data, status} = yield call(
     getSearchedOfFilmsApi,
     access_token,
     query
@@ -96,27 +85,34 @@ function* getSearchedOfFilms(action: any) {
   if (status === 200) {
     yield put(setSearchOfFilms(data.results));
   }
+  yield put(setMainPageLoading(false));
+}
+function* getRecommendationFilmsWorker(action: PayloadAction<any>) {
+  yield put(setSingleFilmLoading(true));
+  yield put(setRecommendationFilms(null));
+  const access_token = localStorage.getItem("jwtAccessToken");
 
-  //   yield put(setMainPageLoading(true));
-  // console.log(action.payload);
-  // let {search: query} = action.payload
-  // console.log(query);
 
-  //   const { status, data, problem } = yield call(getSearchedOfFilmsApi, query);
-  console.log(data);
+  const { status, data, problem } = yield call(
+    getRecommendationFilmsApi,access_token,
+    action.payload
+  );
   console.log(status);
+  console.log(data.titles);
   console.log(problem);
-
-  // if (status === 200) {
-  //   yield put(setAllFilms(data.pagination.data));
-  // }
-  // yield put(setMainPageLoading(false));
+  
+  if (status === 200) {
+    yield put(setRecommendationFilms(data.titles));
+ 
+  }
+  yield put(setSingleFilmLoading(false));
 }
 
 export default function* filmsWatcher() {
   yield all([
     takeLatest(loadAllFilms, getAllFilmsWorker),
     takeLatest(loadFilm, getSingleFilmWorker),
-    takeLatest(searchOfFilms, getSearchedOfFilms),
+    takeLatest(searchOfFilms, getSearchedOfFilmsWorker),
+    takeLatest(loadRecommendationFilms, getRecommendationFilmsWorker)
   ]);
 }

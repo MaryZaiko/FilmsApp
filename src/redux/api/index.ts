@@ -53,14 +53,18 @@ const getSearchedOfFilmsApi = (token: any, query: any) =>{
     headers: {
       Authorization: `Bearer ${token}`,
     },
-  
-  }
-
-  
+    }
+  )
+}
+const getRecommendationFilmsApi = (token:any, id:any)=>{
+  return API.get(`/titles/${id}/related`, {},{
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+    }
   )
 }
 
 
 
-
-export { registerUserApi, loginUserApi,getAllFilmsApi,getSingleFilmApi,getUserInfoApi,getSearchedOfFilmsApi };
+export { registerUserApi, loginUserApi,getAllFilmsApi,getSingleFilmApi,getUserInfoApi,getSearchedOfFilmsApi,getRecommendationFilmsApi };
