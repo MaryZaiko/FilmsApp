@@ -1,4 +1,4 @@
-import React, { FC, useEffect } from "react";
+import React, { FC, useEffect, useState } from "react";
 import "./MainPage.css";
 import FilmsList from "../../components/FilmsList";
 import PagesWrapper from "../../components/PagesWrapper";
@@ -19,6 +19,9 @@ const MainPage: FC<MainPageProps> = ({ isTrends }) => {
   const isDarkTheme = theme === Theme.Dark;
   const dispatch = useDispatch();
   const isActivePage = useSelector(FilmsSelector.getActiveTabLink);
+
+  const [limit, setLimit] = useState(5);
+
   const defaultOptions = {
     loop: true,
     autoplay: true,
@@ -33,7 +36,7 @@ const MainPage: FC<MainPageProps> = ({ isTrends }) => {
 
   useEffect(() => {
     if (isActivePage === ActiveTabLinkEnum.Home) {
-      dispatch(loadAllFilms(mainOrder));
+      dispatch(loadAllFilms({order: mainOrder}));
     } else if (isActivePage === ActiveTabLinkEnum.Trends) {
       dispatch(loadAllFilms(trendOrder));
     }
@@ -43,7 +46,6 @@ const MainPage: FC<MainPageProps> = ({ isTrends }) => {
   const searchedFilms = useSelector(FilmsSelector.getSearchOfFilms);
   const favoriteFilms = useSelector(FilmsSelector.getFavoriteFilms);
 
-  console.log(allFilms);
 
   return (
     <div

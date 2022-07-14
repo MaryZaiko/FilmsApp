@@ -1,55 +1,49 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./MultiSelect.css";
 import classnames from "classnames";
 import Select, { OnChangeValue } from "react-select";
 import SingleSelect from "../SingleSelect";
 import { IOption } from "../../common/types";
 import { Theme, useThemeContext } from "../../context/themeModeContext";
-
+import { useDispatch } from "react-redux";
+import { setFiltersGenres } from "../../redux/reducers/filmsReducer";
 
 const MultiSelect = () => {
   const { theme } = useThemeContext();
   const isDarkTheme = theme === Theme.Dark;
-  const [currentCountries, setCurrentCountries] = useState(["france"]);
-  const options: IOption[] = [
-    {
-      value: "use",
-      label: "USA",
-    },
-    {
-      value: "russia",
-      label: "Russia",
-    },
-    {
-      value: "france",
-      label: "France",
-    },
-    {
-      value: "germany",
-      label: "Germany",
-    },
-    {
-      value: "japan",
-      label: "Japan",
-    },
-  ];
+  const dispatch = useDispatch();
 
-  const getValueCountries = () => {
-    return currentCountries
-      ? options.filter((option) => currentCountries.indexOf(option.value) >= 0)
+  const [currentGenre, setCurrentGenre] = useState(["romance"]);
+  const options: IOption[] = [
+    { label: "Romance", value: "romance" },
+    { label: "Mystery", value: "mystery" },
+    { label: "Horror", value: "horror" },
+    { label: "Science Fiction", value: "scienceFiction" },
+    { label: "Comedy", value: "comedy" },
+    { label: "Thriller", value: "thriller" },
+    { label: "Action", value: "action" },
+    { label: "Drama", value: "drama" },
+  ];
+  useEffect(() => {
+    dispatch(setFiltersGenres(currentGenre));
+  }, [currentGenre]);
+
+  const getValueGenres = () => {
+    return currentGenre
+      ? options.filter((option) => currentGenre.indexOf(option.value) >= 0)
       : [];
   };
 
-  const onChangeCountries = (newValue: OnChangeValue<IOption, boolean>) => {
-    setCurrentCountries((newValue as IOption[]).map((v: any) => v.value));
+  const onChangeGenres = (newValue: OnChangeValue<IOption, boolean>) => {
+    setCurrentGenre((newValue as IOption[]).map((v: any) => v.value));
   };
 
   return (
     <div className={classnames("multiSelect")}>
       <Select
-        classNamePrefix={isDarkTheme ? "multiSelect" : 'multiSelectLight'}
-        onChange={onChangeCountries}
-        value={getValueCountries()}
+        classNamePrefix={isDarkTheme ? "multiSelect" : "multiSelectLight"}
+        onChange={onChangeGenres}
+        value={getValueGenres()}
         options={options}
         isMulti
       />

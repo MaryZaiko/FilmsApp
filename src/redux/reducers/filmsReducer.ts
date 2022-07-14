@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { CardTypes } from "../../common/types";
+import { BaseFromTo, CardTypes, SortByTabsEnum } from "../../common/types";
 
 // export type RegisterUser = {
 //   name: string;
@@ -23,12 +23,13 @@ export type FilmsReducerStateType = {
   actorsForSingleFilm: string[];
   singleFilmLoading: boolean;
   filters: {
-    // sort:null | SortEnum
+    sort:null | SortByTabsEnum;
     genre: string[];
-    // years:null | BaseFromTo ={from:string to:string}
-    // rating:null | BaseFromTo ={from:string to:string}
+    years:null | BaseFromTo ;
+    rating:null | BaseFromTo ;
     countries: string;
   };
+  filtersGenre:string;
 };
 
 const initialState = {
@@ -44,7 +45,9 @@ const initialState = {
   writerForSingleFilm: [],
   actorsForSingleFilm: [],
   favoriteFilms: [],
-  recommendationFilms:[]
+  recommendationFilms:[],
+  filters:{},
+  filtersGenre:''
 };
 
 const filmsSlice = createSlice({
@@ -93,7 +96,11 @@ const filmsSlice = createSlice({
     loadRecommendationFilms:(state,action) =>{},
     setRecommendationFilms:(state,action) =>{
       state.recommendationFilms = action.payload
-    }
+    },
+    setFiltersGenres:(state,action) =>{
+      state.filtersGenre = action.payload
+    },
+
   },
 });
 
@@ -112,7 +119,7 @@ export const {
   setActorsForSingleFilm,
   setSearchOfFilms,
   searchOfFilms,
-  setFavoriteFilms,setRecommendationFilms,loadRecommendationFilms
+  setFavoriteFilms,setRecommendationFilms,loadRecommendationFilms,setFiltersGenres
 } = filmsSlice.actions;
 export default filmsSlice.reducer;
 export const FilmsSelector = {
@@ -128,5 +135,6 @@ export const FilmsSelector = {
   getActorsForSingleFilm: (state: any) => state.films.actorsForSingleFilm,
   getSearchOfFilms: (state: any) => state.films.searchedFilms,
   getFavoriteFilms: (state: any) => state.films.favoriteFilms,
-  getRecommendationFilms:(state:any) =>state.films.recommendationFilms
+  getRecommendationFilms:(state:any) =>state.films.recommendationFilms,
+  getFiltersGenres:(state:any) => state.films.filtersGenre
 };

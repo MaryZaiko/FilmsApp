@@ -8,12 +8,12 @@ export type CardTypes = {
   poster: string;
   name: string;
   rating: number;
-  isTrends?:boolean
+  isTrends?: boolean;
 };
 
 export interface IOption {
-  value:string,
-  label: string
+  label: string;
+  value: string;
 }
 export enum ActiveTabLinkEnum {
   Home = "home",
@@ -21,3 +21,11 @@ export enum ActiveTabLinkEnum {
   Favorites = "favorites",
   Settings = "settings",
 }
+export enum SortByTabsEnum {
+  Movie = "movie",
+  Series = "series",
+}
+export type BaseFromTo = {
+  from: string;
+  to: string;
+};

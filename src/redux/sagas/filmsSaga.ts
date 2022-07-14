@@ -26,13 +26,15 @@ function* getAllFilmsWorker(action: any) {
   yield put(setMainPageLoading(true));
   yield put(setAllFilms(""));
   const access_token = localStorage.getItem("jwtAccessToken");
-  const order = action.payload;
+
 
   const { status, data, problem } = yield call(
     getAllFilmsApi,
     access_token,
-    order
+    action.payload
   );
+  console.log(data);
+  
   if (status === 200) {
     const newData = data.pagination.data.map((card: any) => {
       return {
@@ -55,6 +57,7 @@ function* getSingleFilmWorker(action: PayloadAction<string>) {
     getSingleFilmApi,
     action.payload
   );
+  
   if (status === 200) {
     yield put(setSingleFilm(data.title));
     const filterPeople = (type: string) => {

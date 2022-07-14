@@ -162,7 +162,7 @@ console.log(recommendationFilms);
                   <tr>
                     <td>Actors</td>
                     <td className="singlePageTableInfo">
-                      {actorsNames.length > 0
+                      {actorsNames
                         ? actorsNames.map((p: any) => `${p.name} `)
                         : "-"}
                     </td>
@@ -170,7 +170,7 @@ console.log(recommendationFilms);
                   <tr>
                     <td>Director</td>
                     <td className="singlePageTableInfo">
-                      {directorName.length > 0
+                      {directorName
                         ? directorName.map((p: any) => `${p.name} `)
                         : "-"}
                     </td>
@@ -178,7 +178,7 @@ console.log(recommendationFilms);
                   <tr>
                     <td>Writer</td>
                     <td className="singlePageTableInfo">
-                      {writersNames.length > 0
+                      {writersNames
                         ? writersNames.map((p: any) => `${p.name} `)
                         : "-"}
                     </td>

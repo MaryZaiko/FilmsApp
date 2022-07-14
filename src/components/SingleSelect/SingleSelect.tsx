@@ -5,33 +5,13 @@ import Select, { OnChangeValue, SingleValue } from "react-select";
 import { Theme, useThemeContext } from "../../context/themeModeContext";
 
 import { IOption } from "../../common/types";
+import { countries } from "./countries";
 
 const SingleSelect = () => {
   const { theme } = useThemeContext();
   const isDarkTheme = theme === Theme.Dark;
   const [currentCountry, setCurrentCountry] = useState("france");
-  const options: IOption[] = [
-    {
-      value: "use",
-      label: "USA",
-    },
-    {
-      value: "russia",
-      label: "Russia",
-    },
-    {
-      value: "france",
-      label: "France",
-    },
-    {
-      value: "germany",
-      label: "Germany",
-    },
-    {
-      value: "japan",
-      label: "Japan",
-    },
-  ];
+  const options: IOption[] = countries;
 
   const getValueCountry = () => {
     return currentCountry

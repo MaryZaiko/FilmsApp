@@ -1,4 +1,4 @@
-import React, { useState,  } from "react";
+import React, { useState } from "react";
 import "./FormSelect.css";
 import classnames from "classnames";
 import Select from "react-select";
@@ -9,39 +9,46 @@ import Button from "../Button";
 import Input from "../Input";
 import { Theme, useThemeContext } from "../../context/themeModeContext";
 import { useDispatch, useSelector } from "react-redux";
-import { FilmsSelector,setIsVisibleFormSelect } from "../../redux/reducers/filmsReducer";
-
+import {
+  FilmsSelector,
+  setIsVisibleFormSelect,
+} from "../../redux/reducers/filmsReducer";
+import { SortByTabsEnum } from "../../common/types";
 
 const FormSelect = () => {
   const { theme } = useThemeContext();
   const isDarkTheme = theme === Theme.Dark;
-  const [btnSortActive, setBtnSortActive] = useState("rating");
-  const dispatch = useDispatch()
+  const [sortBy, setSortBy] = useState("rating");
+  const dispatch = useDispatch();
 
   const onClickSortBtn = (value: string) => {
-    console.log(value);
-
-    setBtnSortActive(value);
+    setSortBy(value);
   };
 
-   const isVisibleForm = useSelector(FilmsSelector.getIsVisibleFormSelect)
+  const isVisibleForm = useSelector(FilmsSelector.getIsVisibleFormSelect);
 
-   const onClickFiltersClose = () =>{
-    dispatch(isVisibleForm ? setIsVisibleFormSelect(false) :setIsVisibleFormSelect(true) )
-     }
+  const onClickFiltersClose = () => {
+    dispatch(
+      isVisibleForm
+        ? setIsVisibleFormSelect(false)
+        : setIsVisibleFormSelect(true)
+    );
+  };
+const filterGenre = useSelector(FilmsSelector.getFiltersGenres);
+
 
   return (
     <div
       className={classnames(
         "formSelectWrapper",
-        isDarkTheme ? "formSelectWrapperDark" : "formSelectWrapperLight", {['formSelectVisible'] : isVisibleForm}
+        isDarkTheme ? "formSelectWrapperDark" : "formSelectWrapperLight",
+        { ["formSelectVisible"]: isVisibleForm }
       )}
     >
       <div className="formSelectHeader">
         <h2>Filters</h2>
         <div className="formSelectClose" onClick={onClickFiltersClose}>
-        <XMarkSVG fill="#AFB2B6" />
-
+          <XMarkSVG fill="#AFB2B6" />
         </div>
       </div>
 
@@ -51,44 +58,32 @@ const FormSelect = () => {
             <span>Sort by</span>
             <div className="btnsSortWrapper">
               <Button
-                onClick={() => onClickSortBtn("rating")}
-                btnContent={"Rating"}
-                value="rating"
+                onClick={() => onClickSortBtn(SortByTabsEnum.Movie)}
+                btnContent={"Movie"}
+                value="movie"
                 className={classnames(
                   "btnSort btnSortRight",
                   isDarkTheme ? "btnSortDark" : "btnSortLight",
                   {
                     [isDarkTheme ? "btnSortActiveDark" : "btnSortActiveLight"]:
-                      btnSortActive === "rating",
+                    sortBy === SortByTabsEnum.Movie,
                   }
                 )}
               />
               <Button
-                onClick={() => onClickSortBtn("year")}
-                btnContent={"Year"}
-                value="year"
+                onClick={() => onClickSortBtn(SortByTabsEnum.Series)}
+                btnContent={"Series"}
+                value="series"
                 className={classnames(
                   "btnSort btnSortLeft",
                   isDarkTheme ? "btnSortDark " : "btnSortLight ",
                   {
                     [isDarkTheme ? "btnSortActiveDark" : "btnSortActiveLight"]:
-                      btnSortActive === "year",
+                    sortBy === SortByTabsEnum.Series,
                   }
                 )}
               />
             </div>
-          </div>
-
-          <div className="formSelectItem">
-            <span>Full or short movie name</span>
-            <Input
-              type={"text"}
-              placeholder="Your texts"
-              className={classnames(
-                "inputSearch",
-                isDarkTheme ? "inputDark" : "inputLight"
-              )}
-            />
           </div>
 
           <div className="formSelectItem">
@@ -99,28 +94,44 @@ const FormSelect = () => {
           <div className="formSelectItem">
             <span>Years</span>
             <div className="formSelectSortInterval">
-              <Input type={"number"} placeholder="From" className={classnames(
-                "inputSearch",
-                isDarkTheme ? "inputDark" : "inputLight"
-              )}/>
-              <Input type={"number"} placeholder="To" className={classnames(
-                "inputSearch",
-                isDarkTheme ? "inputDark" : "inputLight"
-              )}/>
+              <Input
+                type={"number"}
+                placeholder="From"
+                className={classnames(
+                  "inputSearch",
+                  isDarkTheme ? "inputDark" : "inputLight"
+                )}
+              />
+              <Input
+                type={"number"}
+                placeholder="To"
+                className={classnames(
+                  "inputSearch",
+                  isDarkTheme ? "inputDark" : "inputLight"
+                )}
+              />
             </div>
           </div>
 
           <div className="formSelectItem">
             <span>Rating</span>
             <div className="formSelectSortInterval">
-              <Input type={"number"} placeholder="From" className={classnames(
-                "inputSearch",
-                isDarkTheme ? "inputDark" : "inputLight"
-              )}/>
-              <Input type={"number"} placeholder="To" className={classnames(
-                "inputSearch",
-                isDarkTheme ? "inputDark" : "inputLight"
-              )}/>
+              <Input
+                type={"number"}
+                placeholder="From"
+                className={classnames(
+                  "inputSearch",
+                  isDarkTheme ? "inputDark" : "inputLight"
+                )}
+              />
+              <Input
+                type={"number"}
+                placeholder="To"
+                className={classnames(
+                  "inputSearch",
+                  isDarkTheme ? "inputDark" : "inputLight"
+                )}
+              />
             </div>
           </div>
 
@@ -131,14 +142,20 @@ const FormSelect = () => {
         </div>
 
         <div className="formSelectFooter">
-          <Button btnContent={"Clear filter"} className={classnames(
-            "btnSettingsSort",
-            isDarkTheme ? "btnSettingsSortDark" : "btnSettingsSortLight"
-          )}/>
-          <Button btnContent={"Show results"} className={classnames(
-            "btnSettingsSort",
-            isDarkTheme ? "btnSettingsSortDark" : "btnSettingsSortLight"
-          )}/>
+          <Button
+            btnContent={"Clear filter"}
+            className={classnames(
+              "btnSettingsSort",
+              isDarkTheme ? "btnSettingsSortDark" : "btnSettingsSortLight"
+            )}
+          />
+          <Button
+            btnContent={"Show results"}
+            className={classnames(
+              "btnSettingsSort",
+              isDarkTheme ? "btnSettingsSortDark" : "btnSettingsSortLight"
+            )}
+          />
         </div>
       </div>
     </div>
