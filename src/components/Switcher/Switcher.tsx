@@ -5,8 +5,6 @@ import { Theme, useThemeContext } from "../../context/themeModeContext";
 
 const Switcher = () => {
   const { theme, onChangeTheme = () => {} } = useThemeContext();
-  const isDarkTheme = theme === Theme.Dark;
-
   const onClickTheme = () => {
     theme === Theme.Dark
       ? onChangeTheme(Theme.Light)

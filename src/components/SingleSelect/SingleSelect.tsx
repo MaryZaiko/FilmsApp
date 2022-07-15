@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import "./SingleSelect.css";
 import classnames from "classnames";
-import Select, { OnChangeValue, SingleValue } from "react-select";
+import Select, { SingleValue } from "react-select";
 import { Theme, useThemeContext } from "../../context/themeModeContext";
-
 import { IOption } from "../../common/types";
 import { countries } from "./countries";
 
@@ -26,7 +25,7 @@ const SingleSelect = () => {
   return (
     <div className={classnames("singleSelect")}>
       <Select
-      classNamePrefix={isDarkTheme ? "singleSelect" : "singleSelectLight"}
+        classNamePrefix={isDarkTheme ? "singleSelect" : "singleSelectLight"}
         onChange={onChangeCountry}
         value={getValueCountry()}
         options={options}

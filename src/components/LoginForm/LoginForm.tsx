@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-
 import "./LoginForm.css";
 import classnames from "classnames";
 import Input from "../Input";
@@ -63,7 +62,6 @@ const LoginForm = () => {
     }
   };
 
-  //!!??? не типизируется этот ивент
   const blurHandler = (e: any) => {
     switch (e.target.name) {
       case "email":

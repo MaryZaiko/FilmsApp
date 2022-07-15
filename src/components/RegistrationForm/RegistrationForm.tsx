@@ -1,4 +1,4 @@
-import React, { useState, FC, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 
 import "./RegistrationForm.css";
 import classnames from "classnames";

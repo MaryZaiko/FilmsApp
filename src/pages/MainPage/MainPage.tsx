@@ -1,14 +1,14 @@
 import React, { FC, useEffect, useState } from "react";
 import "./MainPage.css";
 import FilmsList from "../../components/FilmsList";
-import PagesWrapper from "../../components/PagesWrapper";
 import { useDispatch, useSelector } from "react-redux";
 import classnames from "classnames";
 import { Theme, useThemeContext } from "../../context/themeModeContext";
-import { CardTypes, ActiveTabLinkEnum } from "../../common/types";
+import {ActiveTabLinkEnum } from "../../common/types";
 import { FilmsSelector, loadAllFilms } from "../../redux/reducers/filmsReducer";
 import Lottie from "react-lottie";
 import animationData from "../../components/Lotties/Popcorn.json";
+import LoaderRing from "../../components/LoaderRing";
 
 type MainPageProps = {
   isTrends?: boolean;
@@ -21,6 +21,8 @@ const MainPage: FC<MainPageProps> = ({ isTrends }) => {
   const isActivePage = useSelector(FilmsSelector.getActiveTabLink);
 
   const [limit, setLimit] = useState(5);
+
+  const isLoadMore = false;
 
   const defaultOptions = {
     loop: true,
@@ -36,7 +38,7 @@ const MainPage: FC<MainPageProps> = ({ isTrends }) => {
 
   useEffect(() => {
     if (isActivePage === ActiveTabLinkEnum.Home) {
-      dispatch(loadAllFilms({order: mainOrder}));
+      dispatch(loadAllFilms({ order: mainOrder }));
     } else if (isActivePage === ActiveTabLinkEnum.Trends) {
       dispatch(loadAllFilms(trendOrder));
     }
@@ -45,7 +47,6 @@ const MainPage: FC<MainPageProps> = ({ isTrends }) => {
   const allFilms = useSelector(FilmsSelector.getAllFilms);
   const searchedFilms = useSelector(FilmsSelector.getSearchOfFilms);
   const favoriteFilms = useSelector(FilmsSelector.getFavoriteFilms);
-
 
   return (
     <div
@@ -59,12 +60,24 @@ const MainPage: FC<MainPageProps> = ({ isTrends }) => {
           <Lottie options={defaultOptions} height={400} width={400} />
         </div>
       ) : isActivePage === ActiveTabLinkEnum.Home ? (
-        <FilmsList
-          data={searchedFilms.length > 0 ? searchedFilms : allFilms}
-          isTrends={isTrends}
-        />
+        <div>
+          <FilmsList
+            data={searchedFilms.length > 0 ? searchedFilms : allFilms}
+            isTrends={isTrends}
+          />
+          <div className="btnShowMore">
+            <span>Show more</span>
+            {isLoadMore && <LoaderRing />}
+          </div>
+        </div>
       ) : isActivePage === ActiveTabLinkEnum.Trends ? (
-        <FilmsList data={allFilms} isTrends={isTrends} />
+        <div>
+          <FilmsList data={allFilms} isTrends={isTrends} />
+          <div className="btnShowMore">
+            <span>Show more</span>
+            {isLoadMore && <LoaderRing />}
+          </div>
+        </div>
       ) : (
         <FilmsList data={favoriteFilms} />
       )}

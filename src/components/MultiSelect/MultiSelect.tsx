@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import "./MultiSelect.css";
 import classnames from "classnames";
 import Select, { OnChangeValue } from "react-select";
-import SingleSelect from "../SingleSelect";
 import { IOption } from "../../common/types";
 import { Theme, useThemeContext } from "../../context/themeModeContext";
 import { useDispatch } from "react-redux";

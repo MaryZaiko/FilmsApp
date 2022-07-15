@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./Header.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark, faBars } from "@fortawesome/free-solid-svg-icons";
@@ -6,9 +6,7 @@ import Input from "../Input";
 import Logo from "../Logo";
 import Button from "../Button";
 import UserNameHeader from "../UserNameHeader";
-import Sidebar from "../Sidebar";
 import FilterSVG from "../../assets/FilterSVG";
-
 import { Theme, useThemeContext } from "../../context/themeModeContext";
 import classnames from "classnames";
 import { useDispatch, useSelector } from "react-redux";
@@ -16,7 +14,6 @@ import {
   FilmsSelector,
   setIsVisibleSidebar,
   setIsVisibleFormSelect,
-  setSearchOfFilms,
   searchOfFilms,
 } from "../../redux/reducers/filmsReducer";
 import { useNavigate } from "react-router-dom";
@@ -32,8 +29,6 @@ const Header = () => {
 
   const isOpenBurgerMenu = useSelector(FilmsSelector.getIsVisibleSidebar);
   const isVisibleForm = useSelector(FilmsSelector.getIsVisibleFormSelect);
-
-
 
   const onClickBurgerMenu = () => {
     dispatch(
@@ -52,17 +47,14 @@ const Header = () => {
   };
   const onSearch = (event: any) => {
     setSearch(event.target.value);
-    
-    // dispatch(setSearchOfFilms({search}));
-
-
   };
 
   useEffect(() => {
     if (search.length !== 0) {
-    dispatch(searchOfFilms({search}));}
+      dispatch(searchOfFilms({ search }));
+    }
   }, [search]);
-  
+
   return (
     <div
       className={classnames(
@@ -100,7 +92,6 @@ const Header = () => {
         }
         className="btnUserNameHeader btnUserNameHeaderMenu"
       />
-
       <UserNameHeader />
       <FormSelect />
     </div>

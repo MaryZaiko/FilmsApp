@@ -1,5 +1,4 @@
 import React, { FC } from "react";
-
 import "./Carousel.css";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
@@ -9,9 +8,8 @@ import { CardTypes } from "../../common/types";
 
 type MovieSliderProps = {
   data: CardTypes[];
-  
 };
-const MovieSlider:FC<MovieSliderProps> = ({data}) => {
+const MovieSlider: FC<MovieSliderProps> = ({ data }) => {
   const settings = {
     dots: false,
     arrows: true,
@@ -20,7 +18,6 @@ const MovieSlider:FC<MovieSliderProps> = ({data}) => {
     slidesToShow: 3,
     slidesToScroll: 3,
     initialSlide: 0,
-  
 
     responsive: [
       {
@@ -47,10 +44,8 @@ const MovieSlider:FC<MovieSliderProps> = ({data}) => {
     ],
   };
 
-
   return (
     <div className="sliderContainer">
-  
       <Slider {...settings}>
         {data.map((item) => {
           return (
@@ -58,7 +53,7 @@ const MovieSlider:FC<MovieSliderProps> = ({data}) => {
               id={item.id}
               key={item.id}
               poster={item.poster}
-              name={item.name}             
+              name={item.name}
               rating={item.rating}
               isSlider
             />

@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import "./SingleFilm.css";
 import classnames from "classnames";
 import { Theme, useThemeContext } from "../../context/themeModeContext";
-import { CardTypes } from "../../common/types";
 import Button from "../../components/Button";
 import ImdbLogoSVG from "../../assets/ImdbLogoSVG";
 import Carousel from "../../components/Carousel";
@@ -11,7 +10,8 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   FilmsSelector,
   loadFilm,
-  setFavoriteFilms,setRecommendationFilms,loadRecommendationFilms
+  setFavoriteFilms,
+  loadRecommendationFilms,
 } from "../../redux/reducers/filmsReducer";
 import Lottie from "react-lottie";
 import animationData from "../../components/Lotties/Popcorn.json";
@@ -36,7 +36,6 @@ const SingleFilm = () => {
     if (id) {
       dispatch(loadFilm(id));
       dispatch(loadRecommendationFilms(id));
-
     }
   }, [id]);
 
@@ -46,9 +45,7 @@ const SingleFilm = () => {
   const writersNames = useSelector(FilmsSelector.getWriterForSingleFilm);
   const actorsNames = useSelector(FilmsSelector.getActorsForSingleFilm);
   const recommendationFilms = useSelector(FilmsSelector.getRecommendationFilms);
-console.log(recommendationFilms);
 
-  
   const onClickSave = (id: number, action: string) => {
     isSaveFilm ? setIsSaveFilm(false) : setIsSaveFilm(true);
     console.log(filmData);
@@ -185,11 +182,12 @@ console.log(recommendationFilms);
                   </tr>
                 </tbody>
               </table>
-              {recommendationFilms.length > 0 && <div className="sliderWrapper">
-              <h2>Recommendations</h2>
-              <Carousel data= {recommendationFilms}/>
-              </div>}
-              
+              {recommendationFilms.length > 0 && (
+                <div className="sliderWrapper">
+                  <h2>Recommendations</h2>
+                  <Carousel data={recommendationFilms} />
+                </div>
+              )}
             </div>
           </div>
         )

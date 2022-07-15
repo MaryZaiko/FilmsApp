@@ -1,10 +1,8 @@
-import React, { FC, useState } from "react";
+import React from "react";
 import "./UserNameHeader.css";
 import Button from "../Button";
 import UserSVG from "../../assets/UserSVG";
 import classnames from "classnames";
-
-import LogOutMenu from "../LogOutMenu";
 import ArrowLogOutMenu from "../ArrowLogOutMenu";
 import { Theme, useThemeContext } from "../../context/themeModeContext";
 import { useSelector } from "react-redux";

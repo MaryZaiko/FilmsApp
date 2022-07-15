@@ -14,11 +14,6 @@ type PostCardProps = {
   rating: number;
   isTrends?: boolean;
   isSlider?: boolean;
-  // date: string;
-  // isBig?: boolean;
-  // onClick?: (e: any) => void;
-  // likeStatus?: LikeStatus | null;
-  // saved?: boolean;
 };
 
 const Card: FC<PostCardProps> = ({
@@ -33,8 +28,6 @@ const Card: FC<PostCardProps> = ({
   const isDarkTheme = theme === Theme.Dark;
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
-  // const isTrends = false;
 
   const onClickCard = (id: string) => {
     navigate(`/films/${id}`);
@@ -53,8 +46,8 @@ const Card: FC<PostCardProps> = ({
           className={classnames(isSlider ? "cardImgSlider" : "cardImg")}
         />
         <h2
-          className={classnames(isSlider ? 'cardTitleSlider' :
-            "cardTitle",
+          className={classnames(
+            isSlider ? "cardTitleSlider" : "cardTitle",
             isDarkTheme ? "cardTitleDark" : "cardTitleLight"
           )}
         >

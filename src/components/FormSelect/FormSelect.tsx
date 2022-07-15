@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import "./FormSelect.css";
 import classnames from "classnames";
-import Select from "react-select";
 import SingleSelect from "../SingleSelect";
 import MultiSelect from "../MultiSelect";
 import XMarkSVG from "../../assets/XMarkSVG";
@@ -34,6 +33,7 @@ const FormSelect = () => {
         : setIsVisibleFormSelect(true)
     );
   };
+  
 const filterGenre = useSelector(FilmsSelector.getFiltersGenres);
 
 

@@ -1,8 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import "./Settings.css";
 import classnames from "classnames";
 import { Theme, useThemeContext } from "../../context/themeModeContext";
-
 import Input from "../../components/Input";
 import Switcher from "../../components/Switcher";
 import Button from "../../components/Button";
@@ -33,7 +32,7 @@ const Settings = () => {
           <label className="settingsInputWrapper">
             <span>Name</span>
             <Input
-            value={authUserName}
+              value={authUserName}
               type={"text"}
               className={classnames(
                 "inputSettings",
@@ -44,8 +43,7 @@ const Settings = () => {
           <label className="settingsInputWrapper">
             <span>Email</span>
             <Input
-            value={authUserEmail}
-
+              value={authUserEmail}
               type={"email"}
               className={classnames(
                 "inputSettings",

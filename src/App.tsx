@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import "./App.css";
-
 import { ThemeModeProvider } from "./context/themeModeProvider";
 import { Theme } from "./context/themeModeContext";
 import Router from "./pages/Router";
