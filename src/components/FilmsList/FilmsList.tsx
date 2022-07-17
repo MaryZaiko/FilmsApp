@@ -9,6 +9,8 @@ type FilmsListProps = {
 };
 
 const FilmsList: FC<FilmsListProps> = ({ data, isTrends }) => {
+  console.log(data);
+  
   const cardList = data.map((card) => {
     return (
       <div key={card.id}>

@@ -10,7 +10,7 @@ type UserType = {
   password_confirmation: string;
   token_name: string;
 };
-const accessToken = localStorage.getItem("jwtAccessToken")
+const accessToken = localStorage.getItem("jwtAccessToken");
 
 const registerUserApi = (userData: UserType) => {
   return API.post("/auth/register", userData);
@@ -24,47 +24,73 @@ const loginUserApi = (data: {
   return API.post("/auth/login", data);
 };
 
-const getAllFilmsApi = (token: any, order:any) => {
-  return API.get("/titles", {order},
-  {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  });
-};
-const getSingleFilmApi = (id:string) => {
-  return API.get(`/titles/${id}`, {},
-  {
-    headers: {
-      Authorization: `Bearer ${accessToken}`,
-    },
-  });
-};
-const getUserInfoApi = (token: any, id:string) => {
-  return API.get(`/user-profile/${id}`, {},
-  {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  });
-};
-const getSearchedOfFilmsApi = (token: any, query: any) =>{
-  return API.get(`/search/${query}`, {limit: 10,},{
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
+const getAllFilmsApi = (
+  token: any,
+  order: string,
+  page: number,
+  perPage: number
+) => {
+  return API.get(
+    "/titles",
+    { order, page,perPage },
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
     }
-  )
-}
-const getRecommendationFilmsApi = (token:any, id:any)=>{
-  return API.get(`/titles/${id}/related`, {},{
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
+  );
+};
+const getSingleFilmApi = (token:any, id: string) => {
+  return API.get(
+    `/titles/${id}`,
+    {},
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
     }
-  )
-}
+  );
+};
+const getUserInfoApi = (token: any, id: string) => {
+  return API.get(
+    `/user-profile/${id}`,
+    {},
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+};
+const getSearchedOfFilmsApi = (token: any, query: any) => {
+  return API.get(
+    `/search/${query}`,
+    { limit: 10 },
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+};
+const getRecommendationFilmsApi = (token: any, id: any) => {
+  return API.get(
+    `/titles/${id}/related`,
+    {},
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+};
 
-
-
-export { registerUserApi, loginUserApi,getAllFilmsApi,getSingleFilmApi,getUserInfoApi,getSearchedOfFilmsApi,getRecommendationFilmsApi };
+export {
+  registerUserApi,
+  loginUserApi,
+  getAllFilmsApi,
+  getSingleFilmApi,
+  getUserInfoApi,
+  getSearchedOfFilmsApi,
+  getRecommendationFilmsApi,
+};

@@ -5,7 +5,8 @@ import { useNavigate } from "react-router-dom";
 import {
   getAllFilmsApi,
   getSearchedOfFilmsApi,
-  getSingleFilmApi,getRecommendationFilmsApi
+  getSingleFilmApi,
+  getRecommendationFilmsApi,
 } from "../api";
 import {
   loadAllFilms,
@@ -18,55 +19,78 @@ import {
   setWriterForSingleFilm,
   setActorsForSingleFilm,
   setSearchOfFilms,
-  searchOfFilms,loadRecommendationFilms, setRecommendationFilms
+  searchOfFilms,
+  loadRecommendationFilms,
+  setRecommendationFilms,
+  setAllFilmsMore,
+  setTrendFilmsMore,
+  setTrendFilms,
 } from "../reducers/filmsReducer";
-
 
 function* getAllFilmsWorker(action: any) {
   yield put(setMainPageLoading(true));
-  yield put(setAllFilms(""));
   const access_token = localStorage.getItem("jwtAccessToken");
 
+  const {
+    isShowMore,
+    mainOrder: order,
+    isTrends,
+    page,
+    perPage,
+  } = action.payload;
 
   const { status, data, problem } = yield call(
     getAllFilmsApi,
     access_token,
-    action.payload
+    order,
+    page,
+    perPage
   );
-  console.log(data);
-  
+  console.log(data.pagination.data);
+  console.log(isShowMore);
+
   if (status === 200) {
-    const newData = data.pagination.data.map((card: any) => {
-      return {
-        ...card,
-        saved: false,
-      };
-    });
-    yield put(setAllFilms(newData));
+    if (isShowMore) {
+      if (isTrends) {
+        yield put(setTrendFilmsMore(data.pagination.data));
+      } else {
+        yield put(setAllFilmsMore(data.pagination.data));
+      }
+    } else {
+      if (isTrends) {
+        yield put(setTrendFilms(data.pagination.data));
+      } else {
+        yield put(setAllFilms(data.pagination.data));
+      }
+    }
   }
   yield put(setMainPageLoading(false));
 }
+
 function* getSingleFilmWorker(action: PayloadAction<string>) {
   yield put(setSingleFilmLoading(true));
   yield put(setSingleFilm(null));
-  yield put(setDirectorForSingleFilm(''));
-  yield put(setWriterForSingleFilm(''));
-  yield put(setActorsForSingleFilm(''));
+  yield put(setDirectorForSingleFilm(""));
+  yield put(setWriterForSingleFilm(""));
+  yield put(setActorsForSingleFilm(""));
+  const access_token = localStorage.getItem("jwtAccessToken");
 
   const { status, data, problem } = yield call(
-    getSingleFilmApi,
+    getSingleFilmApi,access_token,
     action.payload
   );
-  
+
   if (status === 200) {
     yield put(setSingleFilm(data.title));
     const filterPeople = (type: string) => {
-      return data.title.credits.filter((item: any) => item.pivot.department === type)
-    }
-    const director: any[] = filterPeople('directing');
-    const writers: any[] = filterPeople('writing');
-    const actors: any[] = filterPeople('cast');
-     
+      return data.title.credits.filter(
+        (item: any) => item.pivot.department === type
+      );
+    };
+    const director: any[] = filterPeople("directing");
+    const writers: any[] = filterPeople("writing");
+    const actors: any[] = filterPeople("cast");
+
     yield put(setDirectorForSingleFilm(director));
     yield put(setWriterForSingleFilm(writers));
     yield put(setActorsForSingleFilm(actors));
@@ -80,7 +104,7 @@ function* getSearchedOfFilmsWorker(action: any) {
 
   const access_token = localStorage.getItem("jwtAccessToken");
   const { search: query } = action.payload;
-   const { data, status} = yield call(
+  const { data, status } = yield call(
     getSearchedOfFilmsApi,
     access_token,
     query
@@ -95,18 +119,17 @@ function* getRecommendationFilmsWorker(action: PayloadAction<any>) {
   yield put(setRecommendationFilms(null));
   const access_token = localStorage.getItem("jwtAccessToken");
 
-
   const { status, data, problem } = yield call(
-    getRecommendationFilmsApi,access_token,
+    getRecommendationFilmsApi,
+    access_token,
     action.payload
   );
   console.log(status);
   console.log(data.titles);
   console.log(problem);
-  
+
   if (status === 200) {
     yield put(setRecommendationFilms(data.titles));
- 
   }
   yield put(setSingleFilmLoading(false));
 }
@@ -116,6 +139,6 @@ export default function* filmsWatcher() {
     takeLatest(loadAllFilms, getAllFilmsWorker),
     takeLatest(loadFilm, getSingleFilmWorker),
     takeLatest(searchOfFilms, getSearchedOfFilmsWorker),
-    takeLatest(loadRecommendationFilms, getRecommendationFilmsWorker)
+    takeLatest(loadRecommendationFilms, getRecommendationFilmsWorker),
   ]);
 }

@@ -17,8 +17,9 @@ import { SortByTabsEnum } from "../../common/types";
 const FormSelect = () => {
   const { theme } = useThemeContext();
   const isDarkTheme = theme === Theme.Dark;
-  const [sortBy, setSortBy] = useState("rating");
+  const [sortBy, setSortBy] = useState("movie");
   const dispatch = useDispatch();
+
 
   const onClickSortBtn = (value: string) => {
     setSortBy(value);
@@ -35,6 +36,8 @@ const FormSelect = () => {
   };
   
 const filterGenre = useSelector(FilmsSelector.getFiltersGenres);
+const filterCountry = useSelector(FilmsSelector.getFiltersCountry);
+
 
 
   return (

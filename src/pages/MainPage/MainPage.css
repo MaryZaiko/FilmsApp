@@ -10,6 +10,12 @@
 .mainPageWrapperLight {
   background-color: white;
 }
+.pageContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+}
 .lottie {
   display: flex;
   align-items: center;
@@ -18,19 +24,20 @@
 }
 .btnShowMore {
 
-  height: 40px;
   padding: 8px 24px;
-  display: flex;
+  /* display: flex;
   justify-content: center;
-  align-items: center;
-color: white;
+  align-items: center; */
+  color: white;
   background: #323537;
   border-radius: 40px;
+  cursor: pointer;
+  margin: 10px;
 }
-.btnShowMore span{
+/* .btnShowMore span {
   margin: 5px 10px;
   font-size: 16px;
-}
+} */
 @media (max-width: 1280px) {
   .mainPageWrapper {
     padding: 40px 176px 0px 176px;
