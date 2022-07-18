@@ -29,10 +29,10 @@ import {
   setFilterStatus,
   setSearchedStatus,
 } from "../reducers/filmsReducer";
+import { callCheckingAuth } from "./callCheckingAuth";
 
 function* getAllFilmsWorker(action: any) {
   yield put(setMainPageLoading(true));
-  const access_token = localStorage.getItem("jwtAccessToken");
   const {
     isShowMore,
     mainOrder: order,
@@ -41,9 +41,8 @@ function* getAllFilmsWorker(action: any) {
     perPage,
   } = action.payload;
 
-  const { status, data } = yield call(
+  const { status, data } = yield callCheckingAuth(
     getAllFilmsApi,
-    access_token,
     order,
     page,
     perPage
@@ -73,11 +72,9 @@ function* getSingleFilmWorker(action: PayloadAction<string>) {
   yield put(setDirectorForSingleFilm(""));
   yield put(setWriterForSingleFilm(""));
   yield put(setActorsForSingleFilm(""));
-  const access_token = localStorage.getItem("jwtAccessToken");
 
-  const { status, data } = yield call(
+  const { status, data } = yield callCheckingAuth(
     getSingleFilmApi,
-    access_token,
     action.payload
   );
 
@@ -103,13 +100,8 @@ function* getSearchedOfFilmsWorker(action: any) {
   yield put(setMainPageLoading(true));
   yield put(setSearchOfFilms(""));
 
-  const access_token = localStorage.getItem("jwtAccessToken");
   const { search: query } = action.payload;
-  const { data, status } = yield call(
-    getSearchedOfFilmsApi,
-    access_token,
-    query
-  );
+  const { data, status } = yield callCheckingAuth(getSearchedOfFilmsApi, query);
   if (status === 200) {
     yield put(setSearchOfFilms(data.results));
     yield put(setSearchedStatus(true));
@@ -119,11 +111,9 @@ function* getSearchedOfFilmsWorker(action: any) {
 function* getRecommendationFilmsWorker(action: PayloadAction<string>) {
   yield put(setSingleFilmLoading(true));
   yield put(setRecommendationFilms(null));
-  const access_token = localStorage.getItem("jwtAccessToken");
 
-  const { status, data } = yield call(
+  const { status, data } = yield callCheckingAuth(
     getRecommendationFilmsApi,
-    access_token,
     action.payload
   );
 
@@ -136,7 +126,6 @@ function* getRecommendationFilmsWorker(action: PayloadAction<string>) {
 function* getFilteredFilmsWorker(action: any) {
   yield put(setMainPageLoading(true));
   yield put(setFilteredFilms(""));
-  const access_token = localStorage.getItem("jwtAccessToken");
   const {
     sortBy: type,
     genre,
@@ -146,9 +135,8 @@ function* getFilteredFilmsWorker(action: any) {
   } = action.payload;
   const released = Object.values(years);
   const score = Object.values(rating);
-  const { data, status, problem } = yield call(
+  const { data, status, problem } = yield callCheckingAuth(
     getFilteredFilmsApi,
-    access_token,
     type,
     genre.join(),
     released.join(),

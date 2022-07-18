@@ -14,6 +14,7 @@ import {
   DataUser,
 } from "../reducers/authReducer";
 import { registerUserApi, loginUserApi, getUserInfoApi } from "../api";
+import { callCheckingAuth } from "./callCheckingAuth";
 
 function* registerUserWorker(action: PayloadAction<RegisterUser>) {
   const {
@@ -60,8 +61,7 @@ export function* logoutWorker() {
   yield put(setLogStatus(false));
 }
 export function* getUserInfoWorker() {
-  const access_token = localStorage.getItem("jwtAccessToken");
-  const { status, data } = yield call(getUserInfoApi, access_token, "me");
+  const { status, data } = yield callCheckingAuth(getUserInfoApi, "me");
 
   if (status === 200) {
     yield put(setAuthUserName(data.user.first_name));
