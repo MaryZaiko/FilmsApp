@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import classnames from "classnames";
 import { Theme, useThemeContext } from "../../context/themeModeContext";
 import { ActiveTabLinkEnum } from "../../common/types";
-import { FilmsSelector, loadAllFilms } from "../../redux/reducers/filmsReducer";
+import { FilmsSelector, loadAllFilms, setFilterStatus, setSearchedStatus } from "../../redux/reducers/filmsReducer";
 import Lottie from "react-lottie";
 import animationData from "../../components/Lotties/Popcorn.json";
 import LoaderRing from "../../components/LoaderRing";
@@ -24,13 +24,18 @@ const MainPage: FC<MainPageProps> = ({ isTrends }) => {
   const [isShowMore, setIsShowMore] = useState(false);
   const [page, setPage] = useState(1);
   const perPage = 1;
+
+  let isFilterStatus = useSelector(FilmsSelector.getFilterStatus);
+  let isSearchedStatus = useSelector(FilmsSelector.getSearchedStatus);
+
+
   const allFilms = useSelector(FilmsSelector.getAllFilms);
   const trendFilms = useSelector(FilmsSelector.getTrendFilms);
 
-  const searchedFilms = useSelector(FilmsSelector.getSearchOfFilms);
+  const searchedFilms = useSelector(FilmsSelector.getSearchedFilms);
+  const filteredFilms = useSelector(FilmsSelector.getFilteredFilms);
+
   const favoriteFilms = useSelector(FilmsSelector.getFavoriteFilms);
-  
-  const isLoadMore = false;
 
   const defaultOptions = {
     loop: true,
@@ -45,18 +50,23 @@ const MainPage: FC<MainPageProps> = ({ isTrends }) => {
 
   useEffect(() => {
     if (isActivePage === ActiveTabLinkEnum.Home) {
-      dispatch(loadAllFilms({ mainOrder, page, perPage, isShowMore }));
+      dispatch(setFilterStatus(false))
+      dispatch(setSearchedStatus(false))
+
+            dispatch(loadAllFilms({ mainOrder, page, perPage, isShowMore }));
     } else if (isActivePage === ActiveTabLinkEnum.Trends) {
+      dispatch(setFilterStatus(false))
+      dispatch(setSearchedStatus(false))
+
       dispatch(loadAllFilms({ page, perPage, isShowMore, isTrends }));
     }
   }, [isActivePage, page]);
-
- 
 
   const onClickShowMore = () => {
     setPage(page + 1);
     setIsShowMore(true);
   };
+
   return (
     <div
       className={classnames(
@@ -71,32 +81,29 @@ const MainPage: FC<MainPageProps> = ({ isTrends }) => {
       ) : isActivePage === ActiveTabLinkEnum.Home ? (
         <div className="pageContainer">
           <FilmsList
-            data={
-              searchedFilms.length > 0
-                ? searchedFilms
-                : // : isShowMore
-                  // ? allFilmsMore
-                  allFilms
-            }
-            isTrends={isTrends}
+            data={searchedFilms.length > 0 ? searchedFilms : (filteredFilms.length > 0 ? filteredFilms : allFilms)}
           />
-          <Button
+          {
+            !isFilterStatus && !isSearchedStatus && <Button
             className="btnShowMore"
             onClick={onClickShowMore}
             btnContent="Show more"
           />
+          }
+          
         </div>
       ) : isActivePage === ActiveTabLinkEnum.Trends ? (
         <div>
-          <FilmsList data={trendFilms} isTrends={isTrends} />
+          <FilmsList
+            data={trendFilms}
+            isTrends={isTrends}
+          />
+
           <Button
             className="btnShowMore"
             onClick={onClickShowMore}
             btnContent="Show more"
           />
-
-          {/* <span>Show more</span> */}
-          {/* {isLoadMore && <LoaderRing />} */}
         </div>
       ) : (
         <FilmsList data={favoriteFilms} />

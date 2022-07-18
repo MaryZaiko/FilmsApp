@@ -12,7 +12,7 @@ const MultiSelect = () => {
   const isDarkTheme = theme === Theme.Dark;
   const dispatch = useDispatch();
 
-  const [currentGenre, setCurrentGenre] = useState(["romance"]);
+  const [currentGenre, setCurrentGenre] = useState([""]);
   const options: IOption[] = [
     { label: "Romance", value: "romance" },
     { label: "Mystery", value: "mystery" },
@@ -38,7 +38,9 @@ const MultiSelect = () => {
   };
 
   return (
-    <div className={classnames("multiSelect")}>
+    <div className={classnames("multiSelect", "formSelectItem")}>
+            <span>Genre</span>
+
       <Select
         classNamePrefix={isDarkTheme ? "multiSelect" : "multiSelectLight"}
         onChange={onChangeGenres}

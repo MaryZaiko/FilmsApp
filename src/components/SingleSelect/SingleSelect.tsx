@@ -14,13 +14,13 @@ const SingleSelect = () => {
   const dispatch = useDispatch();
 
   const [currentCountry, setCurrentCountry] = useState("france");
-  const options: IOption[] = countries;
+  const optionsCountry: IOption[] = countries;
   useEffect(() => {
     dispatch(setFiltersCountry(currentCountry));
   }, [currentCountry]);
   const getValueCountry = () => {
     return currentCountry
-      ? options.find((c) => c.value === currentCountry)
+      ? optionsCountry.find((c) => c.value === currentCountry)
       : "";
   };
 
@@ -29,12 +29,14 @@ const SingleSelect = () => {
   };
 
   return (
-    <div className={classnames("singleSelect")}>
+    <div className={classnames("singleSelect","formSelectItem")}>
+            <span>Country</span>
+     
       <Select
         classNamePrefix={isDarkTheme ? "singleSelect" : "singleSelectLight"}
         onChange={onChangeCountry}
         value={getValueCountry()}
-        options={options}
+        options={optionsCountry}
         placeholder={"Select country"}
       />
     </div>

@@ -41,10 +41,15 @@ const SingleFilm = () => {
 
   const singlePostLoading = useSelector(FilmsSelector.getSingleFilmLoading);
   const filmData = useSelector(FilmsSelector.getSingleFilm);
-  const directorName = useSelector(FilmsSelector.getDirectorForSingleFilm);
-  const writersNames = useSelector(FilmsSelector.getWriterForSingleFilm);
-  const actorsNames = useSelector(FilmsSelector.getActorsForSingleFilm);
-  const recommendationFilms = useSelector(FilmsSelector.getRecommendationFilms);
+
+    const directorName = useSelector(FilmsSelector.getDirectorForSingleFilm);
+    const writersNames = useSelector(FilmsSelector.getWriterForSingleFilm);
+    const actorsNames = useSelector(FilmsSelector.getActorsForSingleFilm);
+    const recommendationFilms = useSelector(FilmsSelector.getRecommendationFilms);
+  
+  
+console.log(filmData);
+
 
   const onClickSave = (id: number, action: string) => {
     isSaveFilm ? setIsSaveFilm(false) : setIsSaveFilm(true);
@@ -159,7 +164,7 @@ const SingleFilm = () => {
                   <tr>
                     <td>Actors</td>
                     <td className="singlePageTableInfo">
-                      {actorsNames
+                      {actorsNames.length > 0
                         ? actorsNames.map((p: any) => `${p.name} `)
                         : "-"}
                     </td>
@@ -167,7 +172,7 @@ const SingleFilm = () => {
                   <tr>
                     <td>Director</td>
                     <td className="singlePageTableInfo">
-                      {directorName
+                      {directorName.length > 0
                         ? directorName.map((p: any) => `${p.name} `)
                         : "-"}
                     </td>
@@ -175,7 +180,7 @@ const SingleFilm = () => {
                   <tr>
                     <td>Writer</td>
                     <td className="singlePageTableInfo">
-                      {writersNames
+                      {writersNames.length > 0
                         ? writersNames.map((p: any) => `${p.name} `)
                         : "-"}
                     </td>

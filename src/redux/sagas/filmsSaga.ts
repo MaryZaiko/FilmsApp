@@ -1,12 +1,13 @@
 import { all, takeLatest, put, call } from "redux-saga/effects";
 
 import { PayloadAction } from "@reduxjs/toolkit";
-import { useNavigate } from "react-router-dom";
+import { callCheckingAuth } from "./callCheckingAuth";
 import {
   getAllFilmsApi,
   getSearchedOfFilmsApi,
   getSingleFilmApi,
   getRecommendationFilmsApi,
+  getFilteredFilmsApi,
 } from "../api";
 import {
   loadAllFilms,
@@ -25,6 +26,10 @@ import {
   setAllFilmsMore,
   setTrendFilmsMore,
   setTrendFilms,
+  setAllFilters,
+  setFilteredFilms,
+  setFilterStatus,
+  setSearchedStatus,
 } from "../reducers/filmsReducer";
 
 function* getAllFilmsWorker(action: any) {
@@ -39,7 +44,7 @@ function* getAllFilmsWorker(action: any) {
     perPage,
   } = action.payload;
 
-  const { status, data, problem } = yield call(
+  const { status, data } = yield call(
     getAllFilmsApi,
     access_token,
     order,
@@ -75,8 +80,9 @@ function* getSingleFilmWorker(action: PayloadAction<string>) {
   yield put(setActorsForSingleFilm(""));
   const access_token = localStorage.getItem("jwtAccessToken");
 
-  const { status, data, problem } = yield call(
-    getSingleFilmApi,access_token,
+  const { status, data } = yield call(
+    getSingleFilmApi,
+    access_token,
     action.payload
   );
 
@@ -87,9 +93,9 @@ function* getSingleFilmWorker(action: PayloadAction<string>) {
         (item: any) => item.pivot.department === type
       );
     };
-    const director: any[] = filterPeople("directing");
-    const writers: any[] = filterPeople("writing");
-    const actors: any[] = filterPeople("cast");
+    const director: string[] = filterPeople("directing");
+    const writers: string[] = filterPeople("writing");
+    const actors: string[] = filterPeople("cast");
 
     yield put(setDirectorForSingleFilm(director));
     yield put(setWriterForSingleFilm(writers));
@@ -111,27 +117,59 @@ function* getSearchedOfFilmsWorker(action: any) {
   );
   if (status === 200) {
     yield put(setSearchOfFilms(data.results));
+    yield put (setSearchedStatus(true))
   }
   yield put(setMainPageLoading(false));
 }
-function* getRecommendationFilmsWorker(action: PayloadAction<any>) {
+function* getRecommendationFilmsWorker(action: PayloadAction<string>) {
   yield put(setSingleFilmLoading(true));
   yield put(setRecommendationFilms(null));
   const access_token = localStorage.getItem("jwtAccessToken");
 
-  const { status, data, problem } = yield call(
+  const { status, data } = yield call(
     getRecommendationFilmsApi,
     access_token,
     action.payload
   );
-  console.log(status);
-  console.log(data.titles);
-  console.log(problem);
 
   if (status === 200) {
     yield put(setRecommendationFilms(data.titles));
   }
   yield put(setSingleFilmLoading(false));
+}
+
+function* getFilteredFilmsWorker(action: any) {
+  yield put(setMainPageLoading(true));
+  yield put(setFilteredFilms(""));
+
+  const access_token = localStorage.getItem("jwtAccessToken");
+  const {
+    sortBy: type,
+    genre,
+    years,
+    rating,
+    countries: country,
+  } = action.payload;
+  const released = Object.values(years);
+  const score = Object.values(rating);
+  const { data, status, problem } = yield call(
+    getFilteredFilmsApi,
+    access_token,
+    type,
+    genre.join(),
+    released.join(),
+    score.join(),
+    country
+  );
+  console.log(data);
+  console.log(status);
+  console.log(problem);
+
+  if (status === 200) {
+    yield put(setFilterStatus(true))
+    yield put(setFilteredFilms(data.pagination.data));
+  }
+  yield put(setMainPageLoading(false));
 }
 
 export default function* filmsWatcher() {
@@ -140,5 +178,6 @@ export default function* filmsWatcher() {
     takeLatest(loadFilm, getSingleFilmWorker),
     takeLatest(searchOfFilms, getSearchedOfFilmsWorker),
     takeLatest(loadRecommendationFilms, getRecommendationFilmsWorker),
+    takeLatest(setAllFilters, getFilteredFilmsWorker),
   ]);
 }

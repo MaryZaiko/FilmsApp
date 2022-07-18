@@ -1,4 +1,5 @@
 import { create } from "apisauce";
+import { BaseFromTo } from "../../common/types";
 const API = create({
   baseURL: "https://unelmamovie.com/api/v1",
 });
@@ -10,7 +11,6 @@ type UserType = {
   password_confirmation: string;
   token_name: string;
 };
-const accessToken = localStorage.getItem("jwtAccessToken");
 
 const registerUserApi = (userData: UserType) => {
   return API.post("/auth/register", userData);
@@ -32,7 +32,7 @@ const getAllFilmsApi = (
 ) => {
   return API.get(
     "/titles",
-    { order, page,perPage },
+    { order, page, perPage },
     {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -40,7 +40,7 @@ const getAllFilmsApi = (
     }
   );
 };
-const getSingleFilmApi = (token:any, id: string) => {
+const getSingleFilmApi = (token: any, id: string) => {
   return API.get(
     `/titles/${id}`,
     {},
@@ -84,6 +84,24 @@ const getRecommendationFilmsApi = (token: any, id: any) => {
     }
   );
 };
+const getFilteredFilmsApi = (
+  token: any,
+  type: any,
+  genre: any,
+  released: any,
+  score: any,
+  country: any
+) => {
+  return API.get(
+    "/titles",
+    {type,genre,released,score,country},
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+};
 
 export {
   registerUserApi,
@@ -93,4 +111,5 @@ export {
   getUserInfoApi,
   getSearchedOfFilmsApi,
   getRecommendationFilmsApi,
+  getFilteredFilmsApi,
 };

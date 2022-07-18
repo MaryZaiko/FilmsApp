@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./FormSelect.css";
 import classnames from "classnames";
 import SingleSelect from "../SingleSelect";
@@ -10,22 +10,73 @@ import { Theme, useThemeContext } from "../../context/themeModeContext";
 import { useDispatch, useSelector } from "react-redux";
 import {
   FilmsSelector,
+  setAllFilters,
+  setFiltersCountry,
+  setFiltersGenres,
   setIsVisibleFormSelect,
 } from "../../redux/reducers/filmsReducer";
-import { SortByTabsEnum } from "../../common/types";
+import { IOption, SortByTabsEnum } from "../../common/types";
+import Select, { OnChangeValue, SingleValue } from "react-select";
+import { countries } from "../SingleSelect/countries";
 
 const FormSelect = () => {
   const { theme } = useThemeContext();
   const isDarkTheme = theme === Theme.Dark;
-  const [sortBy, setSortBy] = useState("movie");
   const dispatch = useDispatch();
+  const isVisibleForm = useSelector(FilmsSelector.getIsVisibleFormSelect);
 
+  const [sortBy, setSortBy] = useState("movie");
+  const [yearFrom, setYearsFrom] = useState(2021);
+  const [yearTo, setYearsTo] = useState(2022);
+
+  const [ratingFrom, setRatingFrom] = useState(5);
+  const [ratingTo, setRatingTo] = useState(10);
+  const [currentGenre, setCurrentGenre] = useState([""]);
+  const [currentCountry, setCurrentCountry] = useState("");
+
+  const options: IOption[] = [
+    { label: "Romance", value: "romance" },
+    { label: "Mystery", value: "mystery" },
+    { label: "Horror", value: "horror" },
+    { label: "Science Fiction", value: "scienceFiction" },
+    { label: "Comedy", value: "comedy" },
+    { label: "Thriller", value: "thriller" },
+    { label: "Action", value: "action" },
+    { label: "Drama", value: "drama" },
+  ];
+  const optionsCountry: IOption[] = countries;
+
+  useEffect(() => {
+    dispatch(setFiltersGenres(currentGenre));
+  }, [currentGenre]);
+
+  useEffect(() => {
+    dispatch(setFiltersCountry(currentCountry));
+  }, [currentCountry]);
+
+  const getValueGenres = () => {
+    return currentGenre
+      ? options.filter((option) => currentGenre.indexOf(option.value) >= 0)
+      : [];
+  };
+
+  const onChangeGenres = (newValue: OnChangeValue<IOption, boolean>) => {
+    setCurrentGenre((newValue as IOption[]).map((v: any) => v.value));
+  };
+
+  const getValueCountry = () => {
+    return currentCountry
+      ? optionsCountry.find((c) => c.value === currentCountry)
+      : "";
+  };
+
+  const onChangeCountry = (newValue: SingleValue<string | IOption>) => {
+    setCurrentCountry((newValue as IOption).value);
+  };
 
   const onClickSortBtn = (value: string) => {
     setSortBy(value);
   };
-
-  const isVisibleForm = useSelector(FilmsSelector.getIsVisibleFormSelect);
 
   const onClickFiltersClose = () => {
     dispatch(
@@ -34,11 +85,32 @@ const FormSelect = () => {
         : setIsVisibleFormSelect(true)
     );
   };
-  
-const filterGenre = useSelector(FilmsSelector.getFiltersGenres);
-const filterCountry = useSelector(FilmsSelector.getFiltersCountry);
+  const onChangeInputYearFrom = (e: any) => {
+    setYearsFrom(e.target.value);
+  };
+  const onChangeInputYearTo = (e: any) => {
+    setYearsTo(e.target.value);
+  };
 
+  const onChangeInputRatingFrom = (e: any) => {
+    setRatingFrom(e.target.value);
+  };
+  const onChangeInputRatingTo = (e: any) => {
+    setRatingTo(e.target.value);
+  };
 
+  const onClickResult = () => {
+    dispatch(
+      setAllFilters({
+        sort: sortBy,
+        genre: currentGenre,
+        years: { from: yearFrom.toString(), to: yearTo.toString() },
+        rating: { from: ratingFrom.toString(), to: ratingTo.toString() },
+        countries: currentCountry.toLowerCase(),
+      })
+    );
+    onClickFiltersClose()
+  };
 
   return (
     <div
@@ -69,7 +141,7 @@ const filterCountry = useSelector(FilmsSelector.getFiltersCountry);
                   isDarkTheme ? "btnSortDark" : "btnSortLight",
                   {
                     [isDarkTheme ? "btnSortActiveDark" : "btnSortActiveLight"]:
-                    sortBy === SortByTabsEnum.Movie,
+                      sortBy === SortByTabsEnum.Movie,
                   }
                 )}
               />
@@ -82,22 +154,31 @@ const filterCountry = useSelector(FilmsSelector.getFiltersCountry);
                   isDarkTheme ? "btnSortDark " : "btnSortLight ",
                   {
                     [isDarkTheme ? "btnSortActiveDark" : "btnSortActiveLight"]:
-                    sortBy === SortByTabsEnum.Series,
+                      sortBy === SortByTabsEnum.Series,
                   }
                 )}
               />
             </div>
           </div>
 
-          <div className="formSelectItem">
+          <div className={classnames("multiSelect", "formSelectItem")}>
             <span>Genre</span>
-            <MultiSelect />
+
+            <Select
+              classNamePrefix={isDarkTheme ? "multiSelect" : "multiSelectLight"}
+              onChange={onChangeGenres}
+              value={getValueGenres()}
+              options={options}
+              isMulti
+            />
           </div>
 
           <div className="formSelectItem">
             <span>Years</span>
             <div className="formSelectSortInterval">
               <Input
+                value={yearFrom}
+                onChange={(e) => onChangeInputYearFrom(e)}
                 type={"number"}
                 placeholder="From"
                 className={classnames(
@@ -106,6 +187,8 @@ const filterCountry = useSelector(FilmsSelector.getFiltersCountry);
                 )}
               />
               <Input
+                value={yearTo}
+                onChange={(e) => onChangeInputYearTo(e)}
                 type={"number"}
                 placeholder="To"
                 className={classnames(
@@ -120,6 +203,8 @@ const filterCountry = useSelector(FilmsSelector.getFiltersCountry);
             <span>Rating</span>
             <div className="formSelectSortInterval">
               <Input
+                value={ratingFrom}
+                onChange={(e) => onChangeInputRatingFrom(e)}
                 type={"number"}
                 placeholder="From"
                 className={classnames(
@@ -128,6 +213,8 @@ const filterCountry = useSelector(FilmsSelector.getFiltersCountry);
                 )}
               />
               <Input
+                value={ratingTo}
+                onChange={(e) => onChangeInputRatingTo(e)}
                 type={"number"}
                 placeholder="To"
                 className={classnames(
@@ -138,9 +225,18 @@ const filterCountry = useSelector(FilmsSelector.getFiltersCountry);
             </div>
           </div>
 
-          <div className="formSelectItem">
+          <div className={classnames("singleSelect", "formSelectItem")}>
             <span>Country</span>
-            <SingleSelect />
+
+            <Select
+              classNamePrefix={
+                isDarkTheme ? "singleSelect" : "singleSelectLight"
+              }
+              onChange={onChangeCountry}
+              value={getValueCountry()}
+              options={optionsCountry}
+              placeholder={"Select country"}
+            />
           </div>
         </div>
 
@@ -153,6 +249,7 @@ const filterCountry = useSelector(FilmsSelector.getFiltersCountry);
             )}
           />
           <Button
+            onClick={onClickResult}
             btnContent={"Show results"}
             className={classnames(
               "btnSettingsSort",

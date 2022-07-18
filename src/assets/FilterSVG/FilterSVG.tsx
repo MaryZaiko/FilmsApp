@@ -4,14 +4,14 @@ import "./FilterSVG.css";
 type FilterSVGType = {
   width?: string;
   height?: string;
-  fill?: string;
+  fillActive?: string;
   stroke?:string;
 };
 
 const FilterSVG = ({
   width = "24px",
   height = "24px",
-  fill = "none",
+  fillActive = "none",
   stroke = 'white'
 }: FilterSVGType) => {
   let isFilter = true;
@@ -23,7 +23,7 @@ const FilterSVG = ({
       width={width}
       height={height}
       viewBox="0 0 24 24"
-      fill={fill}
+      fill='none'
       xmlns="http://www.w3.org/2000/svg"
  
     >
@@ -39,7 +39,7 @@ const FilterSVG = ({
         cx="3"
         cy="19"
         r="3"
-        fill="#7B61FF"
+        fill={fillActive}
       />
     </svg>
   );

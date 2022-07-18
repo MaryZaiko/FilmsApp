@@ -15,6 +15,10 @@ export type FilmsReducerStateType = {
   allFilms: CardTypes[];
   allTrendFilms: CardTypes[];
   searchedFilms: CardTypes[];
+  filteredFilms: CardTypes[];
+  isFiltered:boolean;
+  isSearched:boolean;
+  // searchOfFilms:string;
   favoriteFilms: CardTypes[];
   mainPageLoading: boolean;
   singleFilm: CardTypes | null;
@@ -23,12 +27,12 @@ export type FilmsReducerStateType = {
   writerForSingleFilm: string[];
   actorsForSingleFilm: string[];
   singleFilmLoading: boolean;
-  filters: {
-    sort: null | SortByTabsEnum;
-    genre: string[];
-    years: null | BaseFromTo;
-    rating: null | BaseFromTo;
-    countries: string;
+  allFilters: {
+    sort?: null | SortByTabsEnum;
+    genre?: string[];
+    years:null | BaseFromTo;
+    rating:null | BaseFromTo;
+    countries?: string;
   };
   filtersGenre: string;
   filtersCountry: string;
@@ -41,6 +45,11 @@ const initialState = {
   allFilms: [],
   allTrendFilms: [],
   searchedFilms: [],
+  filteredFilms:[],
+  isFiltered:false,
+  isSearched:false,
+
+  // searchOfFilms:'',
   mainPageLoading: false,
   singleFilm: null,
   singleFilmLoading: false,
@@ -49,7 +58,7 @@ const initialState = {
   actorsForSingleFilm: [],
   favoriteFilms: [],
   recommendationFilms: [],
-  filters: {},
+  allFilters: {},
   filtersGenre: "",
   filtersCountry: "",
 };
@@ -67,7 +76,7 @@ const filmsSlice = createSlice({
     setIsVisibleFormSelect: (state, action: PayloadAction<boolean>) => {
       state.isUnVisibleFormSelect = action.payload;
     },
-    setMainPageLoading: (state, action) => {
+    setMainPageLoading: (state, action:PayloadAction<boolean>) => {
       state.mainPageLoading = action.payload;
     },
     loadAllFilms: (state, action) => {},
@@ -102,7 +111,17 @@ const filmsSlice = createSlice({
     setSearchOfFilms: (state, action) => {
       state.searchedFilms = action.payload;
     },
-    searchOfFilms: (state, action) => {},
+    setFilteredFilms: (state, action) => {
+      state.filteredFilms = action.payload;
+    },
+    setFilterStatus:(state,action)=>{
+      state.isFiltered = action.payload
+    },
+    setSearchedStatus:(state,action)=>{
+      state.isSearched = action.payload
+    },
+    searchOfFilms: (state, action) => {
+    },
     setFavoriteFilms: (state, action) => {
       state.favoriteFilms = action.payload;
     },
@@ -116,6 +135,9 @@ const filmsSlice = createSlice({
     setFiltersCountry: (state, action) => {
       state.filtersCountry = action.payload;
     },
+    setAllFilters:(state,acton) =>{
+      state.allFilters = acton.payload
+    }
   },
 });
 
@@ -139,7 +161,7 @@ export const {
   loadRecommendationFilms,
   setFiltersGenres,
   setFiltersCountry,
-  setAllFilmsMore,setTrendFilms,setTrendFilmsMore
+  setAllFilmsMore,setTrendFilms,setTrendFilmsMore,setAllFilters,setFilteredFilms,setFilterStatus,setSearchedStatus
 } = filmsSlice.actions;
 export default filmsSlice.reducer;
 export const FilmsSelector = {
@@ -154,9 +176,14 @@ export const FilmsSelector = {
   getDirectorForSingleFilm: (state: any) => state.films.directorForSingleFilm,
   getWriterForSingleFilm: (state: any) => state.films.writerForSingleFilm,
   getActorsForSingleFilm: (state: any) => state.films.actorsForSingleFilm,
-  getSearchOfFilms: (state: any) => state.films.searchedFilms,
+  getSearchedFilms: (state: any) => state.films.searchedFilms,
   getFavoriteFilms: (state: any) => state.films.favoriteFilms,
   getRecommendationFilms: (state: any) => state.films.recommendationFilms,
   getFiltersGenres: (state: any) => state.films.filtersGenre,
   getFiltersCountry: (state: any) => state.films.filtersCountry,
+  // getSearchOfFilms:(state:any) => state.films.searchOfFilms
+  getAllFilters:(state:any) => state.films.allFilters,
+  getFilteredFilms:(state:any) => state.films.filteredFilms,
+  getFilterStatus:(state:any) =>state.films.isFiltered,
+  getSearchedStatus:(state:any) => state.films.isSearched
 };

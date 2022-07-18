@@ -48,10 +48,12 @@ const Header = () => {
   const onSearch = (event: any) => {
     setSearch(event.target.value);
   };
+  let isFilterStatus = useSelector(FilmsSelector.getFilterStatus)
 
   useEffect(() => {
-    if (search.length !== 0) {
+    if(search){
       dispatch(searchOfFilms({ search }));
+
     }
   }, [search]);
 
@@ -77,7 +79,7 @@ const Header = () => {
           )}
         />
         <div className={classnames("iconInput")} onClick={onClickFiltersIcon}>
-          <FilterSVG stroke={isDarkTheme ? "white" : "#AFB2B6"} />
+          <FilterSVG stroke={isDarkTheme ? "white" : "#AFB2B6"} fillActive={isFilterStatus && "#7B61FF"}/>
         </div>
       </div>
 
