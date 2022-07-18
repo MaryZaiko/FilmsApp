@@ -2,14 +2,18 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 export type RegisterUser = {
   first_name: string;
-  last_name:string;
+  last_name: string;
   email: string;
   password: string;
   password_confirmation: string;
   token_name: string;
   callback: () => void;
 };
-
+export type DataUser = {
+  email: string;
+  password: string;
+  token_name: string;
+};
 export type AuthReducerStateType = {
   isLoggedIn: boolean;
   isLoginUserLoading: boolean;
@@ -30,18 +34,11 @@ const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
-    registerUser: (state, action: PayloadAction<RegisterUser>) => {},
+    registerUser: (state, action) => {},
     setIsLoginUserLoading: (state, action) => {
       state.isLoginUserLoading = action.payload;
     },
-    loginUser: (
-      state: any,
-      action: PayloadAction<{
-        email: string;
-        password: string;
-        token_name: string;
-      }>
-    ) => {},
+    loginUser: (state, action) => {},
     setLogStatus: (state, action) => {
       state.isLoggedIn = action.payload;
     },
@@ -67,7 +64,8 @@ export const {
   setIsLoginUserLoading,
   getUserInfo,
   setAuthUserName,
-  setAuthUserEmail,setAuthUserLastName
+  setAuthUserEmail,
+  setAuthUserLastName,
 } = authSlice.actions;
 export default authSlice.reducer;
 export const AuthSelector = {
@@ -75,5 +73,5 @@ export const AuthSelector = {
   getIsLoginUserLoading: (state: any) => state.auth.isLoginUserLoading,
   getAuthUserName: (state: any) => state.auth.authUserName,
   getAuthUserEmail: (state: any) => state.auth.authUserEmail,
-  getAuthUserLastName:(state:any) => state.auth.authUserLastName
+  getAuthUserLastName: (state: any) => state.auth.authUserLastName,
 };

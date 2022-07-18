@@ -1,5 +1,4 @@
 import { all, takeLatest, put, call } from "redux-saga/effects";
-
 import { PayloadAction } from "@reduxjs/toolkit";
 import {
   RegisterUser,
@@ -12,10 +11,8 @@ import {
   setAuthUserName,
   setAuthUserEmail,
   setAuthUserLastName,
+  DataUser,
 } from "../reducers/authReducer";
-import { callCheckingAuth } from "./callCheckingAuth";
-
-import { useNavigate } from "react-router-dom";
 import { registerUserApi, loginUserApi, getUserInfoApi } from "../api";
 
 function* registerUserWorker(action: PayloadAction<RegisterUser>) {
@@ -29,7 +26,7 @@ function* registerUserWorker(action: PayloadAction<RegisterUser>) {
     token_name,
   } = action.payload;
 
-  const { data, status, problem } = yield call(registerUserApi, {
+  const { status } = yield call(registerUserApi, {
     email,
     first_name,
     last_name,
@@ -43,7 +40,7 @@ function* registerUserWorker(action: PayloadAction<RegisterUser>) {
   }
 }
 
-function* loginUserWorker(action: any) {
+function* loginUserWorker(action: PayloadAction<DataUser>) {
   yield put(setIsLoginUserLoading(true));
   yield put(setAuthUserName(""));
   yield put(setAuthUserEmail(""));
@@ -58,19 +55,13 @@ function* loginUserWorker(action: any) {
   }
   yield put(setIsLoginUserLoading(false));
 }
-export function* logoutWorker(action: any) {
+export function* logoutWorker() {
   localStorage.removeItem("jwtAccessToken");
   yield put(setLogStatus(false));
 }
 export function* getUserInfoWorker() {
   const access_token = localStorage.getItem("jwtAccessToken");
-
-  const { status, data, problem } = yield call(
-    getUserInfoApi,
-    access_token,
-    "me"
-  );
-  console.log(data);
+  const { status, data } = yield call(getUserInfoApi, access_token, "me");
 
   if (status === 200) {
     yield put(setAuthUserName(data.user.first_name));
