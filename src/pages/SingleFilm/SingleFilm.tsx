@@ -22,8 +22,15 @@ const SingleFilm = () => {
   const { theme } = useThemeContext();
   const isDarkTheme = theme === Theme.Dark;
   const dispatch = useDispatch();
+  const singlePostLoading = useSelector(FilmsSelector.getSingleFilmLoading);
+  const filmData = useSelector(FilmsSelector.getSingleFilm);
+  const directorName = useSelector(FilmsSelector.getDirectorForSingleFilm);
+  const writersNames = useSelector(FilmsSelector.getWriterForSingleFilm);
+  const actorsNames = useSelector(FilmsSelector.getActorsForSingleFilm);
+  const recommendationFilms = useSelector(FilmsSelector.getRecommendationFilms);
   const [isSaveFilm, setIsSaveFilm] = useState(false);
   const { id } = useParams();
+
   const defaultOptions = {
     loop: true,
     autoplay: true,
@@ -32,24 +39,13 @@ const SingleFilm = () => {
       preserveAspectRatio: "xMidYMid slice",
     },
   };
+  
   useEffect(() => {
     if (id) {
       dispatch(loadFilm(id));
       dispatch(loadRecommendationFilms(id));
     }
   }, [id]);
-
-  const singlePostLoading = useSelector(FilmsSelector.getSingleFilmLoading);
-  const filmData = useSelector(FilmsSelector.getSingleFilm);
-
-    const directorName = useSelector(FilmsSelector.getDirectorForSingleFilm);
-    const writersNames = useSelector(FilmsSelector.getWriterForSingleFilm);
-    const actorsNames = useSelector(FilmsSelector.getActorsForSingleFilm);
-    const recommendationFilms = useSelector(FilmsSelector.getRecommendationFilms);
-  
-  
-console.log(filmData);
-
 
   const onClickSave = (id: number, action: string) => {
     isSaveFilm ? setIsSaveFilm(false) : setIsSaveFilm(true);
@@ -58,6 +54,7 @@ console.log(filmData);
       dispatch(setFavoriteFilms({ id, action }));
     }
   };
+
   return (
     <div className="singlePageContent">
       {singlePostLoading ? (

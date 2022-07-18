@@ -98,7 +98,7 @@ const MainPage: FC<MainPageProps> = ({ isTrends }) => {
           )}
         </div>
       ) : isActivePage === ActiveTabLinkEnum.Trends ? (
-        <div>
+        <div className="pageContainer">
           <FilmsList data={trendFilms} isTrends={isTrends} />
           <Button
             className="btnShowMore"

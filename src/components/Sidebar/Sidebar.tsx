@@ -21,8 +21,6 @@ const Sidebar = () => {
   const dispatch = useDispatch();
 
   const onClickActiveLink = (value: string) => {
-    console.log(value);
-
     dispatch(setActiveTabLink(value));
   };
   const isActive = useSelector(FilmsSelector.getActiveTabLink);

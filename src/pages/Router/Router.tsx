@@ -24,7 +24,6 @@ const Router = () => {
     <BrowserRouter>
       {isLoggedIn ? (
         <Routes>
-          {/* <Route path={"/"} element={<PagesWrapper />}> */}
           <Route
             path={"/films"}
             element={
@@ -41,7 +40,6 @@ const Router = () => {
               </PagesWrapper>
             }
           ></Route>
-
           <Route
             path={"/favorites"}
             element={
@@ -50,7 +48,6 @@ const Router = () => {
               </PagesWrapper>
             }
           />
-
           <Route
             path={"/films/:id"}
             element={
@@ -69,7 +66,6 @@ const Router = () => {
           />
 
           <Route path={"*"} element={<Navigate to={"/films"} replace />} />
-          {/* что значт строчка */}
         </Routes>
       ) : (
         <Routes>

@@ -1,7 +1,5 @@
 import { all, takeLatest, put, call } from "redux-saga/effects";
-
 import { PayloadAction } from "@reduxjs/toolkit";
-import { callCheckingAuth } from "./callCheckingAuth";
 import {
   getAllFilmsApi,
   getSearchedOfFilmsApi,
@@ -35,7 +33,6 @@ import {
 function* getAllFilmsWorker(action: any) {
   yield put(setMainPageLoading(true));
   const access_token = localStorage.getItem("jwtAccessToken");
-
   const {
     isShowMore,
     mainOrder: order,
@@ -51,8 +48,6 @@ function* getAllFilmsWorker(action: any) {
     page,
     perPage
   );
-  console.log(data.pagination.data);
-  console.log(isShowMore);
 
   if (status === 200) {
     if (isShowMore) {
@@ -117,7 +112,7 @@ function* getSearchedOfFilmsWorker(action: any) {
   );
   if (status === 200) {
     yield put(setSearchOfFilms(data.results));
-    yield put (setSearchedStatus(true))
+    yield put(setSearchedStatus(true));
   }
   yield put(setMainPageLoading(false));
 }
@@ -141,7 +136,6 @@ function* getRecommendationFilmsWorker(action: PayloadAction<string>) {
 function* getFilteredFilmsWorker(action: any) {
   yield put(setMainPageLoading(true));
   yield put(setFilteredFilms(""));
-
   const access_token = localStorage.getItem("jwtAccessToken");
   const {
     sortBy: type,
@@ -161,12 +155,9 @@ function* getFilteredFilmsWorker(action: any) {
     score.join(),
     country
   );
-  console.log(data);
-  console.log(status);
-  console.log(problem);
 
   if (status === 200) {
-    yield put(setFilterStatus(true))
+    yield put(setFilterStatus(true));
     yield put(setFilteredFilms(data.pagination.data));
   }
   yield put(setMainPageLoading(false));
