@@ -1,11 +1,11 @@
 .authorizationPageWrapper {
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
   justify-content: space-between;
   align-items: center;
   flex-direction: column;
   padding: 48px 62px 64px 62px;
-  /* background-color:rgba(0, 0, 0, 0,7) ; */
+
   background-image: url("../../assets/images/auth-bg.jpg");
   background-repeat: no-repeat;
   background-size: cover;

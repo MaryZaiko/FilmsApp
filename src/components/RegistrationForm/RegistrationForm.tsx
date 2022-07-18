@@ -20,6 +20,11 @@ const RegistrationForm = () => {
   const [userNameErr, setUserNameErr] = useState(
     "This field must not be empty"
   );
+  const [userLastName, setUserLastName] = useState("");
+  const [userLastNameDirty, setUserLastNameDirty] = useState(false);
+  const [userLastNameErr, setUserLastNameErr] = useState(
+    "This field must not be empty"
+  );
 
   const [email, setEmail] = useState("");
   const [emailDirty, setEmailDirty] = useState(false);
@@ -40,16 +45,20 @@ const RegistrationForm = () => {
   const [formValid, setFormValid] = useState(false);
 
   useEffect(() => {
-    if (userNameErr || emailErr || passwordErr || confirmPasswordErr) {
+    if (
+      userNameErr ||
+      userLastNameErr ||
+      emailErr ||
+      passwordErr ||
+      confirmPasswordErr
+    ) {
       setFormValid(false);
     } else {
       setFormValid(true);
     }
-  }, [userNameErr, emailErr, passwordErr, confirmPasswordErr]);
+  }, [userNameErr, userLastNameErr, emailErr, passwordErr, confirmPasswordErr]);
 
   const dispatch = useDispatch();
-
-  //ВОПРОС ПО ТИПИЗАЦИИ
 
   const userNameHandler = (e: any) => {
     setUserName(e.target.value);
@@ -60,6 +69,17 @@ const RegistrationForm = () => {
       }
     } else {
       setUserNameErr("");
+    }
+  };
+  const userLastNameHandler = (e: any) => {
+    setUserLastName(e.target.value);
+    if (e.target.value.length < 2) {
+      setUserLastNameErr("Name must contain at least 2 symbols");
+      if (!e.target.value) {
+        setUserLastNameErr("This field must not be empty");
+      }
+    } else {
+      setUserLastNameErr("");
     }
   };
 
@@ -103,13 +123,15 @@ const RegistrationForm = () => {
       case "userName":
         setUserNameDirty(true);
         break;
+      case "userLastName":
+        setUserLastNameDirty(true);
+        break;
       case "email":
         setEmailDirty(true);
         break;
       case "password":
         setPasswordDirty(true);
         break;
-
       case "confirmPassword":
         setConfirmPasswordDirty(true);
         break;
@@ -125,13 +147,13 @@ const RegistrationForm = () => {
     dispatch(
       registerUser({
         first_name: userName,
+        last_name: userLastName,
         email,
         password,
         password_confirmation: confirmPassword,
         token_name: "iphone 12",
-        callback
-      }
-)
+        callback,
+      })
     );
   };
 
@@ -165,6 +187,26 @@ const RegistrationForm = () => {
               )}
             />
           </label>
+
+          <label className="settingsInputWrapper">
+            {userNameDirty && userNameErr && (
+              <div style={{ color: "red" }}>{userNameErr}</div>
+            )}
+            <span>Last Name</span>
+            <Input
+              value={userLastName}
+              onBlur={(e) => blurHandler(e)}
+              onChange={userLastNameHandler}
+              type="text"
+              name="userLastName"
+              placeholder={"Your last name"}
+              className={classnames(
+                "inputSettings",
+                isDarkTheme ? "inputDark" : "inputLight"
+              )}
+            />
+          </label>
+
           <label className="settingsInputWrapper">
             {emailDirty && emailErr && (
               <div style={{ color: "red" }}>{emailErr}</div>

@@ -5,14 +5,26 @@ import { Theme, useThemeContext } from "../../context/themeModeContext";
 import Input from "../../components/Input";
 import Switcher from "../../components/Switcher";
 import Button from "../../components/Button";
-import { useSelector } from "react-redux";
-import { AuthSelector } from "../../redux/reducers/authReducer";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  AuthSelector,
+  setAuthUserEmail,
+  setAuthUserName,
+} from "../../redux/reducers/authReducer";
 
 const Settings = () => {
   const { theme } = useThemeContext();
   const isDarkTheme = theme === Theme.Dark;
+  const dispatch = useDispatch();
   const authUserName = useSelector(AuthSelector.getAuthUserName);
   const authUserEmail = useSelector(AuthSelector.getAuthUserEmail);
+
+  const onChangeName = (e: any) => {
+    dispatch(setAuthUserName(e.target.value));
+  };
+  const onChangeEmail = (e: any) => {
+    dispatch(setAuthUserEmail(e.target.value));
+  };
 
   return (
     <div
@@ -33,6 +45,9 @@ const Settings = () => {
             <span>Name</span>
             <Input
               value={authUserName}
+              onChange={(e) => {
+                onChangeName(e);
+              }}
               type={"text"}
               className={classnames(
                 "inputSettings",
@@ -44,6 +59,9 @@ const Settings = () => {
             <span>Email</span>
             <Input
               value={authUserEmail}
+              onChange={(e) => {
+                onChangeEmail(e);
+              }}
               type={"email"}
               className={classnames(
                 "inputSettings",

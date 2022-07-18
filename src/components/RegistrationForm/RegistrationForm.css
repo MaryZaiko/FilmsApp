@@ -1,14 +1,12 @@
 .registrationFormWrapper {
   width: 574px;
-  height: 732px;
-
+  margin: 30px;
   background: #242426;
   border-radius: 10px;
   padding: 40px;
   flex-direction: column;
   display: flex;
   gap: 40px;
-
 }
 
 .registrationForm {
@@ -29,23 +27,21 @@
   flex: 1;
 }
 
-
-
-.loginFormFooter{
+.loginFormFooter {
   font-weight: 500;
   font-size: 14px;
   line-height: 24px;
   color: #80858b;
   text-align: center;
 }
-.loginFormFooter a{
+.loginFormFooter a {
   text-decoration: none;
-  color: #7B61FF;;
+  color: #7b61ff;
 }
 .registrationFormWrapperDark {
   background-color: #242426;
   color: #ffffff;
-} 
+}
 .registrationFormWrapperLight {
   background-color: #ffffff;
   border: 2px solid #afb2b6;

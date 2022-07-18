@@ -84,7 +84,7 @@ const LoginForm = () => {
       preserveAspectRatio: "xMidYMid slice",
     },
   };
-  const isLoginUserLoading = useSelector(AuthSelector.getIsLoginUserLoading)
+  const isLoginUserLoading = useSelector(AuthSelector.getIsLoginUserLoading);
   return (
     <div
       className={classnames(
@@ -92,70 +92,66 @@ const LoginForm = () => {
         isDarkTheme ? "loginFormWrapperDark" : "loginFormWrapperLight"
       )}
     >
-{
-  isLoginUserLoading ? (
-    <div className="lottie">
-    <Lottie options={defaultOptions} height={400} width={400} />
-  </div>
-  ):(
-<div>
-<form className="loginForm">
-        <span className="formTitle">Sing In</span>
-        <div className="inputWrapper">
-          <label className="settingsInputWrapper">
-            {emailDirty && emailErr && (
-              <div style={{ color: "red" }}>{emailErr}</div>
-            )}
-            <span>Email</span>
-            <Input
-              value={email}
-              onBlur={(e) => blurHandler(e)}
-              onChange={(e) => emailHandler(e)}
-              type="email"
-              name="email"
-              placeholder={"Your email"}
-              className={classnames(
-                "inputSettings",
-                isDarkTheme ? "inputDark" : "inputLight"
-              )}
-            />
-          </label>
-          <label className="settingsInputWrapper">
-            {passwordDirty && passwordErr && (
-              <div style={{ color: "red" }}>{passwordErr}</div>
-            )}
-            <span>Password</span>
-            <Input
-              value={password}
-              onBlur={(e) => blurHandler(e)}
-              onChange={(e) => passwordHandler(e)}
-              type="password"
-              name="password"
-              placeholder={"Your password"}
-              className={classnames(
-                "inputSettings",
-                isDarkTheme ? "inputDark" : "inputLight"
-              )}
-            />
-            <span>Forgot password?</span>
-          </label>
-          <Button
-          onClick={onSubmit}
-        disabled={!formValid}
-        btnContent={"Sign in"}
-        className={classnames("btnAuth")}
-      />
+      {isLoginUserLoading ? (
+        <div className="lottie">
+          <Lottie options={defaultOptions} height={400} width={400} />
         </div>
-      </form>
-    
-      <span className="loginFormFooter">
-        Don’t have an account? <NavLink to="/registration">Sign Up</NavLink>{" "}
-      </span>
-</div>
-  )
-}
+      ) : (
+        <div className="loginFormContent">
+          <form className="loginForm">
+            <span className="formTitle">Sing In</span>
+            <div className="inputWrapper">
+              <label className="settingsInputWrapper">
+                {emailDirty && emailErr && (
+                  <div style={{ color: "red" }}>{emailErr}</div>
+                )}
+                <span>Email</span>
+                <Input
+                  value={email}
+                  onBlur={(e) => blurHandler(e)}
+                  onChange={(e) => emailHandler(e)}
+                  type="email"
+                  name="email"
+                  placeholder={"Your email"}
+                  className={classnames(
+                    "inputSettings",
+                    isDarkTheme ? "inputDark" : "inputLight"
+                  )}
+                />
+              </label>
+              <label className="settingsInputWrapper">
+                {passwordDirty && passwordErr && (
+                  <div style={{ color: "red" }}>{passwordErr}</div>
+                )}
+                <span>Password</span>
+                <Input
+                  value={password}
+                  onBlur={(e) => blurHandler(e)}
+                  onChange={(e) => passwordHandler(e)}
+                  type="password"
+                  name="password"
+                  placeholder={"Your password"}
+                  className={classnames(
+                    "inputSettings",
+                    isDarkTheme ? "inputDark" : "inputLight"
+                  )}
+                />
+                <span>Forgot password?</span>
+              </label>
+              <Button
+                onClick={onSubmit}
+                disabled={!formValid}
+                btnContent={"Sign in"}
+                className={classnames("btnAuth")}
+              />
+            </div>
+          </form>
 
-     
+          <span className="loginFormFooter">
+            Don’t have an account? <NavLink to="/registration">Sign Up</NavLink>{" "}
+          </span>
+        </div>
+      )}
     </div>
   );
 };

@@ -17,7 +17,11 @@
   flex-direction: column;
   gap: 24px;
 }
-
+.loginFormContent{
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
 .settingsInputWrapper {
   display: flex;
   flex-direction: column;

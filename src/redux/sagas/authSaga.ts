@@ -11,6 +11,7 @@ import {
   getUserInfo,
   setAuthUserName,
   setAuthUserEmail,
+  setAuthUserLastName,
 } from "../reducers/authReducer";
 import { callCheckingAuth } from "./callCheckingAuth";
 
@@ -22,6 +23,7 @@ function* registerUserWorker(action: PayloadAction<RegisterUser>) {
     callback,
     email,
     first_name,
+    last_name,
     password,
     password_confirmation,
     token_name,
@@ -30,6 +32,7 @@ function* registerUserWorker(action: PayloadAction<RegisterUser>) {
   const { data, status, problem } = yield call(registerUserApi, {
     email,
     first_name,
+    last_name,
     password,
     password_confirmation,
     token_name,
@@ -42,8 +45,8 @@ function* registerUserWorker(action: PayloadAction<RegisterUser>) {
 
 function* loginUserWorker(action: any) {
   yield put(setIsLoginUserLoading(true));
-  yield put(setAuthUserName(''));
-  yield put(setAuthUserEmail(''));
+  yield put(setAuthUserName(""));
+  yield put(setAuthUserEmail(""));
   const userData = action.payload;
   const { status, data, problem } = yield call(loginUserApi, userData);
 
@@ -60,12 +63,18 @@ export function* logoutWorker(action: any) {
   yield put(setLogStatus(false));
 }
 export function* getUserInfoWorker() {
-const access_token = localStorage.getItem("jwtAccessToken")
+  const access_token = localStorage.getItem("jwtAccessToken");
 
-  const { status, data, problem } = yield call(getUserInfoApi,access_token, "me");
+  const { status, data, problem } = yield call(
+    getUserInfoApi,
+    access_token,
+    "me"
+  );
+  console.log(data);
 
   if (status === 200) {
     yield put(setAuthUserName(data.user.first_name));
+    yield put(setAuthUserLastName(data.user.last_name));
     yield put(setAuthUserEmail(data.user.email));
   }
 }

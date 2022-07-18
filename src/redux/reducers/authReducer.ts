@@ -2,6 +2,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 export type RegisterUser = {
   first_name: string;
+  last_name:string;
   email: string;
   password: string;
   password_confirmation: string;
@@ -13,6 +14,7 @@ export type AuthReducerStateType = {
   isLoggedIn: boolean;
   isLoginUserLoading: boolean;
   authUserName: string;
+  authUserLastName: string;
   authUserEmail: string;
 };
 
@@ -20,6 +22,7 @@ const initialState = {
   isLoggedIn: !!localStorage.getItem("jwtAccessToken"),
   isLoginUserLoading: false,
   authUserName: "",
+  authUserLastName: "",
   authUserEmail: "",
 };
 
@@ -47,6 +50,9 @@ const authSlice = createSlice({
     setAuthUserName: (state, action) => {
       state.authUserName = action.payload;
     },
+    setAuthUserLastName: (state, action) => {
+      state.authUserLastName = action.payload;
+    },
     setAuthUserEmail: (state, action) => {
       state.authUserEmail = action.payload;
     },
@@ -61,7 +67,7 @@ export const {
   setIsLoginUserLoading,
   getUserInfo,
   setAuthUserName,
-  setAuthUserEmail,
+  setAuthUserEmail,setAuthUserLastName
 } = authSlice.actions;
 export default authSlice.reducer;
 export const AuthSelector = {
@@ -69,4 +75,5 @@ export const AuthSelector = {
   getIsLoginUserLoading: (state: any) => state.auth.isLoginUserLoading,
   getAuthUserName: (state: any) => state.auth.authUserName,
   getAuthUserEmail: (state: any) => state.auth.authUserEmail,
+  getAuthUserLastName:(state:any) => state.auth.authUserLastName
 };

@@ -13,6 +13,8 @@ const UserNameHeader = () => {
   const { theme } = useThemeContext();
   const isDarkTheme = theme === Theme.Dark;
   const authUserName = useSelector(AuthSelector.getAuthUserName);
+  const authUserLastName = useSelector(AuthSelector.getAuthUserLastName);
+
 
   return (
     <div
@@ -26,10 +28,10 @@ const UserNameHeader = () => {
       {isLogin ? (
         <div className="userNameHeaderContent">
           <Button
-            btnContent={authUserName && `${authUserName[0]}`}
+            btnContent={authUserName && authUserLastName && `${authUserName[0]}` + `${authUserLastName[0]}`}
             className="btnUserNameHeader"
           />
-          <p>{authUserName}</p>
+          <p>{authUserName} {authUserLastName}</p>
           <ArrowLogOutMenu />
         </div>
       ) : (
