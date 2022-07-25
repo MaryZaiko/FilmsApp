@@ -15,6 +15,7 @@ import Lottie from "react-lottie";
 import animationData from "../../components/Lotties/Popcorn.json";
 import LoaderRing from "../../components/LoaderRing";
 import Button from "../../components/Button";
+import EmptyState from "../../components/EmptyState";
 
 type MainPageProps = {
   isTrends?: boolean;
@@ -79,33 +80,43 @@ const MainPage: FC<MainPageProps> = ({ isTrends }) => {
           <Lottie options={defaultOptions} height={400} width={400} />
         </div>
       ) : isActivePage === ActiveTabLinkEnum.Home ? (
-        <div className="pageContainer">
-          <FilmsList
-            data={
-              searchedFilms.length > 0
-                ? searchedFilms
-                : filteredFilms.length > 0
-                ? filteredFilms
-                : allFilms
-            }
-          />
-          {!isFilterStatus && !isSearchedStatus && (
+        allFilms.length === 0 ? (
+          <EmptyState />
+        ) : (
+          <div className="pageContainer">
+            <FilmsList
+              data={
+                searchedFilms.length > 0
+                  ? searchedFilms
+                  : filteredFilms.length > 0
+                  ? filteredFilms
+                  : allFilms
+              }
+            />
+            {!isFilterStatus && !isSearchedStatus && (
+              <Button
+                className="btnShowMore"
+                onClick={onClickShowMore}
+                btnContent="Show more"
+              />
+            )}
+          </div>
+        )
+      ) : isActivePage === ActiveTabLinkEnum.Trends ? (
+        trendFilms.length === 0 ? (
+          <EmptyState />
+        ) : (
+          <div className="pageContainer">
+            <FilmsList data={trendFilms} isTrends={isTrends} />
             <Button
               className="btnShowMore"
               onClick={onClickShowMore}
               btnContent="Show more"
             />
-          )}
-        </div>
-      ) : isActivePage === ActiveTabLinkEnum.Trends ? (
-        <div className="pageContainer">
-          <FilmsList data={trendFilms} isTrends={isTrends} />
-          <Button
-            className="btnShowMore"
-            onClick={onClickShowMore}
-            btnContent="Show more"
-          />
-        </div>
+          </div>
+        )
+      ) : favoriteFilms.length === 0 ? (
+        <EmptyState />
       ) : (
         <FilmsList data={favoriteFilms} />
       )}

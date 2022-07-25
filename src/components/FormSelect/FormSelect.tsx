@@ -109,9 +109,17 @@ const FormSelect = () => {
         countries: currentCountry.toLowerCase(),
       })
     );
-    onClickFiltersClose()
+    onClickFiltersClose();
   };
-
+  const onClickClearForm = () => {
+    setSortBy(SortByTabsEnum.Movie)
+    setYearsFrom(0);
+    setYearsTo(0);
+    setRatingFrom(0);
+    setRatingTo(0);
+    setCurrentGenre([""]);
+    setCurrentCountry("");
+  };
   return (
     <div
       className={classnames(
@@ -242,6 +250,8 @@ const FormSelect = () => {
 
         <div className="formSelectFooter">
           <Button
+            onClick={onClickClearForm}
+
             btnContent={"Clear filter"}
             className={classnames(
               "btnSettingsSort",
