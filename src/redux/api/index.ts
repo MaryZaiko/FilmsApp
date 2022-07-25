@@ -93,6 +93,8 @@ const getFilteredFilmsApi = (
   score: any,
   country: any
 ) => {
+  console.log(type,genre,released,score,country);
+  
   return API.get(
     "/titles",
     {type,genre,released,score,country},

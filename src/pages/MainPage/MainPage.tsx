@@ -39,6 +39,9 @@ const MainPage: FC<MainPageProps> = ({ isTrends }) => {
   const filteredFilms = useSelector(FilmsSelector.getFilteredFilms);
   const favoriteFilms = useSelector(FilmsSelector.getFavoriteFilms);
   const mainPageLoading = useSelector(FilmsSelector.getMainPageLoading);
+  let allFilters = useSelector(FilmsSelector.getAllFilters);
+  console.log(allFilters);
+  
 
   const defaultOptions = {
     loop: true,
@@ -84,6 +87,7 @@ const MainPage: FC<MainPageProps> = ({ isTrends }) => {
           <EmptyState />
         ) : (
           <div className="pageContainer">
+
             <FilmsList
               data={
                 searchedFilms.length > 0

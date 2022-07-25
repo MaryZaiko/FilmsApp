@@ -127,17 +127,18 @@ function* getFilteredFilmsWorker(action: any) {
   yield put(setMainPageLoading(true));
   yield put(setFilteredFilms(""));
   const {
-    sortBy: type,
+    sort: type,
     genre,
     years,
     rating,
     countries: country,
   } = action.payload;
+  
   const released = Object.values(years);
   const score = Object.values(rating);
   const { data, status, problem } = yield callCheckingAuth(
     getFilteredFilmsApi,
-    type,
+    type && type,
     genre.join(),
     released.join(),
     score.join(),
@@ -145,6 +146,8 @@ function* getFilteredFilmsWorker(action: any) {
   );
 
   if (status === 200) {
+    console.log(data);
+    
     yield put(setFilterStatus(true));
     yield put(setFilteredFilms(data.pagination.data));
   }
