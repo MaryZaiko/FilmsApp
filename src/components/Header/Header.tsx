@@ -15,6 +15,7 @@ import {
   setIsVisibleSidebar,
   setIsVisibleFormSelect,
   searchOfFilms,
+  setSearchedStatus,
 } from "../../redux/reducers/filmsReducer";
 import { useNavigate } from "react-router-dom";
 import FormSelect from "../FormSelect";
@@ -46,15 +47,24 @@ const Header = () => {
     navigate("/films");
   };
   const onSearch = (event: any) => {
-    setSearch(event.target.value);
+    if(   event.target.value === '' ){
+      dispatch(setSearchedStatus(false));
+      setSearch(event.target.value);
+    }else{
+      setSearch(event.target.value);
+    }
   };
 
-  let isFilterStatus = useSelector(FilmsSelector.getFilterStatus)
+  let isFilterStatus = useSelector(FilmsSelector.getFilterStatus);
 
   useEffect(() => {
-    if(search){
-      dispatch(searchOfFilms({ search }));
-
+    if (search) {
+      if (search === "") {
+        dispatch(setSearchedStatus(false));
+      } else {
+        dispatch(searchOfFilms({ search }));
+        dispatch(setSearchedStatus(true));
+      }
     }
   }, [search]);
 
@@ -80,7 +90,10 @@ const Header = () => {
           )}
         />
         <div className={classnames("iconInput")} onClick={onClickFiltersIcon}>
-          <FilterSVG stroke={isDarkTheme ? "white" : "#AFB2B6"} fillActive={isFilterStatus ? "#7B61FF" : 'none'}/>
+          <FilterSVG
+            stroke={isDarkTheme ? "white" : "#AFB2B6"}
+            fillActive={isFilterStatus ? "#7B61FF" : "none"}
+          />
         </div>
       </div>
 

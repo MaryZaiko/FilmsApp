@@ -39,8 +39,6 @@ const MainPage: FC<MainPageProps> = ({ isTrends }) => {
   const favoriteFilms = useSelector(FilmsSelector.getFavoriteFilms);
   const mainPageLoading = useSelector(FilmsSelector.getMainPageLoading);
   let allFilters = useSelector(FilmsSelector.getAllFilters);
-  console.log(allFilters);
-  
 
   const defaultOptions = {
     loop: true,
@@ -54,16 +52,18 @@ const MainPage: FC<MainPageProps> = ({ isTrends }) => {
   const mainOrder = "release_date:desc";
 
   useEffect(() => {
-    if (isActivePage === ActiveTabLinkEnum.Home) {
-      dispatch(setFilterStatus(false));
-      dispatch(setSearchedStatus(false));
-      dispatch(loadAllFilms({ mainOrder, page, perPage, isShowMore }));
-    } else if (isActivePage === ActiveTabLinkEnum.Trends) {
-      dispatch(setFilterStatus(false));
-      dispatch(setSearchedStatus(false));
-      dispatch(loadAllFilms({ page, perPage, isShowMore, isTrends }));
+    if (!isSearchedStatus) {
+      if (isActivePage === ActiveTabLinkEnum.Home) {
+        dispatch(setFilterStatus(false));
+        dispatch(setSearchedStatus(false));
+        dispatch(loadAllFilms({ mainOrder, page, perPage, isShowMore }));
+      } else if (isActivePage === ActiveTabLinkEnum.Trends) {
+        dispatch(setFilterStatus(false));
+        dispatch(setSearchedStatus(false));
+        dispatch(loadAllFilms({ page, perPage, isShowMore, isTrends }));
+      }
     }
-  }, [isActivePage, page]);
+  }, [isActivePage, page, isSearchedStatus]);
 
   const onClickShowMore = () => {
     setPage(page + 1);
@@ -86,10 +86,9 @@ const MainPage: FC<MainPageProps> = ({ isTrends }) => {
           <EmptyState />
         ) : (
           <div className="pageContainer">
-
             <FilmsList
               data={
-                searchedFilms.length > 0
+                isSearchedStatus && searchedFilms.length > 0
                   ? searchedFilms
                   : filteredFilms.length > 0
                   ? filteredFilms
@@ -110,7 +109,21 @@ const MainPage: FC<MainPageProps> = ({ isTrends }) => {
           <EmptyState />
         ) : (
           <div className="pageContainer">
-            <FilmsList data={trendFilms} isTrends={isTrends} />
+            {isSearchedStatus || isFilterStatus ? (
+              <FilmsList
+                data={
+                  searchedFilms.length > 0 ? (
+                    searchedFilms
+                  ) : filteredFilms.length > 0 ? (
+                    filteredFilms
+                  ) : (
+                    <EmptyState />
+                  )
+                }
+              />
+            ) : (
+              <FilmsList data={trendFilms} isTrends={isTrends} />
+            )}
             <Button
               className="btnShowMore"
               onClick={onClickShowMore}

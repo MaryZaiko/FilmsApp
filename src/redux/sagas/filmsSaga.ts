@@ -98,15 +98,24 @@ function* getSingleFilmWorker(action: PayloadAction<string>) {
 
 function* getSearchedOfFilmsWorker(action: any) {
   yield put(setMainPageLoading(true));
+  yield put(setSingleFilmLoading(true));
+
   yield put(setSearchOfFilms(""));
 
   const { search: query } = action.payload;
+ if(query === ''){
+  return
+ }else{
   const { data, status } = yield callCheckingAuth(getSearchedOfFilmsApi, query);
   if (status === 200) {
     yield put(setSearchOfFilms(data.results));
     yield put(setSearchedStatus(true));
   }
   yield put(setMainPageLoading(false));
+  yield put(setSingleFilmLoading(false));
+
+ }
+  
 }
 function* getRecommendationFilmsWorker(action: PayloadAction<string>) {
   yield put(setSingleFilmLoading(true));

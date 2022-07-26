@@ -17,6 +17,8 @@ import Lottie from "react-lottie";
 import animationData from "../../components/Lotties/Popcorn.json";
 import FlagSVG from "../../assets/FlagSVG";
 import ShareSVG from "../../assets/ShareSVG";
+import EmptyState from "../../components/EmptyState";
+import FilmsList from "../../components/FilmsList";
 
 const SingleFilm = () => {
   const { theme } = useThemeContext();
@@ -30,6 +32,9 @@ const SingleFilm = () => {
   const recommendationFilms = useSelector(FilmsSelector.getRecommendationFilms);
   const [isSaveFilm, setIsSaveFilm] = useState(false);
   const { id } = useParams();
+  let isSearchedStatus = useSelector(FilmsSelector.getSearchedStatus);
+  const searchedFilms = useSelector(FilmsSelector.getSearchedFilms);
+  console.log(writersNames);
 
   const defaultOptions = {
     loop: true,
@@ -39,7 +44,7 @@ const SingleFilm = () => {
       preserveAspectRatio: "xMidYMid slice",
     },
   };
-  
+
   useEffect(() => {
     if (id) {
       dispatch(loadFilm(id));
@@ -47,10 +52,9 @@ const SingleFilm = () => {
     }
   }, [id]);
 
-  const onClickSave = ( action: string) => {
+  const onClickSave = (action: string) => {
     isSaveFilm ? setIsSaveFilm(false) : setIsSaveFilm(true);
     console.log(filmData);
-   
   };
 
   return (
@@ -59,6 +63,8 @@ const SingleFilm = () => {
         <div className="lottie">
           <Lottie options={defaultOptions} height={400} width={400} />
         </div>
+      ) : isSearchedStatus && searchedFilms.length > 0 ? (
+        <FilmsList data={searchedFilms} />
       ) : (
         filmData && (
           <div
@@ -75,9 +81,7 @@ const SingleFilm = () => {
               />
               <div className="singlePageBtns">
                 <Button
-                  onClick={() =>
-                    onClickSave( isSaveFilm ? "unset" : "save")
-                  }
+                  onClick={() => onClickSave(isSaveFilm ? "unset" : "save")}
                   btnContent={
                     <FlagSVG fill={isSaveFilm ? "#E3DB08" : "#AFB2B6"} />
                   }
@@ -175,7 +179,7 @@ const SingleFilm = () => {
                   <tr>
                     <td>Writer</td>
                     <td className="singlePageTableInfo">
-                      {writersNames && writersNames.length > 0
+                      {!!writersNames && writersNames.length > 0
                         ? writersNames.map((p: any) => `${p.name} `)
                         : "-"}
                     </td>
