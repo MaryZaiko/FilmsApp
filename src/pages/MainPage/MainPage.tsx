@@ -13,7 +13,6 @@ import {
 } from "../../redux/reducers/filmsReducer";
 import Lottie from "react-lottie";
 import animationData from "../../components/Lotties/Popcorn.json";
-import LoaderRing from "../../components/LoaderRing";
 import Button from "../../components/Button";
 import EmptyState from "../../components/EmptyState";
 

@@ -109,7 +109,7 @@ const RegistrationForm = () => {
   const confirmPasswordHandler = (e: any) => {
     setConfirmPassword(e.target.value);
     if (e.target.value !== password) {
-      setConfirmPasswordErr("Password not confirmed");
+      setConfirmPasswordErr("Passwords doen’t match");
       if (!e.target.value) {
         setConfirmPasswordErr("This field must not be empty");
       }

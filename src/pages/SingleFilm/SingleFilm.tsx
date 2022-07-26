@@ -47,12 +47,10 @@ const SingleFilm = () => {
     }
   }, [id]);
 
-  const onClickSave = (id: number, action: string) => {
+  const onClickSave = ( action: string) => {
     isSaveFilm ? setIsSaveFilm(false) : setIsSaveFilm(true);
     console.log(filmData);
-    if (action === "save" || action === "unset") {
-      dispatch(setFavoriteFilms({ id, action }));
-    }
+   
   };
 
   return (
@@ -78,7 +76,7 @@ const SingleFilm = () => {
               <div className="singlePageBtns">
                 <Button
                   onClick={() =>
-                    onClickSave(filmData.id, isSaveFilm ? "unset" : "save")
+                    onClickSave( isSaveFilm ? "unset" : "save")
                   }
                   btnContent={
                     <FlagSVG fill={isSaveFilm ? "#E3DB08" : "#AFB2B6"} />
@@ -161,7 +159,7 @@ const SingleFilm = () => {
                   <tr>
                     <td>Actors</td>
                     <td className="singlePageTableInfo">
-                      {actorsNames.length > 0
+                      {actorsNames && actorsNames.length > 0
                         ? actorsNames.map((p: any) => `${p.name} `)
                         : "-"}
                     </td>
@@ -169,7 +167,7 @@ const SingleFilm = () => {
                   <tr>
                     <td>Director</td>
                     <td className="singlePageTableInfo">
-                      {directorName.length > 0
+                      {directorName && directorName.length > 0
                         ? directorName.map((p: any) => `${p.name} `)
                         : "-"}
                     </td>
@@ -177,7 +175,7 @@ const SingleFilm = () => {
                   <tr>
                     <td>Writer</td>
                     <td className="singlePageTableInfo">
-                      {writersNames.length > 0
+                      {writersNames && writersNames.length > 0
                         ? writersNames.map((p: any) => `${p.name} `)
                         : "-"}
                     </td>

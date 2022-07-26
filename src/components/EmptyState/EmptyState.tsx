@@ -3,7 +3,7 @@ import "./EmptyState.css";
 import { Theme, useThemeContext } from "../../context/themeModeContext";
 import classnames from "classnames";
 import { type } from "@testing-library/user-event/dist/type";
-import EmptyImg from "../EmptyImg";
+import EmptyImg from "../../assets/EmptyImg";
 
 const EmptyState = () => {
   const { theme } = useThemeContext();
