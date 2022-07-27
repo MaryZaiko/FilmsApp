@@ -85,9 +85,13 @@ function* getSingleFilmWorker(action: PayloadAction<string>) {
         (item: any) => item.pivot.department === type
       );
     };
-    const director: string[] = filterPeople("directing");
-    const writers: string[] = filterPeople("writing");
-    const actors: string[] = filterPeople("cast");
+    const director: any = filterPeople("directing");
+    const writers: any = filterPeople("writing");
+    const actors: any = filterPeople("cast");
+console.log(director);
+console.log(writers);
+console.log(actors);
+
 
     yield put(setDirectorForSingleFilm(director));
     yield put(setWriterForSingleFilm(writers));
@@ -99,23 +103,19 @@ function* getSingleFilmWorker(action: PayloadAction<string>) {
 function* getSearchedOfFilmsWorker(action: any) {
   yield put(setMainPageLoading(true));
   yield put(setSingleFilmLoading(true));
-
   yield put(setSearchOfFilms(""));
 
   const { search: query } = action.payload;
- if(query === ''){
-  return
- }else{
+  console.log(query);
+
   const { data, status } = yield callCheckingAuth(getSearchedOfFilmsApi, query);
   if (status === 200) {
     yield put(setSearchOfFilms(data.results));
     yield put(setSearchedStatus(true));
   }
+
   yield put(setMainPageLoading(false));
   yield put(setSingleFilmLoading(false));
-
- }
-  
 }
 function* getRecommendationFilmsWorker(action: PayloadAction<string>) {
   yield put(setSingleFilmLoading(true));
@@ -142,7 +142,7 @@ function* getFilteredFilmsWorker(action: any) {
     rating,
     countries: country,
   } = action.payload;
-  
+
   const released = Object.values(years);
   const score = Object.values(rating);
   const { data, status, problem } = yield callCheckingAuth(
@@ -156,7 +156,7 @@ function* getFilteredFilmsWorker(action: any) {
 
   if (status === 200) {
     console.log(data);
-    
+
     yield put(setFilterStatus(true));
     yield put(setFilteredFilms(data.pagination.data));
   }

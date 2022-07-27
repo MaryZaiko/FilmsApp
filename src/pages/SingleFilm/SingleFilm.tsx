@@ -35,6 +35,8 @@ const SingleFilm = () => {
   let isSearchedStatus = useSelector(FilmsSelector.getSearchedStatus);
   const searchedFilms = useSelector(FilmsSelector.getSearchedFilms);
   console.log(writersNames);
+  console.log(writersNames.length);
+
 
   const defaultOptions = {
     loop: true,
@@ -176,12 +178,25 @@ const SingleFilm = () => {
                         : "-"}
                     </td>
                   </tr>
+
+
+                  {/* {writersNames && writersNames.length > 0 && (
+                    <tr>
+                      <td>Writer</td>
+                      <td className="singlePageTableInfo">
+                        {writersNames!.map((p: any) => `${p.name} `).join(', ')}
+                      </td>
+                    </tr>
+                  )} */}
+
+
                   <tr>
                     <td>Writer</td>
                     <td className="singlePageTableInfo">
-                      {!!writersNames && writersNames.length > 0
+                      {writersNames && writersNames.length > 0
                         ? writersNames.map((p: any) => `${p.name} `)
-                        : "-"}
+                        : "-"
+                        }
                     </td>
                   </tr>
                 </tbody>

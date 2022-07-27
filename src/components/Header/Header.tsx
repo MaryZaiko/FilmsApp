@@ -47,6 +47,9 @@ const Header = () => {
     navigate("/films");
   };
   const onSearch = (event: any) => {
+
+     
+
     if(   event.target.value === '' ){
       dispatch(setSearchedStatus(false));
       setSearch(event.target.value);
@@ -62,7 +65,7 @@ const Header = () => {
       if (search === "") {
         dispatch(setSearchedStatus(false));
       } else {
-        dispatch(searchOfFilms({ search }));
+        dispatch(searchOfFilms( {search} ));
         dispatch(setSearchedStatus(true));
       }
     }
