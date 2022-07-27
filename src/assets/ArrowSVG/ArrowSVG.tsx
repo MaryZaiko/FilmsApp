@@ -16,8 +16,6 @@ const ArrowSVG = ({
   className,
   onClick,
 }: ArrowSVGType) => {
-  let isFilter = true;
-
   return (
     <svg
       width={width}

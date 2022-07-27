@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./FormSelect.css";
 import classnames from "classnames";
-import SingleSelect from "../SingleSelect";
-import MultiSelect from "../MultiSelect";
 import XMarkSVG from "../../assets/XMarkSVG";
 import Button from "../Button";
 import Input from "../Input";
@@ -61,7 +59,7 @@ const FormSelect = () => {
   };
 
   const onChangeGenres = (newValue: OnChangeValue<IOption, boolean>) => {
-    setCurrentGenre((newValue as IOption[]).map((v: any) => v.value));
+    setCurrentGenre((newValue as IOption[]).map((v: IOption) => v.value));
   };
 
   const getValueCountry = () => {
@@ -112,7 +110,7 @@ const FormSelect = () => {
     onClickFiltersClose();
   };
   const onClickClearForm = () => {
-    setSortBy(SortByTabsEnum.Movie)
+    setSortBy(SortByTabsEnum.Movie);
     setYearsFrom(0);
     setYearsTo(0);
     setRatingFrom(0);
@@ -251,7 +249,6 @@ const FormSelect = () => {
         <div className="formSelectFooter">
           <Button
             onClick={onClickClearForm}
-
             btnContent={"Clear filter"}
             className={classnames(
               "btnSettingsSort",

@@ -34,7 +34,7 @@ const MultiSelect = () => {
   };
 
   const onChangeGenres = (newValue: OnChangeValue<IOption, boolean>) => {
-    setCurrentGenre((newValue as IOption[]).map((v: any) => v.value));
+    setCurrentGenre((newValue as IOption[]).map((v: IOption) => v.value));
   };
 
   return (

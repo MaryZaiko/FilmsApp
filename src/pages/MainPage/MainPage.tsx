@@ -38,7 +38,6 @@ const MainPage: FC<MainPageProps> = ({ isTrends }) => {
   const filteredFilms = useSelector(FilmsSelector.getFilteredFilms);
   const favoriteFilms = useSelector(FilmsSelector.getFavoriteFilms);
   const mainPageLoading = useSelector(FilmsSelector.getMainPageLoading);
-  let allFilters = useSelector(FilmsSelector.getAllFilters);
 
   const defaultOptions = {
     loop: true,
@@ -49,7 +48,7 @@ const MainPage: FC<MainPageProps> = ({ isTrends }) => {
     },
   };
 
-  const mainOrder = "release_date:desc";
+  const mainOrder = "budget:desc";
 
   useEffect(() => {
     if (!isSearchedStatus) {
@@ -97,8 +96,9 @@ const MainPage: FC<MainPageProps> = ({ isTrends }) => {
             />
             {!isFilterStatus && !isSearchedStatus && (
               <Button
-                className={classnames
-                  (isDarkTheme ? "btnShowMore" : "btnShowMoreLight")}
+                className={classnames(
+                  isDarkTheme ? "btnShowMore" : "btnShowMoreLight"
+                )}
                 onClick={onClickShowMore}
                 btnContent="Show more"
               />
@@ -110,13 +110,14 @@ const MainPage: FC<MainPageProps> = ({ isTrends }) => {
           <EmptyState />
         ) : (
           <div className="pageContainer">
-            {isSearchedStatus || isFilterStatus ? (
+            {(searchedFilms! && searchedFilms.length > 0) ||
+            (filteredFilms! && filteredFilms.length > 0) ? (
               <FilmsList
                 data={
-                  searchedFilms.length > 0 ? (
-                    searchedFilms
-                  ) : filteredFilms.length > 0 ? (
-                    filteredFilms
+                  searchedFilms!.length > 0 ? (
+                    searchedFilms!
+                  ) : filteredFilms!.length > 0 ? (
+                    filteredFilms!
                   ) : (
                     <EmptyState />
                   )

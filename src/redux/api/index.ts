@@ -1,17 +1,9 @@
 import { create } from "apisauce";
-import { BaseFromTo } from "../../common/types";
+import { UserType } from "../../common/types";
+
 const API = create({
   baseURL: "https://unelmamovie.com/api/v1",
 });
-
-type UserType = {
-  first_name: string;
-  last_name:string;
-  email: string;
-  password: string;
-  password_confirmation: string;
-  token_name: string;
-};
 
 const registerUserApi = (userData: UserType) => {
   return API.post("/auth/register", userData);
@@ -26,7 +18,7 @@ const loginUserApi = (data: {
 };
 
 const getAllFilmsApi = (
-  token: any,
+  token: string,
   order: string,
   page: number,
   perPage: number
@@ -41,7 +33,7 @@ const getAllFilmsApi = (
     }
   );
 };
-const getSingleFilmApi = (token: any, id: string) => {
+const getSingleFilmApi = (token: string, id: string) => {
   return API.get(
     `/titles/${id}`,
     {},
@@ -52,7 +44,7 @@ const getSingleFilmApi = (token: any, id: string) => {
     }
   );
 };
-const getUserInfoApi = (token: any, id: string) => {
+const getUserInfoApi = (token: string, id: string) => {
   return API.get(
     `/user-profile/${id}`,
     {},
@@ -63,7 +55,7 @@ const getUserInfoApi = (token: any, id: string) => {
     }
   );
 };
-const getSearchedOfFilmsApi = (token: any, query: any) => {
+const getSearchedOfFilmsApi = (token: string, query: string) => {
   return API.get(
     `/search/${query}`,
     { limit: 10 },
@@ -74,7 +66,7 @@ const getSearchedOfFilmsApi = (token: any, query: any) => {
     }
   );
 };
-const getRecommendationFilmsApi = (token: any, id: any) => {
+const getRecommendationFilmsApi = (token: string, id: string) => {
   return API.get(
     `/titles/${id}/related`,
     {},
@@ -86,18 +78,16 @@ const getRecommendationFilmsApi = (token: any, id: any) => {
   );
 };
 const getFilteredFilmsApi = (
-  token: any,
-  type: any,
-  genre: any,
-  released: any,
-  score: any,
-  country: any
+  token: string,
+  type: string,
+  genre: string[],
+  released: number[],
+  score: string,
+  country: string
 ) => {
-  console.log(type,genre,released,score,country);
-  
   return API.get(
     "/titles",
-    {type,genre,released,score,country},
+    { type, genre, released, score, country },
     {
       headers: {
         Authorization: `Bearer ${token}`,

@@ -17,6 +17,7 @@ import animationData from "../../components/Lotties/Popcorn.json";
 import FlagSVG from "../../assets/FlagSVG";
 import ShareSVG from "../../assets/ShareSVG";
 import FilmsList from "../../components/FilmsList";
+import { FilmInfo } from "../../common/types";
 
 const SingleFilm = () => {
   const { theme } = useThemeContext();
@@ -93,7 +94,7 @@ const SingleFilm = () => {
               <p>
                 {filmData.genres
                   .map(
-                    (item: { name: string | any[] }) =>
+                    (item: { name: string | string[] }) =>
                       item.name[0].toUpperCase() + item.name.slice(1)
                   )
                   .join(" • ")}
@@ -160,7 +161,7 @@ const SingleFilm = () => {
                     <td>Actors</td>
                     <td className="singlePageTableInfo">
                       {actorsNames && actorsNames!.length > 0
-                        ? actorsNames.map((p: any) => `${p.name}, `)
+                        ? actorsNames.map((p: FilmInfo) => `${p.name}, `)
                         : "-"}
                     </td>
                   </tr>
@@ -168,7 +169,7 @@ const SingleFilm = () => {
                     <td>Director</td>
                     <td className="singlePageTableInfo">
                       {directorName && directorName!.length > 0
-                        ? directorName.map((p: any) => `${p.name}, `)
+                        ? directorName.map((p: FilmInfo) => `${p.name}, `)
                         : "-"}
                     </td>
                   </tr>
@@ -176,7 +177,7 @@ const SingleFilm = () => {
                     <td>Writer</td>
                     <td className="singlePageTableInfo">
                       {writersNames && writersNames!.length > 0
-                        ? writersNames.map((p: any) => `${p.name}, `)
+                        ? writersNames.map((p: FilmInfo) => `${p.name}, `)
                         : "-"}
                     </td>
                   </tr>

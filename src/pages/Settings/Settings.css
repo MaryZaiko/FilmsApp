@@ -1,5 +1,4 @@
 .settingsWrapper {
-
   padding-right: 290px;
   display: flex;
   flex-direction: column;
@@ -78,9 +77,8 @@ label > span {
   background-color: white;
   border: 2px solid #afb2b6;
 }
-@media (max-width: 950px) {
+@media (max-width: 1280px) {
   .settingsWrapper {
-  padding: 0 40px;
+    padding: 0 40px;
   }
- 
 }

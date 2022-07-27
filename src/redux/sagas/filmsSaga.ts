@@ -151,8 +151,6 @@ function* getFilteredFilmsWorker(action: PayloadAction<AllFilters>) {
   );
 
   if (status === 200) {
-    console.log(data);
-
     yield put(setFilterStatus(true));
     yield put(setFilteredFilms(data.pagination.data));
   }

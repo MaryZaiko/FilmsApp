@@ -10,14 +10,8 @@ const EmptyState = () => {
   const isDarkTheme = theme === Theme.Dark;
 
   return (
-    <div
-      className={classnames(
-        "emptyStateContainer"
-        // { ["container"]: isLightTheme },
-        // { ["darkContainer"]: !isLightTheme }
-      )}
-    >
-      <EmptyImg fill={'#8080806b'} />
+    <div className={classnames("emptyStateContainer")}>
+      <EmptyImg fill={"#8080806b"} />
       <p
         className={classnames(
           isDarkTheme ? "emptyStateTitle" : "emptyStateTitleDark"

@@ -1,4 +1,9 @@
-import React, { FC,FocusEventHandler } from "react";
+import React, {
+  DetailedHTMLProps,
+  FC,
+  FocusEventHandler,
+  InputHTMLAttributes,
+} from "react";
 import "./Input.css";
 
 type InputProps = {
@@ -7,16 +12,32 @@ type InputProps = {
   onChange?: (value: any) => void;
   type: string;
   className?: string;
-  onBlur?: (e: FocusEventHandler<HTMLInputElement> | undefined) => void;
-  placeholder?:string
+  onBlur?: (
+    e:
+      | FocusEventHandler<HTMLInputElement>
+      | undefined
+      | DetailedHTMLProps<
+          InputHTMLAttributes<HTMLInputElement>,
+          HTMLInputElement
+        >
+  ) => void;
+  placeholder?: string;
 };
 
-const Input: FC<InputProps> = ({ value, name, onChange, type, className, onBlur, placeholder }: any) => {
+const Input: FC<InputProps> = ({
+  value,
+  name,
+  onChange,
+  type,
+  className,
+  onBlur,
+  placeholder,
+}) => {
   // const onInputChange = (event: any) => {
   //   if (event.target) {
   //     onChange(event.target.value);
   //   }
-  // }; 
+  // };
 
   return (
     <input
@@ -26,7 +47,7 @@ const Input: FC<InputProps> = ({ value, name, onChange, type, className, onBlur,
       onChange={onChange}
       className={className}
       onBlur={onBlur}
-      placeholder = {placeholder}
+      placeholder={placeholder}
     />
   );
 };

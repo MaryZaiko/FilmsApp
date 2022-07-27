@@ -16,8 +16,6 @@ const FilterSVG = ({
 }: FilterSVGType) => {
   let isFilter = true;
 
-
-
   return (
     <svg
       width={width}
