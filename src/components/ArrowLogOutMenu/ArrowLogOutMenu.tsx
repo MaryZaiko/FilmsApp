@@ -9,9 +9,9 @@ import { Theme, useThemeContext } from "../../context/themeModeContext";
 const ArrowLogOutMenu = () => {
   const { theme } = useThemeContext();
   const isDarkTheme = theme === Theme.Dark;
-
   const [isOpenMenu, setIsOpenMenu] = useState(false);
-  const onClickArr = (e: any) => {
+
+  const onClickArr = () => {
     isOpenMenu ? setIsOpenMenu(false) : setIsOpenMenu(true);
   };
 
@@ -26,7 +26,14 @@ const ArrowLogOutMenu = () => {
           />
         }
       />
-      <LogOutMenu className={classnames('logOutMenuContainer',isDarkTheme ? 'logOutMenuContainerDark' : 'logOutMenuContainerLight' ,isOpenMenu ? "logOutMenuOpen" : "logOutMenuClose")}/>
+      <LogOutMenu
+        onClick={() => onClickArr()}
+        className={classnames(
+          "logOutMenuContainer",
+          isDarkTheme ? "logOutMenuContainerDark" : "logOutMenuContainerLight",
+          isOpenMenu ? "logOutMenuOpen" : "logOutMenuClose"
+        )}
+      />
     </div>
   );
 };

@@ -56,11 +56,16 @@ function* loginUserWorker(action: PayloadAction<DataUser>) {
   }
   yield put(setIsLoginUserLoading(false));
 }
+
 export function* logoutWorker() {
   localStorage.removeItem("jwtAccessToken");
   yield put(setLogStatus(false));
 }
+
 export function* getUserInfoWorker() {
+  yield put(setAuthUserName(""));
+  yield put(setAuthUserLastName(""));
+  yield put(setAuthUserEmail(""));
   const { status, data } = yield callCheckingAuth(getUserInfoApi, "me");
 
   if (status === 200) {

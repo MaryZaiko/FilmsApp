@@ -30,8 +30,9 @@ import {
   setSearchedStatus,
 } from "../reducers/filmsReducer";
 import { callCheckingAuth } from "./callCheckingAuth";
+import { AllFilters, FilmInfo, LoadAllFilms } from "../../common/types";
 
-function* getAllFilmsWorker(action: any) {
+function* getAllFilmsWorker(action: PayloadAction<LoadAllFilms>) {
   yield put(setMainPageLoading(true));
   const {
     isShowMore,
@@ -82,16 +83,12 @@ function* getSingleFilmWorker(action: PayloadAction<string>) {
     yield put(setSingleFilm(data.title));
     const filterPeople = (type: string) => {
       return data.title.credits.filter(
-        (item: any) => item.pivot.department === type
+        (item: FilmInfo) => item.pivot.department === type
       );
     };
-    const director: any = filterPeople("directing");
-    const writers: any = filterPeople("writing");
-    const actors: any = filterPeople("cast");
-console.log(director);
-console.log(writers);
-console.log(actors);
-
+    const director: FilmInfo[] = filterPeople("directing");
+    const writers: FilmInfo[] = filterPeople("writing");
+    const actors: FilmInfo[] = filterPeople("cast");
 
     yield put(setDirectorForSingleFilm(director));
     yield put(setWriterForSingleFilm(writers));
@@ -106,9 +103,8 @@ function* getSearchedOfFilmsWorker(action: any) {
   yield put(setSearchOfFilms(""));
 
   const { search: query } = action.payload;
-  console.log(query);
-
   const { data, status } = yield callCheckingAuth(getSearchedOfFilmsApi, query);
+
   if (status === 200) {
     yield put(setSearchOfFilms(data.results));
     yield put(setSearchedStatus(true));
@@ -132,7 +128,7 @@ function* getRecommendationFilmsWorker(action: PayloadAction<string>) {
   yield put(setSingleFilmLoading(false));
 }
 
-function* getFilteredFilmsWorker(action: any) {
+function* getFilteredFilmsWorker(action: PayloadAction<AllFilters>) {
   yield put(setMainPageLoading(true));
   yield put(setFilteredFilms(""));
   const {
@@ -143,12 +139,12 @@ function* getFilteredFilmsWorker(action: any) {
     countries: country,
   } = action.payload;
 
-  const released = Object.values(years);
-  const score = Object.values(rating);
-  const { data, status, problem } = yield callCheckingAuth(
+  const released = Object.values((years as unknown) as string[]);
+  const score = Object.values((rating as unknown) as string[]);
+  const { data, status } = yield callCheckingAuth(
     getFilteredFilmsApi,
     type && type,
-    genre.join(),
+    genre!.join(),
     released.join(),
     score.join(),
     country

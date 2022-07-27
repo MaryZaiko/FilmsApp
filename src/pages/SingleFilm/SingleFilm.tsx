@@ -10,14 +10,12 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   FilmsSelector,
   loadFilm,
-  setFavoriteFilms,
   loadRecommendationFilms,
 } from "../../redux/reducers/filmsReducer";
 import Lottie from "react-lottie";
 import animationData from "../../components/Lotties/Popcorn.json";
 import FlagSVG from "../../assets/FlagSVG";
 import ShareSVG from "../../assets/ShareSVG";
-import EmptyState from "../../components/EmptyState";
 import FilmsList from "../../components/FilmsList";
 
 const SingleFilm = () => {
@@ -34,9 +32,6 @@ const SingleFilm = () => {
   const { id } = useParams();
   let isSearchedStatus = useSelector(FilmsSelector.getSearchedStatus);
   const searchedFilms = useSelector(FilmsSelector.getSearchedFilms);
-  console.log(writersNames);
-  console.log(writersNames.length);
-
 
   const defaultOptions = {
     loop: true,
@@ -56,7 +51,6 @@ const SingleFilm = () => {
 
   const onClickSave = (action: string) => {
     isSaveFilm ? setIsSaveFilm(false) : setIsSaveFilm(true);
-    console.log(filmData);
   };
 
   return (
@@ -165,43 +159,30 @@ const SingleFilm = () => {
                   <tr>
                     <td>Actors</td>
                     <td className="singlePageTableInfo">
-                      {actorsNames && actorsNames.length > 0
-                        ? actorsNames.map((p: any) => `${p.name} `)
+                      {actorsNames && actorsNames!.length > 0
+                        ? actorsNames.map((p: any) => `${p.name}, `)
                         : "-"}
                     </td>
                   </tr>
                   <tr>
                     <td>Director</td>
                     <td className="singlePageTableInfo">
-                      {directorName && directorName.length > 0
-                        ? directorName.map((p: any) => `${p.name} `)
+                      {directorName && directorName!.length > 0
+                        ? directorName.map((p: any) => `${p.name}, `)
                         : "-"}
                     </td>
                   </tr>
-
-
-                  {/* {writersNames && writersNames.length > 0 && (
-                    <tr>
-                      <td>Writer</td>
-                      <td className="singlePageTableInfo">
-                        {writersNames!.map((p: any) => `${p.name} `).join(', ')}
-                      </td>
-                    </tr>
-                  )} */}
-
-
                   <tr>
                     <td>Writer</td>
                     <td className="singlePageTableInfo">
-                      {writersNames && writersNames.length > 0
-                        ? writersNames.map((p: any) => `${p.name} `)
-                        : "-"
-                        }
+                      {writersNames && writersNames!.length > 0
+                        ? writersNames.map((p: any) => `${p.name}, `)
+                        : "-"}
                     </td>
                   </tr>
                 </tbody>
               </table>
-              {recommendationFilms.length > 0 && (
+              {recommendationFilms && recommendationFilms.length > 0 && (
                 <div className="sliderWrapper">
                   <h2>Recommendations</h2>
                   <Carousel data={recommendationFilms} />

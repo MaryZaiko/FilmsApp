@@ -97,7 +97,8 @@ const MainPage: FC<MainPageProps> = ({ isTrends }) => {
             />
             {!isFilterStatus && !isSearchedStatus && (
               <Button
-                className="btnShowMore"
+                className={classnames
+                  (isDarkTheme ? "btnShowMore" : "btnShowMoreLight")}
                 onClick={onClickShowMore}
                 btnContent="Show more"
               />

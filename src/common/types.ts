@@ -29,3 +29,35 @@ export type BaseFromTo = {
   from: string;
   to: string;
 };
+export type FilmInfo = {
+  id: number;
+  model_type: string;
+  name: string;
+  pivot: FilmInfoPivot;
+  poster: string;
+};
+type FilmInfoPivot = {
+  character: null;
+  creditable_id: number;
+  creditable_type: string;
+  department: string;
+  id: number;
+  job: string;
+  order: number;
+  person_id: number;
+};
+export type AllFilters = {
+  sort?: null | SortByTabsEnum;
+  genre?: string[];
+  years: null | BaseFromTo;
+  rating: null | BaseFromTo;
+  countries?: string;
+};
+export type LoadAllFilms = {
+  mainOrder: string;
+  page: number;
+  perPage: number;
+  isShowMore?: boolean;
+  isTrends?: boolean;
+
+};

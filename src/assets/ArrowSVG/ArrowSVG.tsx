@@ -5,9 +5,8 @@ type ArrowSVGType = {
   width?: string;
   height?: string;
   fill?: string;
-  className?: string
-  onClick?: (e:any)=>void
-
+  className?: string;
+  onClick?: () => void;
 };
 
 const ArrowSVG = ({
@@ -15,7 +14,7 @@ const ArrowSVG = ({
   height = "12px",
   fill = "none",
   className,
-  onClick
+  onClick,
 }: ArrowSVGType) => {
   let isFilter = true;
 

@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { BaseFromTo, CardTypes, SortByTabsEnum } from "../../common/types";
+import { AllFilters, BaseFromTo, CardTypes, SortByTabsEnum } from "../../common/types";
 
 // export type RegisterUser = {
 //   name: string;
@@ -27,13 +27,7 @@ export type FilmsReducerStateType = {
   writerForSingleFilm: string[];
   actorsForSingleFilm: string[];
   singleFilmLoading: boolean;
-  allFilters: {
-    sort?: null | SortByTabsEnum;
-    genre?: string[];
-    years: null | BaseFromTo;
-    rating: null | BaseFromTo;
-    countries?: string;
-  };
+  allFilters: AllFilters;
   filtersGenre: string;
   filtersCountry: string;
 };
