@@ -1,0 +1,14 @@
+.filmsListWrapper {
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+  justify-content: space-between;
+
+}
+@media (max-width: 580px) {
+  .filmsListWrapper {
+    justify-content: center;
+
+  }
+}

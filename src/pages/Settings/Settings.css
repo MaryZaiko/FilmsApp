@@ -1,0 +1,84 @@
+.settingsWrapper {
+  padding-right: 290px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+.settingsWrapperDark {
+  background-color: black;
+  color: white;
+}
+.settingsWrapperLight {
+  background-color: white;
+  color: black;
+}
+.settingsInputWrapper {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+.settingsChangePasswordWrapper {
+  flex: 1;
+  display: flex;
+  gap: 24px;
+  flex-direction: column;
+}
+.settingsProfileContent {
+  margin-top: 16px;
+  margin-bottom: 40px;
+  padding: 40px;
+
+  border-radius: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+  justify-content: space-between;
+}
+
+.settingsPasswordContent {
+  background: #242426;
+  border-radius: 10px;
+  margin-top: 16px;
+  margin-bottom: 40px;
+  padding: 40px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 24px;
+}
+.settingsColorModeContent {
+  background: #242426;
+  border-radius: 10px;
+  padding: 24px 40px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+}
+.settingsColorModeContent p {
+  color: #afb2b6;
+}
+label > span {
+  margin-bottom: 8px;
+}
+.btnsWrapper {
+  display: flex;
+  justify-content: flex-end;
+  gap: 40px;
+  width: 50%;
+  margin-top: 48px;
+  align-self: end;
+}
+.settingsContentDark {
+  background-color: #242426;
+  border: 2px solid transparent;
+}
+.settingsContentLight {
+  background-color: white;
+  border: 2px solid #afb2b6;
+}
+@media (max-width: 1280px) {
+  .settingsWrapper {
+    padding: 0 40px;
+  }
+}

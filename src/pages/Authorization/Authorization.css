@@ -1,0 +1,41 @@
+.authorizationPageWrapper {
+  min-height: 100vh;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+  padding: 48px 62px 64px 62px;
+
+  background-image: url("../../assets/images/auth-bg.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+
+}
+.authorizationPageLogo {
+  align-self: flex-start;
+}
+.formTitle {
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 36px;
+}
+.authorizationPageWrapperFooter {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  color: #ffffff;
+}
+@media (max-width: 768px) {
+  .authorizationPageWrapper {
+    padding: 47px 40px 56px 40px;
+  }
+}
+@media (max-width: 320px) {
+  .authorizationPageWrapper {
+    padding: 32px 24px 48px 24px;
+  }
+  .authorizationPageLogo {
+    align-self: center;
+  }
+}

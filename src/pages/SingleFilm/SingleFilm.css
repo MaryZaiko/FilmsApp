@@ -1,0 +1,117 @@
+.singlePageWrapper {
+  min-height: 100vh;
+  padding: 40px 62px 0px 0;
+  color: white;
+  display: flex;
+  gap: 50px;
+}
+.singlePageWrapperDark {
+  background-color: black;
+}
+.singlePageWrapperLight {
+  background-color: white;
+  color: black;
+}
+.singlePageInfoLight{
+  color: white;
+
+}
+.singlePageContent{
+  display: flex;
+  margin: 0 auto;
+  min-height: 100vh;
+
+}
+.singlePageImg {
+  width: 266px;
+  height: 356px;
+  border-radius: 20px;
+}
+.singlePageTitle {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 40px;
+  line-height: 60px;
+}
+.ratingWrapper {
+  display: flex;
+  gap: 20px;
+}
+
+.singlePageCardRating {
+  width: 37px;
+  height: 28px;
+  padding: 2px 8px;
+  border-radius: 6px;
+  color: white;
+  text-align: center;
+}
+
+.singlePageCardRatingHigh {
+  background-color: #00a340;
+}
+.singlePageCardRatingAverage {
+  background-color: #f3a608;
+}
+.singlePageCardRatingLow {
+  background-color: #f45d2d;
+}
+.singlePageImdbRating {
+  padding: 2px 8px;
+  width: 79px;
+  height: 28px;
+  background: #323537;
+  border-radius: 6px;
+}
+.singlePageRuntime {
+  padding: 2px 8px;
+  width: 73px;
+  height: 28px;
+  background: #323537;
+  border-radius: 6px;
+}
+.singlePageTable{
+  margin-top: 40px;
+  margin-bottom: 56px;
+  border-spacing: 0 20px;
+}
+.singlePageTableInfo{
+  padding-left: 54px;
+}
+h2{
+
+font-size: 24px;
+font-weight: 600;
+line-height: 36px;
+letter-spacing: 0em;
+text-align: left;
+
+}
+.lottie{
+display: flex;
+align-items: center;
+justify-content: center;
+width: 100%;
+}
+@media (max-width: 1280px) {
+  .singlePageWrapper {
+    padding: 40px 40px 0px 40px;
+  }
+  .singlePageImg{
+    width: 208px;
+    height: 280px;
+  }
+}
+
+@media (max-width: 840px) {
+  .singlePageWrapper {
+    align-items: center;
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 350px) {
+  .singlePageWrapper {
+    padding: 32px 24px 0px 24px;
+  }
+}

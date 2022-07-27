@@ -1,0 +1,114 @@
+.btnUserNameHeader {
+  min-width: 56px;
+  min-height: 56px;
+  color: white;
+  background: #7b61ff;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+}
+.btnHeaderArrow {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  color: white;
+}
+.btnUserNameHeaderMenu {
+  display: none;
+  cursor: pointer;
+}
+.btnSettingsSort {
+  /* width: 266px; */
+  height: 56px;
+  border-radius: 10px;
+  flex: 1;
+  cursor: pointer;
+  color: white;
+}
+.btnSettingsSortDark {
+  background: #323537;
+}
+.btnSettingsSortLight {
+  background-color: white;
+  border: 2px solid #afb2b6;
+  color: #242426;
+}
+.btnSettingsSort:hover {
+  background-color: #7b61ff;
+}
+.btnAuth {
+  background-color: #7b61ff;
+  height: 56px;
+  border-radius: 10px;
+  cursor: pointer;
+  border: none;
+  color: white;
+}
+.btnAuth:disabled {
+  background-color: #706994;
+}
+.btnSort {
+  height: 52px;
+  flex: 1;
+  cursor: pointer;
+}
+
+.btnSortRight {
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
+.btnSortLeft {
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+.btnSortDark {
+  background-color: #242426;
+  color: #80858b;
+  border: 2px solid #323537;
+}
+.btnSortLight {
+  background: #ffffff;
+  border: 2px solid #afb2b6;
+  color: #242426;
+}
+.btnSortActiveDark {
+  background-color: #323537;
+}
+.btnSortActiveLight {
+  background-color: #afb2b6;
+}
+.singlePageBtns {
+  display: flex;
+}
+.btnSinglePageFlag {
+  height: 56px;
+  background-color: #323537;
+  flex: 1;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+.btnSinglePageShare {
+  background-color: #323537;
+  height: 56px;
+  flex: 1;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+@media (max-width: 1280px) {
+  .btnHeaderArrow {
+    display: none;
+  }
+  .btnUserNameHeaderMenu {
+    display: block;
+    margin-left: 35px;
+    margin-right: 35px;
+  }
+}

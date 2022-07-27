@@ -1,0 +1,46 @@
+.sidebarWrapper {
+   padding: 48px 85px 64px 85px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.linksWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+.sidebarFooter {
+  color: #afb2b6;
+}
+.sidebarWrapperDark {
+  background-color: black;
+}
+.linkSidebar {
+  text-decoration: none;
+  display: flex;
+  gap: 25px;
+  color: #80858b;
+}
+.linkActive{
+  color: #7B61FF;
+}
+.sidebarWrapperVisible{
+  display: flex;
+}
+.sidebarWrapperUnVisible{
+  display: none;
+}
+@media (max-width: 1280px) {
+  .sidebarWrapper {
+    display: none;
+  }
+  .sidebarWrapperVisible{
+    display: flex;
+  }
+}
+/* @media (max-width: 320px) {
+  .cardImg {
+    width: 272px;
+    height: 365px;
+  }
+} */

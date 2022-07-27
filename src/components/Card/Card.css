@@ -1,0 +1,82 @@
+.cardContent{
+  width: 266px;
+}
+.cardFilm{
+  position: relative;
+  cursor: pointer;
+}
+
+.cardImg {
+  width: 266px;
+  height: 357px;
+  border-radius: 20px;
+}
+.cardImgSlider{
+  width: 220px;
+  height: 310px;
+  border-radius: 20px;
+}
+.cardTitleSlider{
+  font-size: 18px;
+}
+.cardTitle{
+  font-weight: 700;
+  margin-top: 24px;
+}
+.cardTitleDark{
+  color: white;
+}
+.cardTitleLight{
+  color: black;
+}
+.cardGenre{
+  color: #AFB2B6;
+}
+.cardRating {
+  width: 37px;
+  height: 28px;
+  padding: 2px 8px;
+  border-radius: 6px;
+  color: white;
+  text-align: center;
+  position: absolute;
+  left: 20px;
+  top: 20px;
+}
+
+.cardRatingHigh {
+  background-color: #00a340;
+}
+.cardRatingAverage {
+  background-color: #f3a608;
+}
+.cardRatingLow {
+  background-color: #f45d2d;
+}
+.cardTrends{
+width: 57px;
+height: 28px;
+background-color: #7B61FF;
+display: flex;
+justify-content: center;
+align-items: center;
+gap: 5px;
+}
+@media (max-width: 1010px) {
+  .cardImgSlider {
+    width: 200px;
+    height: 260px;
+  }
+}
+@media (max-width: 768px) {
+  .cardImg {
+    width: 208px;
+    height: 279px;
+  }
+}
+@media (max-width: 320px) {
+  .cardImg {
+    width: 272px;
+    height: 365px;
+  }
+}

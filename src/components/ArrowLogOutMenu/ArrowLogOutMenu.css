@@ -1,0 +1,13 @@
+.userNameHeaderContent {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  position: relative;
+}
+
+
+@media (max-width: 768px) {
+  .UserNameHeaderContainer,.userNameHeaderContainerDark {
+    display: none;
+  }
+}

@@ -1,0 +1,66 @@
+.headerContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+  padding: 40px 62px 56px 62px;
+}
+
+.headerContainerDark {
+  background-color: black;
+}
+.headerContainerLight {
+  background-color: white;
+  color: black;
+}
+.inputWrapper {
+  display: flex;
+  flex-wrap: nowrap;
+  width: 100%;
+  position: relative;
+  padding-left: 20px;
+  padding-right: 10px;
+}
+
+.iconInput {
+  height: 56px;
+  padding: 16px 20px;
+  position: absolute;
+  top: 0px;
+  right: 8px;
+  cursor: pointer;
+}
+
+.headerTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+@media (max-width: 1280px) {
+  .headerContainer {
+    justify-content: center;
+  }
+}
+@media (max-width: 1024px) {
+  .headerContainer {
+    justify-content: center;
+    padding: 40px 48px 40px 48px;
+  }
+}
+@media (max-width: 950px) {
+  .headerContainer {
+    justify-content: center;
+    padding: 40px;
+    margin: 0;
+  }
+}
+@media (max-width: 750px) {
+  .headerContainer {
+    flex-wrap: wrap;
+  }
+}
+@media (max-width: 350px) {
+  .headerContainer {
+    padding: 32px 24px;
+  }
+}
